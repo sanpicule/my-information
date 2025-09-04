@@ -1,0 +1,33 @@
+'use client';
+
+import Header from '@/components/Header';
+import Hero from '@/components/Hero';
+import About from '@/components/About';
+import Skills from '@/components/Skills';
+import Works from '@/components/Works';
+import Contact from '@/components/Contact';
+import Footer from '@/components/Footer';
+import { profileData } from '@/lib/data';
+
+export default function Home() {
+  // スキル名のリストを取得（Heroセクション用）
+  const skillNames = profileData.skills.map(skill => skill.name);
+
+  return (
+    <main className="min-h-screen">
+      <Header />
+      <Hero
+        name={profileData.name}
+        title={profileData.title}
+        introduction={profileData.introduction}
+        skills={skillNames}
+        contact={profileData.contact}
+      />
+      <About about={profileData.about} />
+      <Skills skills={profileData.skills} />
+      <Works projects={profileData.projects} />
+      <Contact contact={profileData.contact} />
+      <Footer contact={profileData.contact} />
+    </main>
+  );
+}

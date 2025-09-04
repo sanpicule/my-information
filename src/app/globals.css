@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+  
+  /* スムーズスクロールのフォールバック */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-800 hover:bg-primary-900 text-white font-light py-4 px-8 rounded-xl transition-all duration-300 border border-primary-700 hover:border-primary-600;
+  }
+  
+  .btn-secondary {
+    @apply bg-transparent hover:bg-primary-50 text-primary-800 font-light py-4 px-8 rounded-xl transition-all duration-300 border border-primary-300 hover:border-primary-400;
+  }
+  
+  .section-padding {
+    @apply py-20 px-6 sm:px-8 lg:px-12;
+  }
+  
+  .container-max {
+    @apply max-w-5xl mx-auto;
+  }
+  
+  /* 角丸のベーススタイル */
+  .rounded-base {
+    @apply rounded-2xl;
+  }
+  
+  .rounded-card {
+    @apply rounded-xl;
+  }
+  
+  .rounded-button {
+    @apply rounded-lg;
+  }
+}
