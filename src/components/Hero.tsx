@@ -26,7 +26,7 @@ const Hero = ({ name, title, introduction, skills, contact }: HeroProps) => {
   };
 
   return (
-    <section id="home" className="min-h-screen-dynamic flex items-center justify-center pt-16 w-full relative overflow-hidden">
+    <section id="home" className="h-dvh flex items-center justify-center w-full relative overflow-hidden">
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 z-0" />
       
