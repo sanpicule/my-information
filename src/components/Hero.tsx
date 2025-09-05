@@ -3,9 +3,7 @@ import { motion } from 'framer-motion';
 
 interface HeroProps {
   name: string;
-  title: string;
   introduction: string;
-  skills: string[];
   contact: {
     github?: string;
     twitter?: string;
@@ -13,7 +11,7 @@ interface HeroProps {
   };
 }
 
-const Hero = ({ name, title, introduction, skills, contact }: HeroProps) => {
+const Hero = ({ name, introduction, contact }: HeroProps) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -49,13 +47,13 @@ const Hero = ({ name, title, introduction, skills, contact }: HeroProps) => {
           {/* Portfolio Title */}
           <motion.div className="mb-12">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-sans text-slate-900 mb-6 tracking-wide font-light">
-              Hikawa's Portfolio
+              {name}'s Portfolio
             </h1>
             <motion.p 
               className="text-sm sm:text-base md:text-lg text-slate-900 max-w-3xl mx-auto font-light leading-relaxed font-sans"
               style={{ fontFamily: 'Noto Sans JP, sans-serif' }}
             >
-              しがないフロントエンジニアによる<br></br>ポートフォリオサイトです。
+              {introduction}
             </motion.p>
           </motion.div>
 

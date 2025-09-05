@@ -11,17 +11,13 @@ import { useViewportHeight } from '@/hooks/useViewportHeight';
 function App() {
   // ビューポート高さの動的制御
   useViewportHeight();
-  // スキル名のリストを取得（Heroセクション用）
-  const skillNames = profileData.skills.map(skill => skill.name);
 
   return (
     <main className="min-h-screen-dynamic">
       <Header />
       <Hero
         name={profileData.name}
-        title={profileData.title}
         introduction={profileData.introduction}
-        skills={skillNames}
         contact={profileData.contact}
       />
       <About about={profileData.about} skills={profileData.skills} />
