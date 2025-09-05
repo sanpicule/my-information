@@ -39,15 +39,22 @@ export interface Profile {
   projects: Project[];
   contact: ContactInfo;
   about: {
-    background: string;
-    experience: string;
-    education: string;
-    values: string;
-    hobbies: string[];
+    description: string;
     workHistory: {
       company: string;
       position: string;
       period: string;
+      description: string;
+    }[];
+    education: {
+      school: string;
+      period: string;
+      degree: string;
+      description: string;
+    }[];
+    achievements: {
+      title: string;
+      year: string;
       description: string;
     }[];
   };

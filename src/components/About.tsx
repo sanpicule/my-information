@@ -1,18 +1,32 @@
 import { motion } from 'framer-motion';
 import { MapPin, Briefcase, Award } from 'lucide-react';
 
-interface WorkExperience {
-  company: string;
-  period: string;
-  position: string;
+interface AboutData {
   description: string;
+  workHistory: {
+    company: string;
+    period: string;
+    position: string;
+    description: string;
+  }[];
+  education: {
+    school: string;
+    period: string;
+    degree: string;
+    description: string;
+  }[];
+  achievements: {
+    title: string;
+    year: string;
+    description: string;
+  }[];
 }
 
 interface AboutProps {
-  workExperience: WorkExperience[];
+  about: AboutData;
 }
 
-const About = ({ workExperience }: AboutProps) => {
+const About = ({ about }: AboutProps) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -81,8 +95,7 @@ const About = ({ workExperience }: AboutProps) => {
             className="text-sm sm:text-base text-slate-600 max-w-3xl mx-auto font-light leading-relaxed"
             variants={itemVariants}
           >
-            フロントエンド開発者として、技術的な美しさと実用性のバランスを重視した開発を心がけています。
-            ユーザー体験を最優先に考え、常に最新の技術トレンドを取り入れながら、高品質なWebアプリケーションの開発に取り組んでいます。
+            {about.description}
           </motion.p>
         </motion.div>
 
@@ -163,7 +176,7 @@ const About = ({ workExperience }: AboutProps) => {
               </h3>
               
               <div className="space-y-4">
-                {workExperience.map((work, index) => (
+                {about.workHistory.map((work, index) => (
                   <motion.div
                     key={index}
                     className="relative pl-5 border-l-2 border-slate-200"

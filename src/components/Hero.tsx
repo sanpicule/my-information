@@ -1,7 +1,11 @@
-import { Github, Twitter, Instagram, Mail, ArrowDown } from 'lucide-react';
+import { Github, Twitter, Instagram, ArrowDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface HeroProps {
+  name: string;
+  title: string;
+  introduction: string;
+  skills: string[];
   contact: {
     github?: string;
     twitter?: string;
@@ -9,7 +13,7 @@ interface HeroProps {
   };
 }
 
-const Hero = ({ contact }: HeroProps) => {
+const Hero = ({ name, title, introduction, skills, contact }: HeroProps) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -45,16 +49,37 @@ const Hero = ({ contact }: HeroProps) => {
           {/* Portfolio Title */}
           <motion.div className="mb-12">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-sans text-slate-900 mb-6 tracking-wide font-light">
-            Hikawa's Portfolio
+            {name}
             </h1>
+            
+            <motion.h2 
+              className="text-lg sm:text-xl md:text-2xl text-slate-700 mb-4 font-medium"
+              style={{ fontFamily: 'Noto Sans JP, sans-serif' }}
+            >
+              {title}
+            </motion.h2>
             
             <motion.p 
               className="text-sm sm:text-base md:text-lg text-slate-900 max-w-3xl mx-auto font-light leading-relaxed font-sans"
               style={{ fontFamily: 'Noto Sans JP, sans-serif' }}
             >
-              技術的な美しさと実用性のバランスを重視した<br />
-              フロントエンド開発者のポートフォリオ
+              {introduction}
             </motion.p>
+            
+            {/* Skills */}
+            <motion.div className="mt-8 flex flex-wrap justify-center gap-2">
+              {skills.map((skill, index) => (
+                <motion.span
+                  key={index}
+                  className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 + index * 0.1 }}
+                >
+                  {skill}
+                </motion.span>
+              ))}
+            </motion.div>
           </motion.div>
 
           {/* Social Links */}

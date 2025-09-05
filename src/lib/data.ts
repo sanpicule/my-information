@@ -118,11 +118,7 @@ export const profileData: Profile = {
     twitter: 'https://twitter.com/SanpiTech240'
   },
   about: {
-    background: '大学で情報工学を専攻し、Web開発に興味を持ちました。卒業後はスタートアップでフロントエンド開発者として働き、現在はフリーランスとして活動しています。',
-    experience: '3年間のWeb開発経験があり、ECサイト、SaaS、モバイルアプリなど様々なプロジェクトに携わってきました。',
-    education: '○○大学 工学部 情報工学科 卒業',
-    values: 'ユーザー第一主義で、技術的な美しさと実用性のバランスを重視します。常に新しい技術を学び、より良いユーザー体験を提供することを心がけています。',
-    hobbies: ['読書', 'プログラミング', '旅行', '写真撮影'],
+    description: 'フロントエンド開発者として、技術的な美しさと実用性のバランスを重視した開発を心がけています。ユーザー体験を最優先に考え、常に最新の技術トレンドを取り入れながら、高品質なWebアプリケーションの開発に取り組んでいます。',
     workHistory: [
       {
         company: '株式会社Gizumo',
@@ -135,6 +131,21 @@ export const profileData: Profile = {
         position: '営業',
         period: '2020年4月 - 2022年7月',
         description: '新規開拓営業。'
+      }
+    ],
+    education: [
+      {
+        school: '○○大学 工学部 情報工学科',
+        period: '2016年4月 - 2020年3月',
+        degree: '学士',
+        description: '情報工学を専攻し、Web開発の基礎を学びました。'
+      }
+    ],
+    achievements: [
+      {
+        title: 'AWS認定ソリューションアーキテクト',
+        year: '2023年',
+        description: 'クラウドアーキテクチャの設計と実装に関する知識を習得。'
       }
     ]
   }
