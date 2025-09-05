@@ -5,20 +5,46 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* 動的なビューポート高さの制御 */
+    --vh: 1vh;
+    --vw: 1vw;
+  }
+  
   html {
     scroll-behavior: smooth;
+    /* スクロール時の表示領域可変を防ぐ */
+    height: 100%;
+    height: -webkit-fill-available;
   }
   
   body {
     font-family: 'Noto Sans JP', sans-serif;
     background-color: #e0e5ec;
     color: #2d3748;
+    /* スクロール時の表示領域可変を防ぐ */
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+    min-height: -webkit-fill-available;
+    /* スクロール時のレイアウトシフトを防ぐ */
+    overflow-x: hidden;
   }
   
   /* スムーズスクロールのフォールバック */
   @media (prefers-reduced-motion: no-preference) {
     html {
       scroll-behavior: smooth;
+    }
+  }
+  
+  /* モバイルブラウザでの表示領域可変を防ぐ */
+  @media screen and (max-width: 768px) {
+    body {
+      /* iOS Safariのアドレスバー対策 */
+      min-height: 100vh;
+      min-height: calc(var(--vh, 1vh) * 100);
+      /* Android Chromeのナビゲーションバー対策 */
+      min-height: -webkit-fill-available;
     }
   }
 }
@@ -129,5 +155,24 @@
   /* Bantyフォント */
   .font-banty {
     font-family: 'Noto Sans JP', sans-serif;
+  }
+  
+  /* 動的ビューポート高さのユーティリティ */
+  .h-screen-dynamic {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    height: -webkit-fill-available;
+  }
+  
+  .min-h-screen-dynamic {
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+    min-height: -webkit-fill-available;
+  }
+  
+  .max-h-screen-dynamic {
+    max-height: 100vh;
+    max-height: calc(var(--vh, 1vh) * 100);
+    max-height: -webkit-fill-available;
   }
 }

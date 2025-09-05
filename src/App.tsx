@@ -6,13 +6,16 @@ import Works from '@/components/Works';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import { profileData } from '@/lib/data';
+import { useViewportHeight } from '@/hooks/useViewportHeight';
 
 function App() {
+  // ビューポート高さの動的制御
+  useViewportHeight();
   // スキル名のリストを取得（Heroセクション用）
   const skillNames = profileData.skills.map(skill => skill.name);
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen-dynamic">
       <Header />
       <Hero
         name={profileData.name}

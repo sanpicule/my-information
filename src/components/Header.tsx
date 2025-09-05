@@ -77,7 +77,8 @@ const Header = () => {
         className={`md:hidden fixed inset-0 top-16 bg-white transform transition-transform duration-400 ease-out ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
-        style={{
+        style={{ 
+          height: 'calc(100vh - 4rem)',
           transitionDelay: isClosing ? '0.3s' : '0s' // 閉じる時は文字が消えてから背景をスライド
         }}
       >
