@@ -1,5 +1,4 @@
 import { Github, Twitter, Instagram, Mail, ArrowDown } from 'lucide-react';
-import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 interface HeroProps {
@@ -11,25 +10,6 @@ interface HeroProps {
 }
 
 const Hero = ({ contact }: HeroProps) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.load();
-      
-      video.addEventListener('loadeddata', () => {
-        video.play().catch(error => {
-          console.error('動画の再生に失敗しました:', error);
-        });
-      });
-
-      video.addEventListener('error', (e) => {
-        console.error('動画の読み込みエラー:', e);
-      });
-    }
-  }, []);
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -42,25 +22,17 @@ const Hero = ({ contact }: HeroProps) => {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center pt-16 w-full relative overflow-hidden bg-slate-50">
-      {/* Background Video */}
-      <video
-        ref={videoRef}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        className="absolute inset-0 w-full h-full object-cover z-0 opacity-50"
-        style={{ minHeight: '100vh' }}
-      >
-        <source src="/videos/hero.mov" type="video/quicktime" />
-        <source src="/videos/hero.mov" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
-      {/* Simple Background */}
-      <div className="absolute inset-0 bg-slate-50 z-[-1]" />
+    <section id="home" className="min-h-screen flex items-center justify-center pt-16 w-full relative overflow-hidden">
+      {/* Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 z-0" />
+      
+      {/* Decorative Elements */}
+      <div className="absolute inset-0 z-10">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-slate-200 rounded-full opacity-20 animate-pulse" />
+        <div className="absolute top-40 right-20 w-24 h-24 bg-slate-300 rounded-full opacity-30 animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-40 left-20 w-40 h-40 bg-slate-100 rounded-full opacity-25 animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute bottom-20 right-10 w-28 h-28 bg-slate-200 rounded-full opacity-20 animate-pulse" style={{ animationDelay: '3s' }} />
+      </div>
 
       {/* Content */}
       <motion.div 
