@@ -47,7 +47,7 @@ const Hero = ({ name, introduction, contact }: HeroProps) => {
           {/* Portfolio Title */}
           <motion.div className="mb-12">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-sans text-slate-900 mb-6 tracking-wide font-light">
-              {name}'s Portfolio
+              Hikawa's Portfolio
             </h1>
             <motion.p 
               className="text-sm sm:text-base md:text-lg text-slate-900 max-w-3xl mx-auto font-light leading-relaxed font-sans"
