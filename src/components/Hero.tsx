@@ -49,42 +49,19 @@ const Hero = ({ name, title, introduction, skills, contact }: HeroProps) => {
           {/* Portfolio Title */}
           <motion.div className="mb-12">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-sans text-slate-900 mb-6 tracking-wide font-light">
-            {name}
+              Hikawa's Portfolio
             </h1>
-            
-            <motion.h2 
-              className="text-lg sm:text-xl md:text-2xl text-slate-700 mb-4 font-medium"
-              style={{ fontFamily: 'Noto Sans JP, sans-serif' }}
-            >
-              {title}
-            </motion.h2>
-            
             <motion.p 
               className="text-sm sm:text-base md:text-lg text-slate-900 max-w-3xl mx-auto font-light leading-relaxed font-sans"
               style={{ fontFamily: 'Noto Sans JP, sans-serif' }}
             >
-              {introduction}
+              しがないフロントエンジニアによる<br></br>ポートフォリオサイトです。
             </motion.p>
-            
-            {/* Skills */}
-            <motion.div className="mt-8 flex flex-wrap justify-center gap-2">
-              {skills.map((skill, index) => (
-                <motion.span
-                  key={index}
-                  className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 + index * 0.1 }}
-                >
-                  {skill}
-                </motion.span>
-              ))}
-            </motion.div>
           </motion.div>
 
           {/* Social Links */}
           <motion.div 
-            className="flex justify-center space-x-6 mt-16"
+            className="flex justify-center space-x-6 mt-4 md:mt-16"
           >
             {contact.github && (
               <motion.a
@@ -126,7 +103,7 @@ const Hero = ({ name, title, introduction, skills, contact }: HeroProps) => {
 
           {/* Scroll Indicator */}
           <motion.div
-            className="mt-20"
+            className="mt-12"
           >
             <motion.div
               className="inline-flex flex-col items-center text-slate-900 transition-colors duration-300 cursor-pointer"

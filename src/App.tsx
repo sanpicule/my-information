@@ -24,7 +24,7 @@ function App() {
         skills={skillNames}
         contact={profileData.contact}
       />
-      <About about={profileData.about} />
+      <About about={profileData.about} skills={profileData.skills} />
       <Skills skills={profileData.skills} />
       <Works projects={profileData.projects} />
       <Contact contact={profileData.contact} />

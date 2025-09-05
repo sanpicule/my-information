@@ -131,6 +131,12 @@ export const profileData: Profile = {
         position: '営業',
         period: '2020年4月 - 2022年7月',
         description: '新規開拓営業。'
+      },
+      {
+        company: '熊本大学卒業',
+        position: '工学部 数理工学科',
+        period: '2015年4月 - 2020年3月',
+        description: '数理工学科卒業。'
       }
     ],
     education: [

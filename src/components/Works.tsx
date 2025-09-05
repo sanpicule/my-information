@@ -162,7 +162,7 @@ const Works = ({ projects }: WorksProps) => {
                 >
                   <div className="p-6">
                     <h3 
-                      className="text-xl font-sans font-light text-slate-900 mb-3 group-hover:text-slate-700 transition-colors duration-300 cursor-pointer"
+                      className="text-xl font-sans font-medium text-slate-900 mb-3 group-hover:text-slate-700 transition-colors duration-300 cursor-pointer"
                       onClick={() => openModal(project)}
                     >
                       {project.title}
@@ -238,7 +238,7 @@ const Works = ({ projects }: WorksProps) => {
                 >
                   <div className="p-6">
                     <h3 
-                      className="text-xl font-sans font-light text-slate-900 mb-3 group-hover:text-slate-700 transition-colors duration-300 cursor-pointer"
+                      className="text-xl font-sans font-medium text-slate-900 mb-3 group-hover:text-slate-700 transition-colors duration-300 cursor-pointer"
                       onClick={() => openModal(project)}
                     >
                       {project.title}

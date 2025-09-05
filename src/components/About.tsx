@@ -22,11 +22,18 @@ interface AboutData {
   }[];
 }
 
-interface AboutProps {
-  about: AboutData;
+interface Skill {
+  name: string;
+  level: number;
+  category: string;
 }
 
-const About = ({ about }: AboutProps) => {
+interface AboutProps {
+  about: AboutData;
+  skills: Skill[];
+}
+
+const About = ({ about, skills }: AboutProps) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -137,31 +144,45 @@ const About = ({ about }: AboutProps) => {
                     <span className="font-light">東京都世田谷区在住</span>
                   </motion.div>
                 </div>
+
+                {/* Skills Section */}
+                <motion.div 
+                  className="mt-6 pt-6 border-t border-slate-200"
+                  variants={itemVariants}
+                >
+                  <h4 className="text-sm font-sans font-light text-slate-900 mb-3 flex items-center gap-2">
+                    <Award className="w-4 h-4 text-slate-600" />
+                    主要スキル
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {skills && skills.length > 0 ? (
+                      skills.slice(0, 6).map((skill, i) => (
+                        <motion.span
+                          key={skill.name}
+                          className="text-xs rounded-lg font-light bg-slate-100 p-2 border border-slate-200 text-slate-700"
+                          custom={i}
+                          variants={skillTagVariants}
+                        >
+                          {skill.name}
+                        </motion.span>
+                      ))
+                    ) : (
+                      ['TypeScript', 'React', 'Next.js'].map((skill, i) => (
+                        <motion.span
+                          key={skill}
+                          className="text-xs rounded-lg font-light bg-slate-100 p-2 border border-slate-200 text-slate-700"
+                          custom={i}
+                          variants={skillTagVariants}
+                        >
+                          {skill}
+                        </motion.span>
+                      ))
+                    )}
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
 
-            {/* Skills Preview */}
-            <motion.div
-              className="p-6 bg-white border border-slate-200 rounded-xl"
-              variants={cardVariants}
-            >
-              <h3 className="text-lg font-sans font-light text-slate-900 mb-4 flex items-center gap-2">
-                <Award className="w-5 h-5 text-slate-600" />
-                主要スキル
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {['TypeScript', 'React', 'Next.js'].map((skill, i) => (
-                  <motion.span
-                    key={skill}
-                    className="text-sm rounded-lg font-light bg-slate-100 p-2 border border-slate-200 text-slate-700"
-                    custom={i}
-                    variants={skillTagVariants}
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
-              </div>
-            </motion.div>
           </motion.div>
 
           {/* Work Experience */}
@@ -194,45 +215,6 @@ const About = ({ about }: AboutProps) => {
                     <p className="text-slate-500 text-sm font-light">{work.description}</p>
                   </motion.div>
                 ))}
-              </div>
-            </motion.div>
-
-            {/* Project Highlights */}
-            <motion.div
-              className="mt-6 p-6 bg-white border border-slate-200 rounded-xl"
-              variants={cardVariants}
-            >
-              <h3 className="text-lg font-sans font-light text-slate-900 mb-4 flex items-center gap-2">
-                <Award className="w-5 h-5 text-slate-600" />
-                実績
-              </h3>
-              
-              <div className="space-y-3">
-                <motion.div 
-                  className="p-3 bg-slate-50 rounded-lg border border-slate-200"
-                  variants={itemVariants}
-                >
-                  <p className="text-slate-600 text-xs font-light">株式会社Gizumo</p>
-                  <h4 className="font-sans font-light text-slate-900 mb-1 text-sm">
-                    大手SIerデータポータルサイト開発
-                  </h4>
-                </motion.div>
-                
-                <motion.div 
-                  className="p-3 bg-slate-50 rounded-lg border border-slate-200"
-                  variants={itemVariants}
-                >
-                  <p className="text-slate-600 text-xs font-light">株式会社Gizumo</p>
-                  <h4 className="font-sans font-light text-slate-900 mb-1 text-sm">自治体向けシステム開発</h4>
-                </motion.div>
-
-                <motion.div 
-                  className="p-3 bg-slate-50 rounded-lg border border-slate-200"
-                  variants={itemVariants}
-                >
-                  <p className="text-slate-600 text-xs font-light">株式会社J:COM</p>
-                  <h4 className="font-sans font-light text-slate-900 mb-1 text-sm">営業成績九州２位</h4>
-                </motion.div>
               </div>
             </motion.div>
           </motion.div>
