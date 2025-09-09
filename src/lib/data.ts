@@ -3,7 +3,7 @@ import { Profile } from '../types';
 export const profileData: Profile = {
   name: '檜皮 三四朗',
   title: 'フロントエンド開発者',
-  introduction: 'ユーザー体験を重視したWebアプリケーション開発に従事。React、TypeScriptを中心としたモダンな技術スタックで、美しく使いやすいインターフェースの構築を専門としています。',
+  introduction: 'しがないエンジニアのポートフォリオです',
   skills: [
     // フロントエンド
     { name: 'React', level: 5, category: 'frontend' },

@@ -113,6 +113,7 @@ const Skills = ({ skills }: SkillsProps) => {
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05, duration: 0.4 }}
+                    viewport={{ once: true }}
                   >
                     <div className="flex justify-between items-center">
                       <span className="font-medium text-slate-700">{skill.name}</span>
@@ -121,10 +122,10 @@ const Skills = ({ skills }: SkillsProps) => {
                     <div className="w-full bg-slate-200 rounded-full h-1 overflow-hidden">
                       <motion.div
                         className="h-full bg-slate-600 rounded-full"
-                        custom={skill.level}
-                       
-                        initial="hidden"
-                        whileInView="visible"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${(skill.level / 5) * 100}%` }}
+                        transition={{ duration: 0.8, delay: index * 0.1 }}
+                        viewport={{ once: true }}
                       />
                     </div>
                   </motion.div>
