@@ -38,7 +38,7 @@ const Skills = ({ skills }: SkillsProps) => {
           </h2>
           
           <motion.p 
-            className="text-sm sm:text-base text-slate-600 max-w-3xl font-light leading-relaxed"
+            className="text-sm sm:text-base text-slate-600 font-light leading-relaxed"
           >
             フロントエンド開発を中心に、幅広い技術スタックを習得しています。
             各技術の習熟度を5段階で評価し、継続的な学習とスキル向上に取り組んでいます。

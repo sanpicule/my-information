@@ -132,7 +132,7 @@ const Works = ({ projects }: WorksProps) => {
           </h2>
           
           <motion.p 
-              className="text-sm sm:text-base text-slate-600 max-w-3xl font-light leading-relaxed"
+              className="text-sm sm:text-base text-slate-600 font-light leading-relaxed"
             variants={itemVariants}
           >
             これまでに手がけたプロジェクトや制作物をご紹介します。

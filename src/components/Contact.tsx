@@ -69,7 +69,7 @@ const Contact = ({ contact }: ContactProps) => {
           </h2>
           
           <motion.p 
-            className="text-sm sm:text-base text-slate-600 max-w-3xl font-light leading-relaxed"
+            className="text-sm sm:text-base text-slate-600 font-light leading-relaxed"
             variants={itemVariants}
           >
             新しいプロジェクトのご相談や、お問い合わせがございましたら、

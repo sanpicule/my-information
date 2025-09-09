@@ -99,7 +99,7 @@ const About = ({ about, skills }: AboutProps) => {
           <h2 className="text-2xl sm:text-3xl font-sans font-light text-slate-900 mb-6">About</h2>
           
           <motion.p 
-            className="text-sm sm:text-base text-slate-600 max-w-3xl font-light leading-relaxed"
+            className="text-sm sm:text-base text-slate-600 font-light leading-relaxed"
             variants={itemVariants}
           >
             {about.description}
