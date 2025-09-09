@@ -63,13 +63,13 @@ const Contact = ({ contact }: ContactProps) => {
         viewport={{ once: true, amount: 0.3 }}
       >
         {/* Section Header */}
-        <motion.div variants={itemVariants} className="text-center mb-16">
+        <motion.div variants={itemVariants} className="mb-16">
           <h2 className="text-2xl sm:text-3xl font-sans font-light text-slate-900 mb-6">
             Contact
           </h2>
           
           <motion.p 
-            className="text-sm sm:text-base text-slate-600 max-w-3xl mx-auto font-light leading-relaxed"
+            className="text-sm sm:text-base text-slate-600 max-w-3xl font-light leading-relaxed"
             variants={itemVariants}
           >
             新しいプロジェクトのご相談や、お問い合わせがございましたら、

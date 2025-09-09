@@ -123,16 +123,16 @@ const Works = ({ projects }: WorksProps) => {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.1 }}
       >
         {/* Section Header */}
-        <motion.div variants={itemVariants} className="text-center mb-16">
-          <h2 className="text-2xl sm:text-3xl font-sans font-light text-slate-900 mb-6">
+        <motion.div variants={itemVariants} className="mb-12 sm:mb-16">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-sans font-light text-slate-900 mb-6">
             Works
           </h2>
           
           <motion.p 
-            className="text-sm sm:text-base text-slate-600 max-w-3xl mx-auto font-light leading-relaxed"
+              className="text-sm sm:text-base text-slate-600 max-w-3xl font-light leading-relaxed"
             variants={itemVariants}
           >
             これまでに手がけたプロジェクトや制作物をご紹介します。
@@ -146,13 +146,13 @@ const Works = ({ projects }: WorksProps) => {
         {workProjects.length > 0 && (
           <>
             <motion.h3 
-              className="text-lg font-medium text-slate-900 mb-4 text-center"
+              className="text-base sm:text-lg font-medium text-slate-900 mb-4"
               variants={itemVariants}
             >
               参画案件
             </motion.h3>
             <motion.div 
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12"
               variants={containerVariants}
             >
               {workProjects.map((project) => (
@@ -171,17 +171,17 @@ const Works = ({ projects }: WorksProps) => {
                       />
                     </div>
                   )}
-                  <div className="p-6">
+                  <div className="p-4 sm:p-6">
                     <h3 
-                      className="text-xl font-sans font-medium text-slate-900 mb-3 group-hover:text-slate-700 transition-colors duration-300 cursor-pointer"
+                      className="text-lg sm:text-xl font-sans font-medium text-slate-900 mb-3 group-hover:text-slate-700 transition-colors duration-300 cursor-pointer"
                       onClick={() => openModal(project)}
                     >
                       {project.title}
                     </h3>
-                    <p className="text-slate-600 mb-4 line-clamp-2 font-light leading-relaxed">
+                    <p className="text-sm sm:text-base text-slate-600 mb-4 line-clamp-2 font-light leading-relaxed">
                       {project.description}
                     </p>
-                    <div className="flex items-center justify-between text-sm text-slate-500 font-light mb-4">
+                    <div className="flex items-center justify-between text-xs sm:text-sm text-slate-500 font-light mb-4">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
                         <span>{project.duration}</span>
@@ -195,24 +195,24 @@ const Works = ({ projects }: WorksProps) => {
                       {project.technologies.slice(0, 3).map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 bg-slate-100 border border-slate-200 text-slate-700 text-xs font-light rounded-lg"
+                          className="px-2 sm:px-3 py-1 bg-slate-100 border border-slate-200 text-slate-700 text-xs font-light rounded-lg"
                         >
                           {tech}
                         </span>
                       ))}
                       {project.technologies.length > 3 && (
-                        <span className="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-light rounded-lg">
+                        <span className="px-2 sm:px-3 py-1 bg-slate-100 text-slate-600 text-xs font-light rounded-lg">
                           +{project.technologies.length - 3}
                         </span>
                       )}
                     </div>
-                    <div className="mt-5 flex flex-col gap-2">
+                    <div className="mt-4 sm:mt-5 flex flex-col gap-2">
                       {project.githubUrl && (
                         <motion.a
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-2 w-full px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors duration-300"
+                          className="flex items-center justify-center gap-2 w-full px-3 sm:px-4 py-2 bg-slate-900 text-white rounded-lg text-xs sm:text-sm font-medium hover:bg-slate-800 transition-colors duration-300"
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                         >
@@ -232,13 +232,13 @@ const Works = ({ projects }: WorksProps) => {
         {personalProjects.length > 0 && (
           <>
             <motion.h3 
-              className="text-lg font-medium text-slate-900 mb-4 text-center"
+              className="text-base sm:text-lg font-medium text-slate-900 mb-4"
               variants={itemVariants}
             >
               個人開発
             </motion.h3>
             <motion.div 
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
               variants={containerVariants}
             >
               {personalProjects.map((project) => (
@@ -258,17 +258,17 @@ const Works = ({ projects }: WorksProps) => {
                       />
                     </div>
                   )}
-                  <div className="p-6">
+                  <div className="p-4 sm:p-6">
                     <h3 
-                      className="text-xl font-sans font-medium text-slate-900 mb-3 group-hover:text-slate-700 transition-colors duration-300 cursor-pointer"
+                      className="text-lg sm:text-xl font-sans font-medium text-slate-900 mb-3 group-hover:text-slate-700 transition-colors duration-300 cursor-pointer"
                       onClick={() => openModal(project)}
                     >
                       {project.title}
                     </h3>
-                    <p className="text-slate-600 mb-4 line-clamp-2 font-light leading-relaxed">
+                    <p className="text-sm sm:text-base text-slate-600 mb-4 line-clamp-2 font-light leading-relaxed">
                       {project.description}
                     </p>
-                    <div className="flex items-center justify-between text-sm text-slate-500 font-light mb-4">
+                    <div className="flex items-center justify-between text-xs sm:text-sm text-slate-500 font-light mb-4">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
                         <span>{project.duration}</span>
@@ -282,24 +282,24 @@ const Works = ({ projects }: WorksProps) => {
                       {project.technologies.slice(0, 3).map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 bg-slate-100 border border-slate-200 text-slate-700 text-xs font-light rounded-lg"
+                          className="px-2 sm:px-3 py-1 bg-slate-100 border border-slate-200 text-slate-700 text-xs font-light rounded-lg"
                         >
                           {tech}
                         </span>
                       ))}
                       {project.technologies.length > 3 && (
-                        <span className="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-light rounded-lg">
+                        <span className="px-2 sm:px-3 py-1 bg-slate-100 text-slate-600 text-xs font-light rounded-lg">
                           +{project.technologies.length - 3}
                         </span>
                       )}
                     </div>
-                    <div className="mt-5 flex flex-col gap-2">
+                    <div className="mt-4 sm:mt-5 flex flex-col gap-2">
                       {project.demoUrl && (
                         <motion.a
                           href={project.demoUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-2 w-full px-4 py-2 bg-white border border-slate-300 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 hover:border-slate-400 transition-colors duration-300"
+                          className="flex items-center justify-center gap-2 w-full px-3 sm:px-4 py-2 bg-white border border-slate-300 text-slate-700 rounded-lg text-xs sm:text-sm font-medium hover:bg-slate-50 hover:border-slate-400 transition-colors duration-300"
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                         >
@@ -312,7 +312,7 @@ const Works = ({ projects }: WorksProps) => {
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-2 w-full px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors duration-300"
+                          className="flex items-center justify-center gap-2 w-full px-3 sm:px-4 py-2 bg-slate-900 text-white rounded-lg text-xs sm:text-sm font-medium hover:bg-slate-800 transition-colors duration-300"
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                         >

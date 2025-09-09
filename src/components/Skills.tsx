@@ -32,13 +32,13 @@ const Skills = ({ skills }: SkillsProps) => {
         viewport={{ once: true, amount: 0.3 }}
       >
         {/* Section Header */}
-        <motion.div className="text-center mb-16">
+        <motion.div className="mb-16">
           <h2 className="text-2xl sm:text-3xl font-sans font-light text-slate-900 mb-6">
             Skills
           </h2>
           
           <motion.p 
-            className="text-sm sm:text-base text-slate-600 max-w-3xl mx-auto font-light leading-relaxed"
+            className="text-sm sm:text-base text-slate-600 max-w-3xl font-light leading-relaxed"
           >
             フロントエンド開発を中心に、幅広い技術スタックを習得しています。
             各技術の習熟度を5段階で評価し、継続的な学習とスキル向上に取り組んでいます。
