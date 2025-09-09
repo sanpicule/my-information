@@ -11,7 +11,7 @@ interface HeroProps {
   };
 }
 
-const Hero = ({ introduction, contact }: HeroProps) => {
+const Hero = ({ introduction }: HeroProps) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
