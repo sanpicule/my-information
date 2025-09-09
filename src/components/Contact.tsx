@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, Github, Twitter, Instagram } from 'lucide-react';
 import ContactForm from './ContactForm';
 import { ContactInfo } from '../types';
 
@@ -139,39 +139,75 @@ const Contact = ({ contact }: ContactProps) => {
               </div>
             </motion.div>
 
-            {/* Additional Info */}
+            {/* Social Links */}
             <motion.div
               className="p-6 bg-slate-50 border border-slate-200 rounded-xl"
               variants={cardVariants}
             >
               <h4 className="text-lg font-sans font-light text-slate-900 mb-4">
-                対応可能な業務
+                SNSで連絡する
               </h4>
               
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
-                  <span className="text-slate-700 font-light">フロントエンド開発</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
-                  <span className="text-slate-700 font-light">UI/UXデザイン</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
-                  <span className="text-slate-700 font-light">レスポンシブ対応</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
-                  <span className="text-slate-700 font-light">パフォーマンス最適化</span>
-                </div>
+              <div className="flex space-x-4">
+                {contact.github && (
+                  <motion.a
+                    href={contact.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 bg-white border border-slate-700 rounded-full flex items-center justify-center"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Github size={20} color="black" />
+                  </motion.a>
+                )}
+                
+                {contact.twitter && (
+                  <motion.a
+                    href={contact.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 bg-white border border-slate-700 rounded-full flex items-center justify-center"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Twitter size={20} color="black" />
+                  </motion.a>
+                )}
+                
+                <motion.a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-white border border-slate-700 rounded-full flex items-center justify-center"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Instagram size={20} color="black" />
+                </motion.a>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Contact Form */}
-          <motion.div variants={itemVariants}>          
-            <ContactForm />
+          {/* Contact Form - Under Development */}
+          <motion.div variants={itemVariants} className="relative">
+            {/* Contact Form with reduced opacity */}
+            <div className="opacity-40 pointer-events-none">
+              <ContactForm />
+            </div>
+            
+            {/* Black Overlay */}
+            <div className="absolute inset-0 z-10 bg-black/60 rounded-xl"></div>
+            
+            {/* Development Notice Overlay */}
+            <div className="absolute inset-0 z-20 flex items-center justify-center">
+              <div className="bg-white/90 backdrop-blur-sm border border-slate-200 rounded-xl px-6 py-4 shadow-lg">
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+                  <span className="text-slate-800 text-sm font-medium">開発中です。SNSで連絡して下さい。</span>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </motion.div>

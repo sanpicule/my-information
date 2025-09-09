@@ -95,11 +95,11 @@ const About = ({ about, skills }: AboutProps) => {
         viewport={{ once: true, amount: 0.3 }}
       >
         {/* Section Header */}
-        <motion.div variants={itemVariants} className="text-center mb-16">
+        <motion.div variants={itemVariants} className="mb-16">
           <h2 className="text-2xl sm:text-3xl font-sans font-light text-slate-900 mb-6">About</h2>
           
           <motion.p 
-            className="text-sm sm:text-base text-slate-600 max-w-3xl mx-auto font-light leading-relaxed"
+            className="text-sm sm:text-base text-slate-600 max-w-3xl font-light leading-relaxed"
             variants={itemVariants}
           >
             {about.description}
@@ -114,35 +114,39 @@ const About = ({ about, skills }: AboutProps) => {
               variants={cardVariants}
             >
               <div className="relative z-10">
-                <motion.div
-                  className="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden border border-slate-200"
-                  variants={cardVariants}
-                >
-                  <img 
-                    src="/images/profile.jpg" 
-                    alt="檜皮 三四朗" 
-                    className="w-full h-full object-cover"
-                  />
-                </motion.div>
-                
-                <h3 className="text-xl font-sans font-light text-slate-900 mb-2 text-center">檜皮　三四朗</h3>
-                <p className="text-slate-600 mb-6 font-light text-center">Frontend Developer</p>
-                
-                <div className="space-y-3">
-                  <motion.div 
-                    className="flex items-center gap-3 text-slate-600"
-                    variants={itemVariants}
+                <div className="md:flex items-center gap-8">
+                  <motion.div
+                    className="w-full h-56 md:w-48 md:h-48 mb-6 rounded-md overflow-hidden border border-slate-200"
+                    variants={cardVariants}
                   >
-                    <MapPin className="w-4 h-4 text-slate-500" />
-                    <span className="font-light">静岡県焼津市出身</span>
+                    <img 
+                      src="/images/profile.jpg" 
+                      alt="檜皮 三四朗" 
+                      className="w-full h-full object-cover"
+                    />
                   </motion.div>
-                  <motion.div 
-                    className="flex items-center gap-3 text-slate-600"
-                    variants={itemVariants}
-                  >
-                    <MapPin className="w-4 h-4 text-slate-500" />
-                    <span className="font-light">東京都世田谷区在住</span>
-                  </motion.div>
+                  
+                  <div>
+                    <h3 className="text-2xl font-sans font-medium text-slate-900 mb-2">檜皮　三四朗</h3>
+                    <p className="text-slate-600 mb-6 font-light text-sm">Frontend Developer</p>
+                    
+                    <div className="space-y-1">
+                      <motion.div 
+                        className="flex items-center gap-3 text-slate-600"
+                        variants={itemVariants}
+                      >
+                        <MapPin className="w-4 h-4 text-slate-500" />
+                        <span className="font-light">静岡県焼津市出身</span>
+                      </motion.div>
+                      <motion.div 
+                        className="flex items-center gap-3 text-slate-600"
+                        variants={itemVariants}
+                      >
+                        <MapPin className="w-4 h-4 text-slate-500" />
+                        <span className="font-light">東京都世田谷区在住</span>
+                      </motion.div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Skills Section */}

@@ -68,8 +68,9 @@ const Works = ({ projects }: WorksProps) => {
     },
     hover: {
       y: -3,
+      opacity: 0.9,
       transition: {
-        duration: 0.2,
+        duration: 0.3,
         ease: "easeOut" as const
       }
     }
@@ -157,9 +158,19 @@ const Works = ({ projects }: WorksProps) => {
               {workProjects.map((project) => (
                 <motion.div
                   key={project.id}
-                  className="group bg-white border border-slate-200 rounded-xl overflow-hidden"
+                  className="group bg-white shadow-md rounded-xl overflow-hidden cursor-pointer"
                   variants={cardVariants}
+                  whileHover="hover"
                 >
+                  {project.thumbnail && (
+                    <div className="aspect-video overflow-hidden">
+                      <img
+                        src={project.thumbnail}
+                        alt={project.title}
+                        className="w-full h-full object-cover object-center"
+                      />
+                    </div>
+                  )}
                   <div className="p-6">
                     <h3 
                       className="text-xl font-sans font-medium text-slate-900 mb-3 group-hover:text-slate-700 transition-colors duration-300 cursor-pointer"
@@ -233,9 +244,20 @@ const Works = ({ projects }: WorksProps) => {
               {personalProjects.map((project) => (
                 <motion.div
                   key={project.id}
-                  className="group bg-white border border-slate-200 rounded-xl overflow-hidden"
+                  className="group bg-white shadow-md rounded-xl overflow-hidden cursor-pointer"
                   variants={cardVariants}
+                  whileHover="hover"
                 >
+                  {/* Thumbnail for portfolio projects */}
+                  {project.thumbnail && (
+                    <div className="aspect-video overflow-hidden">
+                      <img
+                        src={project.thumbnail}
+                        alt={project.title}
+                        className="w-full h-full object-cover object-center"
+                      />
+                    </div>
+                  )}
                   <div className="p-6">
                     <h3 
                       className="text-xl font-sans font-medium text-slate-900 mb-3 group-hover:text-slate-700 transition-colors duration-300 cursor-pointer"
@@ -282,7 +304,7 @@ const Works = ({ projects }: WorksProps) => {
                           whileTap={{ scale: 0.98 }}
                         >
                           <ExternalLink size={16} />
-                          サイトを見る
+                          制作物を見る
                         </motion.a>
                       )}
                       {project.githubUrl && (

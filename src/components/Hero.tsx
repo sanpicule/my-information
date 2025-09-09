@@ -1,4 +1,4 @@
-import { Github, Twitter, Instagram, ArrowDown } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface HeroProps {
@@ -57,47 +57,6 @@ const Hero = ({ introduction, contact }: HeroProps) => {
             </motion.p>
           </motion.div>
 
-          {/* Social Links */}
-          <motion.div 
-            className="flex justify-center space-x-6 mt-4 md:mt-16"
-          >
-            {contact.github && (
-              <motion.a
-                href={contact.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-slate-800 border border-slate-700 rounded-full flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Github size={20} />
-              </motion.a>
-            )}
-            
-            {contact.twitter && (
-              <motion.a
-                href={contact.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-slate-800 border border-slate-700 rounded-full flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Twitter size={20} />
-              </motion.a>
-            )}
-            
-            <motion.a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 bg-slate-800 border border-slate-700 rounded-full flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Instagram size={20} />
-            </motion.a>
-          </motion.div>
 
           {/* Scroll Indicator */}
           <motion.div
