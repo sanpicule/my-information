@@ -127,7 +127,7 @@ const About = ({ about, skills }: AboutProps) => {
                   </motion.div>
                   
                   <div>
-                    <h3 className="text-2xl font-sans font-medium text-slate-900 mb-2">スガタ</h3>
+                    <h3 className="text-2xl font-sans font-medium text-slate-900 mb-2">Sanshiro</h3>
                     <p className="text-slate-600 mb-6 font-light text-sm">Frontend Developer</p>
                     
                     <div className="space-y-1">
