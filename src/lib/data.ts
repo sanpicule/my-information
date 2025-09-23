@@ -1,7 +1,7 @@
 import { Profile } from '../types';
 
 export const profileData: Profile = {
-  name: '檜皮 三四朗',
+  name: 'スガタ',
   title: 'フロントエンド開発者',
   introduction: 'しがないエンジニアのポートフォリオです',
   skills: [

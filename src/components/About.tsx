@@ -116,18 +116,18 @@ const About = ({ about, skills }: AboutProps) => {
               <div className="relative z-10">
                 <div className="md:flex items-center gap-8">
                   <motion.div
-                    className="w-full h-56 md:w-48 md:h-48 mb-6 rounded-md overflow-hidden border border-slate-200"
+                    className="w-24 h-24 md:w-48 md:h-48 mb-6 rounded-full overflow-hidden"
                     variants={cardVariants}
                   >
                     <img 
                       src="/images/profile.jpg" 
-                      alt="檜皮 三四朗" 
+                      alt="スガタ" 
                       className="w-full h-full object-cover"
                     />
                   </motion.div>
                   
                   <div>
-                    <h3 className="text-2xl font-sans font-medium text-slate-900 mb-2">檜皮　三四朗</h3>
+                    <h3 className="text-2xl font-sans font-medium text-slate-900 mb-2">スガタ</h3>
                     <p className="text-slate-600 mb-6 font-light text-sm">Frontend Developer</p>
                     
                     <div className="space-y-1">
