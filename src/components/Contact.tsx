@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Github, Twitter, Instagram } from 'lucide-react';
+import { Mail, MapPin, Twitter, Instagram } from 'lucide-react';
 import ContactForm from './ContactForm';
 import { ContactInfo } from '../types';
 
@@ -106,25 +106,6 @@ const Contact = ({ contact }: ContactProps) => {
                   </div>
                 </motion.div>
                 
-                {contact.phone && (
-                  <motion.div 
-                    className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-lg"
-                  >
-                    <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
-                      <Phone className="w-5 h-5 text-slate-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-slate-500 font-light">電話番号</p>
-                      <a 
-                        href={`tel:${contact.phone}`}
-                        className="font-medium text-slate-900 hover:text-slate-700 transition-colors duration-300"
-                      >
-                        {contact.phone}
-                      </a>
-                    </div>
-                  </motion.div>
-                )}
-                
                 <motion.div 
                   className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-lg"
                 >
@@ -149,19 +130,6 @@ const Contact = ({ contact }: ContactProps) => {
               </h4>
               
               <div className="flex space-x-4">
-                {contact.github && (
-                  <motion.a
-                    href={contact.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 bg-white border border-slate-700 rounded-full flex items-center justify-center"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Github size={20} color="black" />
-                  </motion.a>
-                )}
-                
                 {contact.twitter && (
                   <motion.a
                     href={contact.twitter}
@@ -176,7 +144,7 @@ const Contact = ({ contact }: ContactProps) => {
                 )}
                 
                 <motion.a
-                  href="https://instagram.com"
+                  href={contact.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-white border border-slate-700 rounded-full flex items-center justify-center"
@@ -189,25 +157,9 @@ const Contact = ({ contact }: ContactProps) => {
             </motion.div>
           </motion.div>
 
-          {/* Contact Form - Under Development */}
-          <motion.div variants={itemVariants} className="relative">
-            {/* Contact Form with reduced opacity */}
-            <div className="opacity-40 pointer-events-none">
-              <ContactForm />
-            </div>
-            
-            {/* Black Overlay */}
-            <div className="absolute inset-0 z-10 bg-black/60 rounded-xl"></div>
-            
-            {/* Development Notice Overlay */}
-            <div className="absolute inset-0 z-20 flex items-center justify-center">
-              <div className="bg-white/90 backdrop-blur-sm border border-slate-200 rounded-xl px-6 py-4 shadow-lg">
-                <div className="flex items-center justify-center gap-2">
-                  <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
-                  <span className="text-slate-800 text-sm font-medium">開発中です。SNSで連絡して下さい。</span>
-                </div>
-              </div>
-            </div>
+          {/* Contact Form */}
+          <motion.div variants={itemVariants}>
+            <ContactForm />
           </motion.div>
         </div>
       </motion.div>

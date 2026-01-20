@@ -3,31 +3,31 @@ import { Profile } from '../types';
 export const profileData: Profile = {
   name: 'スガタ',
   title: 'フロントエンド開発者',
-  introduction: 'しがないエンジニアのポートフォリオです',
+  introduction: 'React / Next.js の既存画面改修、管理画面UI実装、API連携、小〜中規模のフロントエンド開発を承ります。副業も歓迎です。',
   skills: [
     // フロントエンド
-    { name: 'React', level: 5, category: 'frontend' },
-    { name: 'TypeScript', level: 4, category: 'frontend' },
-    { name: 'JavaScript', level: 5, category: 'frontend' },
-    { name: 'Next.js', level: 4, category: 'frontend' },
+    { name: 'React', level: '業務で3年以上使用', category: 'frontend' },
+    { name: 'TypeScript', level: '業務で2年以上使用', category: 'frontend' },
+    { name: 'JavaScript', level: '業務で4年以上使用', category: 'frontend' },
+    { name: 'Next.js', level: '業務で2年以上使用', category: 'frontend' },
     
     // バックエンド
-    { name: 'NestJS', level: 3, category: 'backend' },
+    { name: 'NestJS', level: '業務で1年使用', category: 'backend' },
     
     // データベース
-    { name: 'PostgreSQL', level: 3, category: 'database' },
-    { name: 'MySQL', level: 3, category: 'database' },
+    { name: 'PostgreSQL', level: '業務で2年使用', category: 'database' },
+    { name: 'MySQL', level: '業務で1年使用', category: 'database' },
     
     // ツール
-    { name: 'Git', level: 4, category: 'tool' },
-    { name: 'GitHub', level: 4, category: 'tool' },
-    { name: 'Playwright', level: 3, category: 'tool' },
+    { name: 'Git', level: '業務で4年以上使用', category: 'tool' },
+    { name: 'GitHub', level: '業務で4年以上使用', category: 'tool' },
+    { name: 'Playwright', level: '業務で1年使用', category: 'tool' },
   ],
   projects: [
     {
       id: '1',
       title: 'データポータルサイト開発',
-      description: 'React + TypeScriptで構築したモダンなECサイト。レスポンシブデザインとユーザビリティを重視。',
+      description: '認証後の管理画面（一覧／編集）を担当。React + TypeScriptを使用。API設計者と調整しUIを実装。複雑な商品検索機能でパフォーマンス最適化に苦労したが、カスタムフックで解決。',
       thumbnail: '/images/company1.png',
       technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Node.js', 'PostgreSQL'],
       duration: '9ヶ月',
@@ -44,7 +44,7 @@ export const profileData: Profile = {
     {
       id: '2',
       title: 'アレルギー管理システム開発',
-      description: 'React + TypeScriptで構築したタスク管理アプリケーション。リアルタイム更新機能付き。',
+      description: 'アレルギー管理システムのフルスタック開発を担当。React + TypeScript + PostgreSQLを使用。リアルタイム更新機能の実装でWebSocketとReact Hooksの組み合わせに苦労したが、安定した動作を実現。',
       thumbnail: '/images/company1.png',
       technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Node.js', 'PostgreSQL'],
       duration: '24ヶ月',
@@ -61,7 +61,7 @@ export const profileData: Profile = {
     {
       id: '3',
       title: 'AIタスク管理システム開発',
-      description: 'NextJS + Supabase + OpenAIで構築したタスク管理アプリケーション。',
+      description: 'AIタスク管理システムのフルスタック開発を担当。NextJS + Supabase + OpenAIを使用。AI機能の実装でOpenAI APIの統合に苦労したが、効果的なタスク管理を実現。',
       thumbnail: '/images/company2.png',
       technologies: ['NextJS', 'TypeScript', 'Tailwind CSS', 'Supabase', 'OpenAI'],
       duration: '24ヶ月',
@@ -78,7 +78,7 @@ export const profileData: Profile = {
     {
       id: '4',
       title: 'CMS「Tiny Post」開発',
-      description: 'Kikara HP用のお知らせ投稿するためのCMSを作成しました。',
+      description: 'CMS「Tiny Post」のフロントエンド開発を担当。React + JavaScript + Tailwind CSSを使用。美しいアニメーションとレスポンシブデザインの実現でCSSアニメーションの調整に苦労したが、SEO最適化も実現。',
       thumbnail: '/images/project1.png',
       technologies: ['React', 'JavaScript', 'Tailwind CSS', 'Supabase', 'Figma'],
       duration: '6ヶ月',
@@ -95,7 +95,7 @@ export const profileData: Profile = {
     {
       id: '5',
       title: 'AIアイデアジェネレーター開発',
-      description: 'Bolt.Newを用いた、個人開発で作成したAIアイデアジェネレーター。Gemini APIを使用。',
+      description: 'AIアイデアジェネレーターの開発を担当。React + TypeScript + Supabase + Gemini APIを使用。API連携とUI実装でエラーハンドリングに苦労したが、Stripe決済も統合。',
       thumbnail: '/images/project2.png',
       technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Bolt.New', 'Stripe', 'Gemini API'],
       duration: '2週間',
@@ -112,7 +112,7 @@ export const profileData: Profile = {
     {
       id: '6',
       title: '貯金管理「Shiftme」開発',
-      description: '個人開発で作成した天気予報アプリ。OpenWeatherMap APIを使用。',
+      description: '貯金管理「Shiftme」の開発を担当。React + TypeScript + Tailwind CSS + OpenWeatherMap APIを使用。API連携とレスポンシブデザインの実装でカスタムフックとエラーハンドリングに苦労したが、安定したアプリを実現。',
       thumbnail: '/images/project3.png',
       technologies: ['React', 'TypeScript', 'Tailwind CSS', 'OpenWeatherMap API'],
       duration: '2週間',
@@ -129,10 +129,9 @@ export const profileData: Profile = {
   ],
   contact: {
     email: 'sannsi4444@gmail.com',
-    phone: '070-5416-3460',
     github: 'https://github.com/sanpicule',
-    linkedin: 'https://linkedin.com/in/username',
-    twitter: 'https://twitter.com/SanpiTech240'
+    twitter: 'https://twitter.com/SanpiTech240',
+    instagram: 'https://instagram.com/cafe.tokyo'
   },
   about: {
     description: 'フロント、バック、データベースなどフルスタックで活動できます。現在はAIを活用したバイブコーディングに興味があります。',

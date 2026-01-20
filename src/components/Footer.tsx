@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion';
-import { Mail, Github, Twitter, Instagram, ArrowUp } from 'lucide-react';
+import { Mail, Twitter, Instagram, ArrowUp } from 'lucide-react';
 
 interface FooterProps {
   contact: {
     github?: string;
     twitter?: string;
     email: string;
+    instagram?: string;
   };
 }
 
@@ -47,19 +48,6 @@ const Footer = ({ contact }: FooterProps) => {
             
             {/* Social Links */}
             <div className="flex space-x-4">
-              {contact.github && (
-                <motion.a
-                  href={contact.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-slate-800 border border-slate-700 rounded-full flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 transition-all duration-300"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Github size={20} />
-                </motion.a>
-              )}
-              
               {contact.twitter && (
                 <motion.a
                   href={contact.twitter}
@@ -74,7 +62,7 @@ const Footer = ({ contact }: FooterProps) => {
               )}
               
               <motion.a
-                href="https://instagram.com/cafe.tokyo"
+                href={contact.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-slate-800 border border-slate-700 rounded-full flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 transition-all duration-300"

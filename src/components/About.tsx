@@ -24,7 +24,7 @@ interface AboutData {
 
 interface Skill {
   name: string;
-  level: number;
+  level: string;
   category: string;
 }
 
@@ -104,6 +104,36 @@ const About = ({ about, skills }: AboutProps) => {
           >
             {about.description}
           </motion.p>
+
+          {/* Article and GitHub Link Buttons */}
+          <motion.div variants={itemVariants} className="mt-6 flex gap-4">
+            <motion.a
+              href="https://zenn.dev/sanpicule"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span>記事を見る</span>
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </motion.a>
+            <motion.a
+              href="https://github.com/sanpicule"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-slate-700 text-white rounded-lg font-medium hover:bg-slate-600 transition-colors duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span>GitHubを見る</span>
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </motion.a>
+          </motion.div>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">

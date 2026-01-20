@@ -1,6 +1,6 @@
 export interface Skill {
   name: string;
-  level: number; // 1-5
+  level: string; // 経験ベースの記述
   category: 'frontend' | 'backend' | 'database' | 'infrastructure' | 'tool' | 'soft';
   icon?: string;
 }
@@ -29,6 +29,7 @@ export interface ContactInfo {
   github?: string;
   linkedin?: string;
   twitter?: string;
+  instagram?: string;
 }
 
 export interface Profile {

@@ -1,8 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github, X, Calendar, Tag, Users } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ExternalLink, Github, Calendar, Users } from 'lucide-react';
 
 interface Project {
   id: string;
@@ -24,10 +23,10 @@ interface Project {
 
 interface WorksProps {
   projects: Project[];
+  onProjectSelect: (project: Project) => void;
 }
 
-const Works = ({ projects }: WorksProps) => {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+const Works = ({ projects, onProjectSelect }: WorksProps) => {
   
 
   const containerVariants = {
@@ -76,41 +75,10 @@ const Works = ({ projects }: WorksProps) => {
     }
   };
 
-  const modalVariants = {
-    hidden: { 
-      opacity: 0,
-      scale: 0.95,
-      y: 20
-    },
-    visible: { 
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut" as const
-      }
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.95,
-      y: 20,
-      transition: {
-        duration: 0.2
-      }
-    }
-  };
-
   // フィルターは使用しないため、一覧はそのまま projects を表示
 
   const openModal = (project: Project) => {
-    setSelectedProject(project);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeModal = () => {
-    setSelectedProject(null);
-    document.body.style.overflow = 'unset';
+    onProjectSelect(project);
   };
 
   const personalProjects = projects.filter((p) => p.type === 'portfolio');
@@ -328,142 +296,6 @@ const Works = ({ projects }: WorksProps) => {
           </>
         )}
       </motion.div>
-
-      {/* Project Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={closeModal}
-          >
-            <motion.div
-              className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white rounded-xl"
-              variants={modalVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close Button */}
-              <div className="flex justify-end p-4 border-b border-slate-200">
-                <button
-                  onClick={closeModal}
-                  className="w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors duration-300"
-                >
-                  <X size={16} />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div className="p-8">
-                {/* Project Header */}
-                <div className="mb-8">
-                  <h2 className="text-3xl font-sans font-light text-slate-900 mb-4">
-                    {selectedProject.title}
-                  </h2>
-                  
-                  <p className="text-lg text-slate-600 font-light leading-relaxed">
-                    {selectedProject.description}
-                  </p>
-                </div>
-
-                {/* Project Details Grid */}
-                <div className="grid md:grid-cols-2 gap-8 mb-8">
-                  {/* Project Info */}
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <Calendar className="w-5 h-5 text-slate-600" />
-                      <div>
-                        <p className="text-sm text-slate-500">期間</p>
-                        <p className="font-medium text-slate-900">{selectedProject.duration}</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-3">
-                      <Users className="w-5 h-5 text-slate-600" />
-                      <div>
-                        <p className="text-sm text-slate-500">役割</p>
-                        <p className="font-medium text-slate-900">{selectedProject.role}</p>
-                      </div>
-                    </div>
-                    
-                    {selectedProject.challenge && (
-                      <div className="flex items-center gap-3">
-                        <Tag className="w-5 h-5 text-slate-600" />
-                        <div>
-                          <p className="text-sm text-slate-500">課題</p>
-                          <p className="font-medium text-slate-900">{selectedProject.challenge}</p>
-                        </div>
-                      </div>
-                    )}
-                    
-                    {selectedProject.solution && (
-                      <div className="flex items-center gap-3">
-                        <Tag className="w-5 h-5 text-slate-600" />
-                        <div>
-                          <p className="text-sm text-slate-500">解決策</p>
-                          <p className="font-medium text-slate-900">{selectedProject.solution}</p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Technologies */}
-                  <div>
-                    <h4 className="text-lg font-medium text-slate-900 mb-4">使用技術</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedProject.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-3 py-2 bg-slate-100 border border-slate-200 text-slate-700 text-sm font-medium rounded-lg"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Action Buttons */}
-                {(selectedProject.githubUrl || (selectedProject.demoUrl && selectedProject.type === 'portfolio')) && (
-                  <div className="flex flex-wrap gap-4 pt-6 border-t border-slate-200">
-                    {selectedProject.githubUrl && (
-                      <motion.a
-                        href={selectedProject.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-xl font-medium hover:bg-slate-800 transition-colors duration-300"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <Github size={20} />
-                        コードを見る
-                      </motion.a>
-                    )}
-                    
-                    {selectedProject.demoUrl && selectedProject.type === 'portfolio' && (
-                      <motion.a
-                        href={selectedProject.demoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-300 text-slate-700 rounded-xl font-medium hover:bg-slate-50 hover:border-slate-400 transition-colors duration-300"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <ExternalLink size={20} />
-                        サイトを見る
-                      </motion.a>
-                    )}
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };

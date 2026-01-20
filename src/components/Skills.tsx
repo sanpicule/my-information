@@ -73,16 +73,7 @@ const Skills = ({ skills }: SkillsProps) => {
                   >
                     <div className="flex justify-between items-center">
                       <span className="font-medium text-slate-700">{skill.name}</span>
-                      <span className="text-sm text-slate-500">{skill.level}/5</span>
-                    </div>
-                    <div className="w-full bg-slate-200 rounded-full h-1 overflow-hidden">
-                      <motion.div
-                        className="h-full bg-slate-600 rounded-full"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${(skill.level / 5) * 100}%` }}
-                        transition={{ duration: 0.8, delay: index * 0.1 }}
-                        viewport={{ once: true }}
-                      />
+                      <span className="text-sm text-slate-500">{skill.level}</span>
                     </div>
                   </motion.div>
                 ))}
@@ -117,16 +108,7 @@ const Skills = ({ skills }: SkillsProps) => {
                   >
                     <div className="flex justify-between items-center">
                       <span className="font-medium text-slate-700">{skill.name}</span>
-                      <span className="text-sm text-slate-500">{skill.level}/5</span>
-                    </div>
-                    <div className="w-full bg-slate-200 rounded-full h-1 overflow-hidden">
-                      <motion.div
-                        className="h-full bg-slate-600 rounded-full"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${(skill.level / 5) * 100}%` }}
-                        transition={{ duration: 0.8, delay: index * 0.1 }}
-                        viewport={{ once: true }}
-                      />
+                      <span className="text-sm text-slate-500">{skill.level}</span>
                     </div>
                   </motion.div>
                 ))}
@@ -160,16 +142,7 @@ const Skills = ({ skills }: SkillsProps) => {
                   >
                     <div className="flex justify-between items-center">
                       <span className="font-medium text-slate-700">{skill.name}</span>
-                      <span className="text-sm text-slate-500">{skill.level}/5</span>
-                    </div>
-                    <div className="w-full bg-slate-200 rounded-full h-1 overflow-hidden">
-                      <motion.div
-                        className="h-full bg-slate-600 rounded-full"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${(skill.level / 5) * 100}%` }}
-                        transition={{ duration: 0.8, delay: index * 0.1 }}
-                        viewport={{ once: true }}
-                      />
+                      <span className="text-sm text-slate-500">{skill.level}</span>
                     </div>
                   </motion.div>
                 ))}
@@ -203,16 +176,7 @@ const Skills = ({ skills }: SkillsProps) => {
                   >
                     <div className="flex justify-between items-center">
                       <span className="font-medium text-slate-700">{skill.name}</span>
-                      <span className="text-sm text-slate-500">{skill.level}/5</span>
-                    </div>
-                    <div className="w-full bg-slate-200 rounded-full h-1 overflow-hidden">
-                      <motion.div
-                        className="h-full bg-slate-600 rounded-full"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${(skill.level / 5) * 100}%` }}
-                        transition={{ duration: 0.8, delay: index * 0.1 }}
-                        viewport={{ once: true }}
-                      />
+                      <span className="text-sm text-slate-500">{skill.level}</span>
                     </div>
                   </motion.div>
                 ))}
