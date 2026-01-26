@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Twitter, Instagram } from 'lucide-react';
+import { Twitter, Instagram } from 'lucide-react';
 import ContactForm from './ContactForm';
 import { ContactInfo } from '../types';
 
@@ -64,12 +64,12 @@ const Contact = ({ contact }: ContactProps) => {
       >
         {/* Section Header */}
         <motion.div variants={itemVariants} className="mb-16">
-          <h2 className="text-2xl sm:text-3xl font-sans font-light text-slate-900 mb-6">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sans font-medium text-slate-900 mb-6">
             Contact
           </h2>
           
           <motion.p 
-            className="text-sm sm:text-base text-slate-600 font-light leading-relaxed"
+            className="text-sm sm:text-base text-slate-800 font-light leading-relaxed"
             variants={itemVariants}
           >
             新しいプロジェクトのご相談や、お問い合わせがございましたら、
@@ -77,52 +77,12 @@ const Contact = ({ contact }: ContactProps) => {
           </motion.p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid gap-12 items-start">
           {/* Contact Information */}
           <motion.div variants={itemVariants}>
-            <motion.div
-              className="p-6 bg-slate-50 border border-slate-200 rounded-xl mb-6"
-              variants={cardVariants}
-            >
-              <h3 className="text-xl font-sans font-light text-slate-900 mb-6">
-                連絡先情報
-              </h3>
-              
-              <div className="space-y-4">
-                <motion.div 
-                  className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-lg"
-                >
-                  <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
-                    <Mail className="w-5 h-5 text-slate-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-slate-500 font-light">メールアドレス</p>
-                    <a 
-                      href={`mailto:${contact.email}`}
-                      className="font-medium text-slate-900 hover:text-slate-700 transition-colors duration-300"
-                    >
-                      {contact.email}
-                    </a>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-lg"
-                >
-                  <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-slate-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-slate-500 font-light">所在地</p>
-                    <span className="font-medium text-slate-900">東京都世田谷区</span>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
 
             {/* Social Links */}
             <motion.div
-              className="p-6 bg-slate-50 border border-slate-200 rounded-xl"
               variants={cardVariants}
             >
               <h4 className="text-lg font-sans font-light text-slate-900 mb-4">

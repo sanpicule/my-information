@@ -1,5 +1,12 @@
 import { useEffect } from 'react';
 
+// Extend window interface
+declare global {
+  interface Window {
+    scrollTimeout?: number;
+  }
+}
+
 /**
  * モバイルブラウザでのスクロール時の表示領域可変を防ぐためのフック
  * iOS SafariのアドレスバーやAndroid Chromeのナビゲーションバーの表示/非表示による
@@ -34,7 +41,7 @@ export const useViewportHeight = () => {
       
       window.scrollTimeout = setTimeout(() => {
         setViewportHeight();
-      }, 100);
+      }, 100) as unknown as number;
     };
 
     // オリエンテーション変更時の再計算

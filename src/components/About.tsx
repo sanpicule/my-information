@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { MapPin, Briefcase, Award } from 'lucide-react';
 
 interface AboutData {
   description: string;
@@ -33,7 +32,7 @@ interface AboutProps {
   skills: Skill[];
 }
 
-const About = ({ about, skills }: AboutProps) => {
+const About = ({ about }: AboutProps) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -72,19 +71,6 @@ const About = ({ about, skills }: AboutProps) => {
     }
   };
 
-  const skillTagVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: (i: number) => ({
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delay: i * 0.05,
-        duration: 0.3,
-        ease: "easeOut" as const
-      }
-    })
-  };
-
   return (
     <section id="about" className="section-padding bg-slate-50">
       <motion.div 
@@ -95,138 +81,81 @@ const About = ({ about, skills }: AboutProps) => {
         viewport={{ once: true, amount: 0.3 }}
       >
         {/* Section Header */}
-        <motion.div variants={itemVariants} className="mb-16">
-          <h2 className="text-2xl sm:text-3xl font-sans font-light text-slate-900 mb-6">About</h2>
-          
-          <motion.p 
-            className="text-sm sm:text-base text-slate-600 font-light leading-relaxed"
-            variants={itemVariants}
-          >
-            {about.description}
-          </motion.p>
-
-          {/* Article and GitHub Link Buttons */}
-          <motion.div variants={itemVariants} className="mt-6 flex gap-4">
-            <motion.a
-              href="https://zenn.dev/sanpicule"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span>記事を見る</span>
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </motion.a>
-            <motion.a
-              href="https://github.com/sanpicule"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-slate-700 text-white rounded-lg font-medium hover:bg-slate-600 transition-colors duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span>GitHubを見る</span>
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </motion.a>
-          </motion.div>
+        <motion.div variants={itemVariants}>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sans font-medium text-slate-900 mb-12">About Me</h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 md:gap-12 items-start">
           {/* Personal Info */}
           <motion.div variants={itemVariants}>
             <motion.div
-              className="relative mb-6 p-6 bg-white border border-slate-200 rounded-xl"
               variants={cardVariants}
             >
               <div className="relative z-10">
-                <div className="md:flex items-center gap-8">
-                  <motion.div
-                    className="w-24 h-24 md:w-48 md:h-48 mb-6 rounded-full overflow-hidden"
-                    variants={cardVariants}
-                  >
-                    <img 
-                      src="/images/profile.jpg" 
-                      alt="スガタ" 
-                      className="w-full h-full object-cover"
-                    />
-                  </motion.div>
-                  
+                <div className="flex flex-col gap-12">
                   <div>
-                    <h3 className="text-2xl font-sans font-medium text-slate-900 mb-2">Sanshiro</h3>
-                    <p className="text-slate-600 mb-6 font-light text-sm">Frontend Developer</p>
-                    
-                    <div className="space-y-1">
-                      <motion.div 
-                        className="flex items-center gap-3 text-slate-600"
-                        variants={itemVariants}
-                      >
-                        <MapPin className="w-4 h-4 text-slate-500" />
-                        <span className="font-light">静岡県焼津市出身</span>
-                      </motion.div>
-                      <motion.div 
-                        className="flex items-center gap-3 text-slate-600"
-                        variants={itemVariants}
-                      >
-                        <MapPin className="w-4 h-4 text-slate-500" />
-                        <span className="font-light">東京都世田谷区在住</span>
-                      </motion.div>
-                    </div>
+                    <motion.div 
+                      className="text-slate-800"
+                      variants={itemVariants}
+                    >
+                      <h3 className="text-2xl font-sans font-light text-slate-900 mb-4">現在地</h3>
+                      <span className="font-light text-sm">
+                        エンジニア歴4年目
+                        <br></br>
+                        現在Webシステムの開発に貢献。現場での評価を得て、チームリーダーを任され、要件定義や設計、チームのリソース管理や開発スケジュールの調整なども経験。エンジニアとしてのスキルアップを目指すとともに、社会への貢献を目的として、副業案件を募集しています。
+                      </span>
+                    </motion.div>
                   </div>
+                  <div>
+                    <h3 className="text-2xl font-sans font-light text-slate-900 mb-4">略歴</h3>
+                    <motion.p 
+                      className="text-md sm:text-base text-slate-900 font-light leading-relaxed"
+                      variants={itemVariants}
+                    >
+                      {about.description}
+                    </motion.p>
+                  </div>
+                  {/* Article and GitHub Link Buttons */}
+                  <motion.div variants={itemVariants} className="hidden mt-4 md:flex flex-col gap-4">
+                    <motion.a
+                      href="https://zenn.dev/sanpi34"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className='underline flex items-center gap-2 hover:opacity-40 w-fit transition-all duration-200'
+                    >
+                      <img src='/images/zenn-icon.svg' className='w-10 h-10'></img>
+                      <span>zennの記事を見る</span>
+                    </motion.a>
+                    <motion.a
+                      href="https://github.com/sanpicule"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className='underline flex items-center gap-2 hover:opacity-40 w-fit transition-all duration-200'
+                    >
+                      <img src='/images/github-icon.svg' className='w-10 h-10' />
+                      <span>GitHubを見る</span>
+                    </motion.a>
+                    <motion.a
+                      href="https://sanpicule.github.io/my-information/skill-sheet.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className='underline flex items-center gap-2 hover:opacity-40 w-fit transition-all duration-200'
+                    >
+                      <img src='/images/pdf-icon.svg' className='w-10 h-10' />
+                      <span>スキルシートをダウンロードする</span>
+                    </motion.a>
+                  </motion.div>
                 </div>
-
-                {/* Skills Section */}
-                <motion.div 
-                  className="mt-6 pt-6 border-t border-slate-200"
-                  variants={itemVariants}
-                >
-                  <h4 className="text-sm font-sans font-light text-slate-900 mb-3 flex items-center gap-2">
-                    <Award className="w-4 h-4 text-slate-600" />
-                    主要スキル
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {skills && skills.length > 0 ? (
-                      skills.slice(0, 6).map((skill, i) => (
-                        <motion.span
-                          key={skill.name}
-                          className="text-xs rounded-lg font-light bg-slate-100 p-2 border border-slate-200 text-slate-700"
-                          custom={i}
-                          variants={skillTagVariants}
-                        >
-                          {skill.name}
-                        </motion.span>
-                      ))
-                    ) : (
-                      ['TypeScript', 'React', 'Next.js'].map((skill, i) => (
-                        <motion.span
-                          key={skill}
-                          className="text-xs rounded-lg font-light bg-slate-100 p-2 border border-slate-200 text-slate-700"
-                          custom={i}
-                          variants={skillTagVariants}
-                        >
-                          {skill}
-                        </motion.span>
-                      ))
-                    )}
-                  </div>
-                </motion.div>
               </div>
             </motion.div>
-
           </motion.div>
 
           {/* Work Experience */}
           <motion.div variants={itemVariants}>
             <motion.div
-              className="p-6 bg-white border border-slate-200 rounded-xl"
               variants={cardVariants}
             >
-              <h3 className="text-lg font-sans font-light text-slate-900 mb-6 flex items-center gap-2">
-                <Briefcase className="w-5 h-5 text-slate-600" />
+              <h3 className="text-2xl font-sans font-light text-slate-900 mb-4">
                 職歴・経験
               </h3>
               
@@ -238,6 +167,7 @@ const About = ({ about, skills }: AboutProps) => {
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1, duration: 0.4 }}
+                    viewport={{ once: true }}
                   >
                     <div className="absolute left-0 top-0 w-2 h-2 bg-slate-400 rounded-full -translate-x-1" />
                     <h4 className="font-sans text-slate-900 text-base font-semibold mb-1">{work.company}</h4>
@@ -245,12 +175,43 @@ const About = ({ about, skills }: AboutProps) => {
                       <span className="text-slate-400">●</span>
                       {work.period}
                     </span>
-                    <p className="text-slate-600 text-sm font-light mb-2">{work.position}</p>
+                    <p className="text-slate-800 text-sm font-light mb-2">{work.position}</p>
                     <p className="text-slate-500 text-sm font-light">{work.description}</p>
                   </motion.div>
                 ))}
               </div>
             </motion.div>
+          </motion.div>
+
+          {/* Article and GitHub Link Buttons */}
+          <motion.div variants={itemVariants} className="md:hidden mt-4 flex flex-col gap-3">
+            <motion.a
+              href="https://zenn.dev/sanpi34"
+              target="_blank"
+              rel="noopener noreferrer"
+              className='underline flex items-center gap-2'
+            >
+              <img src='/images/zenn-icon.svg' className='w-8 h-8' />
+              <span>zennの記事を見る</span>
+            </motion.a>
+            <motion.a
+              href="https://github.com/sanpicule"
+              target="_blank"
+              rel="noopener noreferrer"
+              className='underline flex items-center gap-2'
+            >
+              <img src='/images/github-icon.svg' className='w-8 h-8' />
+              <span>GitHubを見る</span>
+            </motion.a>
+            <motion.a
+              href="https://sanpicule.github.io/my-information/skill-sheet.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className='underline flex items-center gap-2'
+            >
+              <img src='/images/pdf-icon.svg' className='w-8 h-8' />
+              <span>スキルシートをダウンロードする</span>
+            </motion.a>
           </motion.div>
         </div>
       </motion.div>

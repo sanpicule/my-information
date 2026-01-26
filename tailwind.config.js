@@ -48,6 +48,12 @@ export default {
         sans: ['Noto Sans JP', 'sans-serif'],
         serif: ['Noto Sans JP', 'sans-serif'],
       },
+      height: {
+        'screen-dynamic': '100dvh',
+      },
+      minHeight: {
+        'screen-dynamic': '100dvh',
+      },
     },
   },
   plugins: [],

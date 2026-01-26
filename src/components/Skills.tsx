@@ -33,12 +33,12 @@ const Skills = ({ skills }: SkillsProps) => {
       >
         {/* Section Header */}
         <motion.div className="mb-16">
-          <h2 className="text-2xl sm:text-3xl font-sans font-light text-slate-900 mb-6">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sans font-medium text-slate-900 mb-6">
             Skills
           </h2>
           
           <motion.p 
-            className="text-sm sm:text-base text-slate-600 font-light leading-relaxed"
+            className="text-sm sm:text-base text-slate-800 font-light leading-relaxed"
           >
             フロントエンド開発を中心に、幅広い技術スタックを習得しています。
             各技術の習熟度を5段階で評価し、継続的な学習とスキル向上に取り組んでいます。
@@ -46,18 +46,16 @@ const Skills = ({ skills }: SkillsProps) => {
         </motion.div>
 
         {/* Skills Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {/* Frontend Skills */}
           <motion.div>
-            <motion.div
-              className="p-6 bg-white border border-slate-200 rounded-xl h-full"
-            >
+            <motion.div className='mx-2'>
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
-                  <Code className="w-5 h-5 text-slate-600" />
+                  <Code className="w-5 h-5 text-slate-800" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-sans font-light text-slate-900">フロントエンド</h3>
+                  <h3 className="text-lg font-sans font-semibold text-slate-900">フロントエンド</h3>
                   <span className="text-sm text-slate-500 font-light">Frontend Development</span>
                 </div>
               </div>
@@ -72,8 +70,10 @@ const Skills = ({ skills }: SkillsProps) => {
                     transition={{ delay: index * 0.05, duration: 0.4 }}
                   >
                     <div className="flex justify-between items-center">
-                      <span className="font-medium text-slate-700">{skill.name}</span>
-                      <span className="text-sm text-slate-500">{skill.level}</span>
+                      <div className='flex gap-10 items-center'>
+                        <img src={skill.icon} className='w-10 h-10'></img>
+                        <span className="font-medium text-slate-700">{skill.name}</span>
+                      </div>
                     </div>
                   </motion.div>
                 ))}
@@ -83,16 +83,14 @@ const Skills = ({ skills }: SkillsProps) => {
 
           {/* Backend Skills */}
           <motion.div>
-            <motion.div
-              className="p-6 bg-white border border-slate-200 rounded-xl h-full"
-            >
+            <motion.div className='mx-2'>
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
-                  <Server className="w-5 h-5 text-slate-600" />
+                  <Server className="w-5 h-5 text-slate-800" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-sans font-light text-slate-900">バックエンド</h3>
-                  <span className="text-sm text-slate-500 font-light">Backend Development</span>
+                  <h3 className="text-lg font-sans font-semibold text-slate-900">バックエンド / DB</h3>
+                  <span className="text-sm text-slate-500 font-light">Backend & Database</span>
                 </div>
               </div>
               
@@ -107,8 +105,10 @@ const Skills = ({ skills }: SkillsProps) => {
                     viewport={{ once: true }}
                   >
                     <div className="flex justify-between items-center">
-                      <span className="font-medium text-slate-700">{skill.name}</span>
-                      <span className="text-sm text-slate-500">{skill.level}</span>
+                      <div className='flex gap-10 items-center'>
+                        <img src={skill.icon} className='w-10 h-10'></img>
+                        <span className="font-medium text-slate-700">{skill.name}</span>
+                      </div>
                     </div>
                   </motion.div>
                 ))}
@@ -118,16 +118,14 @@ const Skills = ({ skills }: SkillsProps) => {
 
           {/* Database Skills */}
           <motion.div>
-            <motion.div
-              className="p-6 bg-white border border-slate-200 rounded-xl h-full"
-            >
+            <motion.div className='mx-2'>
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
-                  <Database className="w-5 h-5 text-slate-600" />
+                  <Database className="w-5 h-5 text-slate-800" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-sans font-light text-slate-900">データベース</h3>
-                  <span className="text-sm text-slate-500 font-light">Database & Storage</span>
+                  <h3 className="text-lg font-sans font-semibold text-slate-900">クラウド</h3>
+                  <span className="text-sm text-slate-500 font-light">Cloud Services</span>
                 </div>
               </div>
               
@@ -141,8 +139,10 @@ const Skills = ({ skills }: SkillsProps) => {
                     transition={{ delay: index * 0.05, duration: 0.4 }}
                   >
                     <div className="flex justify-between items-center">
-                      <span className="font-medium text-slate-700">{skill.name}</span>
-                      <span className="text-sm text-slate-500">{skill.level}</span>
+                      <div className='flex gap-10 items-center'>
+                        <img src={skill.icon} className='w-10 h-10'></img>
+                        <span className="font-medium text-slate-700">{skill.name}</span>
+                      </div>
                     </div>
                   </motion.div>
                 ))}
@@ -152,15 +152,13 @@ const Skills = ({ skills }: SkillsProps) => {
 
           {/* Tools Skills */}
           <motion.div>
-            <motion.div
-              className="p-6 bg-white border border-slate-200 rounded-xl h-full"
-            >
+            <motion.div className='mx-2'>
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
-                  <Settings className="w-5 h-5 text-slate-600" />
+                  <Settings className="w-5 h-5 text-slate-800" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-sans font-light text-slate-900">ツール</h3>
+                  <h3 className="text-lg font-sans font-semibold text-slate-900">ツール</h3>
                   <span className="text-sm text-slate-500 font-light">Development Tools</span>
                 </div>
               </div>
@@ -175,8 +173,10 @@ const Skills = ({ skills }: SkillsProps) => {
                     transition={{ delay: index * 0.05, duration: 0.4 }}
                   >
                     <div className="flex justify-between items-center">
-                      <span className="font-medium text-slate-700">{skill.name}</span>
-                      <span className="text-sm text-slate-500">{skill.level}</span>
+                      <div className='flex gap-10 items-center'>
+                        <img src={skill.icon} className='w-10 h-10'></img>
+                        <span className="font-medium text-slate-700">{skill.name}</span>
+                      </div>
                     </div>
                   </motion.div>
                 ))}

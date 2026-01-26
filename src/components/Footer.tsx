@@ -40,10 +40,9 @@ const Footer = ({ contact }: FooterProps) => {
         <div className="grid md:grid-cols-3 gap-8">
           {/* Brand */}
           <motion.div>
-            <h3 className="text-2xl font-sans font-light mb-4">Hikawa's Portfolio</h3>
+            <h3 className="text-2xl font-sans font-bold mb-4">My Profile</h3>
             <p className="text-slate-300 text-sm font-light leading-relaxed mb-6 max-w-md">
-              フロントエンド開発者として、技術的な美しさと実用性のバランスを重視した開発を心がけています。
-              ユーザー体験を最優先に考え、高品質なWebアプリケーションの開発に取り組んでいます。
+              ぜひ皆様に、私のことを知っていただきたく、作成しました。 ぜひSNSでもつながりましょう！
             </p>
             
             {/* Social Links */}
@@ -78,7 +77,7 @@ const Footer = ({ contact }: FooterProps) => {
           <motion.div>
             <h4 className="text-lg font-medium mb-4">クイックリンク</h4>
             <ul className="space-y-2">
-              {['Home', 'About', 'Skills', 'Works', 'Contact'].map((item, index) => (
+              {['Home', 'About', 'Skills', 'Portfolio', 'Contact'].map((item, index) => (
                 <motion.li
                   key={item}
                   initial={{ opacity: 0, x: -10 }}

@@ -6,9 +6,7 @@
 
 @layer base {
   :root {
-    /* 動的なビューポート高さの制御 */
-    --vh: 1vh;
-    --vw: 1vw;
+    /* 動的なビューポート高さはdvhで対応 */
   }
   
   html {
@@ -23,9 +21,7 @@
     background-color: #e0e5ec;
     color: #2d3748;
     /* スクロール時の表示領域可変を防ぐ */
-    min-height: 100vh;
-    min-height: calc(var(--vh, 1vh) * 100);
-    min-height: -webkit-fill-available;
+    min-height: 100dvh;
     /* スクロール時のレイアウトシフトを防ぐ */
     overflow-x: hidden;
   }
@@ -40,11 +36,8 @@
   /* モバイルブラウザでの表示領域可変を防ぐ */
   @media screen and (max-width: 768px) {
     body {
-      /* iOS Safariのアドレスバー対策 */
-      min-height: 100vh;
-      min-height: calc(var(--vh, 1vh) * 100);
-      /* Android Chromeのナビゲーションバー対策 */
-      min-height: -webkit-fill-available;
+      /* dvhを使用 */
+      min-height: 100dvh;
     }
   }
 }

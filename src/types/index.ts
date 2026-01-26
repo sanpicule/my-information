@@ -5,6 +5,12 @@ export interface Skill {
   icon?: string;
 }
 
+export interface Screenshot {
+  src: string;
+  comment: string;
+  icon?: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -17,7 +23,7 @@ export interface Project {
   type: 'work' | 'portfolio'; // 本業 or 個人開発
   demoUrl?: string;
   githubUrl?: string;
-  screenshots: string[];
+  screenshots: Screenshot[];
   challenge: string;
   solution: string;
   learnings: string[];

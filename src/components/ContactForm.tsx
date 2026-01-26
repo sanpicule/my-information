@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Send } from 'lucide-react';
+import { init, send } from '@emailjs/browser';
+import { motion } from 'framer-motion';
 
 interface FormData {
   name: string;
@@ -31,36 +33,39 @@ const ContactForm = () => {
     mode: 'onBlur'
   });
 
-  const [submitStatus, setSubmitStatusState] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const onSubmit = async (data: FormData) => {
-    try {
-      // ここで実際のAPI呼び出しを行う
-      console.log('Form data:', data);
-      
-      // 成功時の処理
-      setSubmitStatusState('success');
-      reset();
-      
-      // 3秒後にステータスをリセット
-      setTimeout(() => {
-        setSubmitStatusState('idle');
-      }, 3000);
-    } catch (error) {
-      console.error('Submit error:', error);
-      setSubmitStatusState('error');
-      
-      // 3秒後にステータスをリセット
-      setTimeout(() => {
-        setSubmitStatusState('idle');
-      }, 3000);
+    const userID = import.meta.env.VITE_EMAIL_API_KEY
+    const serviceID = import.meta.env.VITE_EMAIL_SERVICE_ID
+    const templateID = import.meta.env.VITE_EMAIL_TEMPLATE_ID
+
+    if (userID && serviceID && templateID) {
+      // EmailJSを初期化
+      init(userID)
+
+      // EmailJSに渡すパラメータを作成
+      const params = {
+        name: data.name,
+        email: data.email,
+        message: data.message
+      }
+
+      try {
+        // メール送信実行
+        await send(serviceID, templateID, params, userID)
+        // 送信に成功すればダイアログ表示と、フォーム入力内容をリセットする
+        alert('この度はお問い合わせ頂き、ありがとうございます。\nお問い合わせを受け付けました。。')
+        reset()
+      } catch (error) {
+        // 失敗した場合のダイアログ表示
+        alert('お問い合わせの受付に失敗しました。\n大変恐れ入りますが、しばらく時間をおいてから再度お試しください。')
+      }
     }
   };
 
   return (
-    <div className="border border-primary-200 p-8 bg-white rounded-2xl">
-      <h3 className="text-2xl font-sans font-light text-primary-900 mb-8">お問い合わせフォーム</h3>
-      
+    <div>      
       {submitStatus === 'success' && (
         <div className="mb-8 p-4 bg-green-50 border border-green-200 text-green-700 font-light rounded-lg">
           お問い合わせありがとうございます。後日ご連絡いたします。
@@ -73,9 +78,16 @@ const ContactForm = () => {
         </div>
       )}
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+      <motion.form 
+        onSubmit={handleSubmit(onSubmit)} 
+        className="space-y-4"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+        viewport={{ once: true }}
+      >
         <div>
-          <label htmlFor="name" className="block text-sm font-light text-primary-700 mb-3">
+          <label htmlFor="name" className="block text-sm font-light text-primary-700 mb-1">
             お名前 *
           </label>
           <input
@@ -93,7 +105,7 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-light text-primary-700 mb-3">
+          <label htmlFor="email" className="block text-sm font-light text-primary-700 mb-1">
             メールアドレス *
           </label>
           <input
@@ -111,7 +123,7 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="subject" className="block text-sm font-light text-primary-700 mb-3">
+          <label htmlFor="subject" className="block text-sm font-light text-primary-700 mb-1">
             件名 *
           </label>
           <input
@@ -129,7 +141,7 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="message" className="block text-sm font-light text-primary-700 mb-3">
+          <label htmlFor="message" className="block text-sm font-light text-primary-700 mb-1">
             メッセージ *
           </label>
           <textarea
@@ -146,10 +158,13 @@ const ContactForm = () => {
           )}
         </div>
 
-        <button
+        <motion.button
           type="submit"
           disabled={isSubmitting}
-          className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center rounded-lg"
+          className="w-full bg-gray-800 py-4 text-white disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center rounded-lg"
+          whileHover={{ scale: 1.02, backgroundColor: "#374151" }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ duration: 0.2 }}
         >
           {isSubmitting ? (
             <>
@@ -162,8 +177,8 @@ const ContactForm = () => {
               送信する
             </>
           )}
-        </button>
-      </form>
+        </motion.button>
+      </motion.form>
     </div>
   );
 };

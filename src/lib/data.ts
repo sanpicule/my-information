@@ -3,83 +3,153 @@ import { Profile } from '../types';
 export const profileData: Profile = {
   name: 'スガタ',
   title: 'フロントエンド開発者',
-  introduction: 'React / Next.js の既存画面改修、管理画面UI実装、API連携、小〜中規模のフロントエンド開発を承ります。副業も歓迎です。',
+  introduction: '',
   skills: [
     // フロントエンド
-    { name: 'React', level: '業務で3年以上使用', category: 'frontend' },
-    { name: 'TypeScript', level: '業務で2年以上使用', category: 'frontend' },
-    { name: 'JavaScript', level: '業務で4年以上使用', category: 'frontend' },
-    { name: 'Next.js', level: '業務で2年以上使用', category: 'frontend' },
+    {
+      name: 'React',
+      level: '業務で3年以上使用',
+      category: 'frontend',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg'
+    },
+    {
+      name: 'TypeScript',
+      level: '業務で2年以上使用',
+      category: 'frontend',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg'
+    },
+    {
+      name: 'Tailwind CSS',
+      level: '業務で4年以上使用',
+      category: 'frontend',
+      icon: '/images/tailwindcss-icon.png'
+    },
+    {
+      name: 'Next.js',
+      level: '業務で2年以上使用',
+      category: 'frontend',
+      icon: '/images/nextjs-icon.svg'
+    },
     
     // バックエンド
-    { name: 'NestJS', level: '業務で1年使用', category: 'backend' },
-    
-    // データベース
-    { name: 'PostgreSQL', level: '業務で2年使用', category: 'database' },
-    { name: 'MySQL', level: '業務で1年使用', category: 'database' },
+    {
+      name: 'NestJS',
+      level: '業務で1年使用',
+      category: 'backend',
+      icon: '/images/nestjs-icon.svg'
+    },
+    {
+      name: 'Python',
+      level: '業務で3年以上使用',
+      category: 'backend',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg'
+    },
+    {
+      name: 'PostgreSQL',
+      level: '業務で2年使用',
+      category: 'backend',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg'
+    },
+    {
+      name: 'MySQL',
+      level: '業務で1年使用',
+      category: 'backend',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg'
+    },
+
+    // クラウドサービス
+    {
+      name: 'AWS',
+      level: '業務で1年使用',
+      category: 'database',
+      icon: '/images/aws-icon.svg'
+    },
+    {
+      name: 'Firebase',
+      level: '業務で1年使用',
+      category: 'database',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg'
+    },
+    {
+      name: 'Vercel',
+      level: '業務で1年使用',
+      category: 'database',
+      icon: '/images/vercel-icon.svg'
+    },
+    {
+      name: 'Supabase',
+      level: '業務で1年使用',
+      category: 'database',
+      icon: '/images/supabase-icon.svg'
+    },
+
+
     
     // ツール
-    { name: 'Git', level: '業務で4年以上使用', category: 'tool' },
-    { name: 'GitHub', level: '業務で4年以上使用', category: 'tool' },
-    { name: 'Playwright', level: '業務で1年使用', category: 'tool' },
+    {
+      name: 'Git/GitHub/GitLab',
+      level: '業務で4年以上使用',
+      category: 'tool',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg'
+    },
+    {
+      name: 'Prisma',
+      level: '業務で4年以上使用',
+      category: 'tool',
+      icon: '/images/prisma-icon.svg'
+    },
+    {
+      name: 'Playwright',
+      level: '業務で1年使用',
+      category: 'tool',
+      icon: '/images/playwright-icon.svg'
+    },
+    {
+      name: 'Docker',
+      level: '業務で1年使用',
+      category: 'tool',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg'
+    },
   ],
   projects: [
     {
       id: '1',
-      title: 'データポータルサイト開発',
-      description: '認証後の管理画面（一覧／編集）を担当。React + TypeScriptを使用。API設計者と調整しUIを実装。複雑な商品検索機能でパフォーマンス最適化に苦労したが、カスタムフックで解決。',
-      thumbnail: '/images/company1.png',
-      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Node.js', 'PostgreSQL'],
-      duration: '9ヶ月',
-      role: 'フロントエンド開発・UI/UX設計',
+      title: 'Kikara 公式ホームページ制作',
+      description: 'Kikaraは、私の母が経営する、お客様の健康を考えた取り組みを行なっている会社です。知り合いに作って貰ったHPが気に入ってないということを知り、初めてHP制作に挑戦しました。私一人ではなく、知り合い数人と共同開発しています。お店のコンセプトに合う色味やフォント選び、Figmaでのワイヤーフレーム作成に苦労しました。',
+      thumbnail: '/images/project1-1.png',
+      technologies: ['NextJS', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Figma', 'React Hook Form'],
+      duration: '約1年',
+      role: '個人開発',
       category: 'web',
-      type: 'work',
-      demoUrl: '',
-      githubUrl: '',
-      screenshots: ['/images/project1-1.jpg', '/images/project1-2.jpg'],
-      challenge: '複雑な商品検索機能とカート機能の実装',
-      solution: 'カスタムフックとコンテキストAPIを活用した状態管理',
-      learnings: ['状態管理の最適化', 'パフォーマンス改善', 'ユーザビリティ向上']
+      type: 'portfolio',
+      demoUrl: 'https://kikara-official.vercel.app/',
+      githubUrl: 'https://github.com/sanpicule/KikaraHP/',
+      screenshots: [
+        {
+          src: '/images/project1-1.png',
+          comment: 'Next.jsとTailwind CSSを使用したレスポンシブデザインのホームページ。Framer Motionで滑らかなアニメーションを実装。',
+          icon: '/images/motion_icon.png'
+        },
+        {
+          src: '/images/project1-2.png',
+          comment: 'Figmaでデザインしたワイヤーフレームとプロトタイプ。ユーザビリティを考慮した直感的なUIを設計。レスポンシブデザインを実装。',
+          icon: '/images/figma_icon.png'
+        },
+        {
+          src: '/images/project1-3.png',
+          comment: 'ReactHookFormを使用したお問い合わせフォーム。バリデーションとユーザーフィードバックを実装し、使いやすさを向上。',
+          icon: '/images/react-hook-form_icon.png'
+        }
+      ],
+      challenge: 'API連携とレスポンシブデザインの実装',
+      solution: 'カスタムフックとエラーハンドリングの実装',
+      learnings: ['API設計', 'エラーハンドリング', 'レスポンシブデザイン']
     },
     {
       id: '2',
-      title: 'アレルギー管理システム開発',
-      description: 'アレルギー管理システムのフルスタック開発を担当。React + TypeScript + PostgreSQLを使用。リアルタイム更新機能の実装でWebSocketとReact Hooksの組み合わせに苦労したが、安定した動作を実現。',
-      thumbnail: '/images/company1.png',
-      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Node.js', 'PostgreSQL'],
-      duration: '24ヶ月',
-      role: 'フルスタック開発',
-      category: 'web',
-      type: 'work',
-      demoUrl: '',
-      githubUrl: '',
-      screenshots: ['/images/project2-1.jpg', '/images/project2-2.jpg'],
-      challenge: 'リアルタイム更新機能の実装',
-      solution: 'WebSocketとReact Hooksを組み合わせた実装',
-      learnings: ['リアルタイム機能の実装', 'データベース設計', 'API設計']
-    },
-    {
-      id: '3',
-      title: 'AIタスク管理システム開発',
-      description: 'AIタスク管理システムのフルスタック開発を担当。NextJS + Supabase + OpenAIを使用。AI機能の実装でOpenAI APIの統合に苦労したが、効果的なタスク管理を実現。',
-      thumbnail: '/images/company2.png',
-      technologies: ['NextJS', 'TypeScript', 'Tailwind CSS', 'Supabase', 'OpenAI'],
-      duration: '24ヶ月',
-      role: 'フルスタック開発',
-      category: 'web',
-      type: 'work',
-      demoUrl: '',
-      githubUrl: '',
-      screenshots: ['/images/project2-1.jpg', '/images/project2-2.jpg'],
-      challenge: 'AIタスク管理機能の実装',
-      solution: 'OpenAI APIを使用した実装',
-      learnings: ['AIタスク管理機能の実装', 'データベース設計', 'API設計']
-    },
-    {
-      id: '4',
       title: 'CMS「Tiny Post」開発',
-      description: 'CMS「Tiny Post」のフロントエンド開発を担当。React + JavaScript + Tailwind CSSを使用。美しいアニメーションとレスポンシブデザインの実現でCSSアニメーションの調整に苦労したが、SEO最適化も実現。',
-      thumbnail: '/images/project1.png',
+      description: 'Kikara公式HPの簡易的なCMSとして「Tiny Post」を開発。私の母がHPにお知らせを投稿できるようにするために開発。母（60歳）でも使いやすく直感的にわかるデザインに工夫しました。',
+      thumbnail: '/images/project2-1.png',
       technologies: ['React', 'JavaScript', 'Tailwind CSS', 'Supabase', 'Figma'],
       duration: '6ヶ月',
       role: 'フロントエンド開発・デザイン',
@@ -87,60 +157,67 @@ export const profileData: Profile = {
       type: 'portfolio',
       demoUrl: 'https://tinypost-three.vercel.app/',
       githubUrl: 'https://github.com/sanpicule/Tinypost',
-      screenshots: ['/images/project3-1.jpg', '/images/project3-2.jpg'],
+      screenshots: [
+        {
+          src: '/images/project2-1.png',
+          comment: 'BaaSであるSupabaseを活用したGoogle認証によるログイン機能を実装。メールアドレスやパスワードを忘れやすい母にとっては最適な選択だと感じた。',
+          icon: '/images/google-icon.png'
+        },
+        {
+          src: '/images/project2-2.png',
+          comment: 'React Hook Formを使用した記事作成・編集画面。バリデーションとユーザーフィードバックを実装し、使いやすさを向上。公開非公開機能をつけることで、一時編集や投稿の作りダメができるよう設計。今後は、予約投稿などできるように改良予定',
+          icon: '/images/react-hook-form_icon.png'
+        },
+        {
+          src: '/images/project2-3.png',
+          comment: 'アプリケーション内にプレビュー画面を設けることで公開前に、見栄えを確認できるように工夫。Supabaseのストレージ機能を使って画像のアップロードを実現しています。また、プロフィール画像の編集もできますが、それもSupabaseのストレージに保存しています。',
+          icon: '/images/supabase-icon.svg'
+        },
+      ],
       challenge: '美しいアニメーションとレスポンシブデザインの実現',
       solution: 'Tailwind CSSとCSSアニメーションの組み合わせ',
       learnings: ['アニメーション実装', 'SEO最適化', 'パフォーマンス改善']
     },
     {
-      id: '5',
-      title: 'AIアイデアジェネレーター開発',
-      description: 'AIアイデアジェネレーターの開発を担当。React + TypeScript + Supabase + Gemini APIを使用。API連携とUI実装でエラーハンドリングに苦労したが、Stripe決済も統合。',
-      thumbnail: '/images/project2.png',
-      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Bolt.New', 'Stripe', 'Gemini API'],
-      duration: '2週間',
-      role: '個人開発',
+      id: '3',
+      title: '貯金管理アプリ「Shiftme」',
+      description: 'Bolt.newというAIエージェントが導入された開発プラットフォームでバイブコーディングで作成。Supabase、Netlifyとの連携が可能（Vercelでデプロイしました）。月収・ボーナス・固定支出を管理し、貯金目標までの進捗を可視化するアプリ。React + Supabase + Tailwind CSSで実装。支出の日別記録、月別予算分析、PWA対応でモバイルアプリのような体験を実現しました。',
+      thumbnail: '/images/project3-1.png',
+      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Vite', 'React Hook Form', 'Lucide React', 'date-fns'],
+      duration: '3ヶ月',
+      role: '個人開発（フルスタック）',
       category: 'web',
       type: 'portfolio',
-      demoUrl: 'https://moonlit-pothos-f289f0.netlify.app/',
-      githubUrl: 'https://github.com/sanpicule/ai_generator',
-      screenshots: ['/images/project4-1.jpg', '/images/project4-2.jpg'],
-      challenge: 'API連携とレスポンシブデザインの実装',
-      solution: 'カスタムフックとエラーハンドリングの実装',
-      learnings: ['API設計', 'エラーハンドリング', 'レスポンシブデザイン']
-    },
-    {
-      id: '6',
-      title: '貯金管理「Shiftme」開発',
-      description: '貯金管理「Shiftme」の開発を担当。React + TypeScript + Tailwind CSS + OpenWeatherMap APIを使用。API連携とレスポンシブデザインの実装でカスタムフックとエラーハンドリングに苦労したが、安定したアプリを実現。',
-      thumbnail: '/images/project3.png',
-      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'OpenWeatherMap API'],
-      duration: '2週間',
-      role: '個人開発',
-      category: 'web',
-      type: 'portfolio',
-      demoUrl: 'https://lively-marzipan-614a01.netlify.app/',
+      demoUrl: 'https://shiftme.vercel.app/',
       githubUrl: 'https://github.com/sanpicule/shiftme',
-      screenshots: ['/images/project4-1.jpg', '/images/project4-2.jpg'],
-      challenge: 'API連携とレスポンシブデザインの実装',
-      solution: 'カスタムフックとエラーハンドリングの実装',
-      learnings: ['API設計', 'エラーハンドリング', 'レスポンシブデザイン']
-    },
+      screenshots: [
+        {
+          src: '/images/project3-1.png',
+          comment: 'ダッシュボード画面。月の予算残額と貯金目標の進捗率を一目で確認可能。',
+          icon: '/images/boltnew-icon.png'
+        },
+        { src: '/images/project3-2.png', comment: '支出管理画面。カレンダービューで日別支出を追跡。' },
+        { src: '/images/project3-3.png', comment: '分析ページ。月別支出グラフと貯金目標への到達ペースを表示。' },
+      ],
+      challenge: '複雑な予算計算ロジックとリアルタイムデータ同期、PWA対応によるオフライン機能の実装',
+      solution: 'カスタムフックによる状態管理の一元化、Supabaseの行レベルセキュリティで多要素データの安全性確保、service workerでオフライン対応',
+      learnings: ['Supabaseのセキュリティ設計', '複雑な財務計算ロジック', 'PWA・オフライン機能', 'レスポンシブデザイン実装']
+    }
   ],
   contact: {
     email: 'sannsi4444@gmail.com',
     github: 'https://github.com/sanpicule',
     twitter: 'https://twitter.com/SanpiTech240',
-    instagram: 'https://instagram.com/cafe.tokyo'
+    instagram: 'https://instagram.com/sanp___ery'
   },
   about: {
-    description: 'フロント、バック、データベースなどフルスタックで活動できます。現在はAIを活用したバイブコーディングに興味があります。',
+    description: '熊本での訪問営業での挫折を経験、独学で学んだプログラミングの知識を活かすために、上京し、エンジニアに転職。やりがいを感じているものの、営業での挫折を克服したい思いがあり、現在はエンジニアの知見を生かした営業寄りの仕事を探しながら日々様々な分野の知見をキャッチアップ。',
     workHistory: [
       {
         company: '株式会社Gizumo',
         position: 'エンジニア',
         period: '2022年8月 - 現在',
-        description: 'フロントエンド開発。React、TypeScriptを使用したモダンな開発を実践。'
+        description: 'フロントエンド / バックエンド開発。'
       },
       {
         company: '株式会社J:COM',

@@ -1,23 +1,8 @@
-import { motion } from 'framer-motion';
-import { ExternalLink, Github, Calendar, Tag, Users, ArrowLeft } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink, Github, Calendar, Tag, ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState } from 'react';
 
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  thumbnail: string;
-  technologies: string[];
-  type: 'portfolio' | 'work';
-  githubUrl?: string;
-  demoUrl?: string;
-  duration: string;
-  role: string;
-  challenge?: string;
-  solution?: string;
-  learnings?: string[];
-  category: string;
-  screenshots?: string[];
-}
+import { Project } from '../types';
 
 interface ProjectDetailProps {
   project: Project;
@@ -25,6 +10,19 @@ interface ProjectDetailProps {
 }
 
 const ProjectDetail = ({ project, onBack }: ProjectDetailProps) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % project.screenshots.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + project.screenshots.length) % project.screenshots.length);
+  };
+
+  const goToImage = (index: number) => {
+    setCurrentImageIndex(index);
+  };
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -63,142 +61,24 @@ const ProjectDetail = ({ project, onBack }: ProjectDetailProps) => {
         <motion.div variants={itemVariants} className="mb-8">
           <button
             onClick={onBack}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors duration-300"
+            className="inline-flex items-center gap-2 p-4 bg-white border border-slate-200 rounded-full text-slate-700 md:hover:bg-slate-50 transition-colors duration-300 shadow-md"
           >
             <ArrowLeft size={16} />
-            <span>戻る</span>
           </button>
         </motion.div>
 
-        {/* Project Header */}
-        <motion.div variants={itemVariants} className="mb-12">
-          <h1 className="text-4xl font-sans font-light text-slate-900 mb-4">
-            {project.title}
-          </h1>
-          
-          <p className="text-xl text-slate-600 font-light leading-relaxed">
-            {project.description}
-          </p>
-        </motion.div>
-
-        {/* Project Details Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 mb-12">
-          {/* Project Info */}
-          <motion.div variants={itemVariants}>
-            <div className="bg-white p-8 rounded-xl border border-slate-200">
-              <h2 className="text-2xl font-sans font-light text-slate-900 mb-6">プロジェクト情報</h2>
-              
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <Calendar className="w-6 h-6 text-slate-600" />
-                  <div>
-                    <p className="text-sm text-slate-500">期間</p>
-                    <p className="font-medium text-slate-900">{project.duration}</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-4">
-                  <Users className="w-6 h-6 text-slate-600" />
-                  <div>
-                    <p className="text-sm text-slate-500">役割</p>
-                    <p className="font-medium text-slate-900">{project.role}</p>
-                  </div>
-                </div>
-                
-                {project.challenge && (
-                  <div className="flex items-center gap-4">
-                    <Tag className="w-6 h-6 text-slate-600" />
-                    <div>
-                      <p className="text-sm text-slate-500">課題</p>
-                      <p className="font-medium text-slate-900">{project.challenge}</p>
-                    </div>
-                  </div>
-                )}
-                
-                {project.solution && (
-                  <div className="flex items-center gap-4">
-                    <Tag className="w-6 h-6 text-slate-600" />
-                    <div>
-                      <p className="text-sm text-slate-500">解決策</p>
-                      <p className="font-medium text-slate-900">{project.solution}</p>
-                    </div>
-                  </div>
-                )}
-                
-                <div className="flex items-center gap-4">
-                  <Tag className="w-6 h-6 text-slate-600" />
-                  <div>
-                    <p className="text-sm text-slate-500">使用技術</p>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {project.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-3 py-1 bg-slate-100 border border-slate-200 text-slate-700 text-sm font-light rounded-lg"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Screenshots */}
-          <motion.div variants={itemVariants}>
-            <div className="bg-white p-8 rounded-xl border border-slate-200">
-              <h2 className="text-2xl font-sans font-light text-slate-900 mb-6">スクリーンショット</h2>
-              
-              {project.screenshots && project.screenshots.length > 0 ? (
-                <div className="space-y-4">
-                  {project.screenshots.map((screenshot, index) => (
-                    <img
-                      key={index}
-                      src={screenshot}
-                      alt={`${project.title} screenshot ${index + 1}`}
-                      className="w-full rounded-lg border border-slate-200"
-                    />
-                  ))}
-                </div>
-              ) : (
-                <p className="text-slate-500">スクリーンショットはありません</p>
-              )}
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Learnings */}
-        {project.learnings && project.learnings.length > 0 && (
-          <motion.div variants={itemVariants} className="mb-12">
-            <div className="bg-white p-8 rounded-xl border border-slate-200">
-              <h2 className="text-2xl font-sans font-light text-slate-900 mb-6">学んだこと</h2>
-              
-              <ul className="space-y-3">
-                {project.learnings.map((learning, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-slate-600 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-slate-700 font-light">{learning}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
-        )}
-
         {/* Links */}
-        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4">
+        <motion.div variants={itemVariants} className="flex gap-2">
           {project.demoUrl && (
             <motion.a
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-slate-300 text-slate-700 rounded-lg font-medium hover:bg-slate-50 hover:border-slate-400 transition-colors duration-300"
+              className="inline-flex items-center justify-center gap-2 p-4 bg-slate-600 border border-slate-300 text-white rounded-full font-medium hover:bg-slate-800 hover:border-slate-400 transition-colors duration-300 shadow-md"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
               <ExternalLink size={16} />
-              制作物を見る
             </motion.a>
           )}
           
@@ -207,15 +87,173 @@ const ProjectDetail = ({ project, onBack }: ProjectDetailProps) => {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors duration-300"
+              className="inline-flex items-center justify-center gap-2 p-4 bg-slate-900 text-white rounded-full font-medium hover:bg-slate-800 transition-colors duration-300 shadow-md"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
               <Github size={16} />
-              コードを見る
             </motion.a>
           )}
         </motion.div>
+
+        <motion.div variants={itemVariants} className="mt-8">
+          <h1 className="text-2xl font-bold mb-4">
+            {project.title}
+          </h1>
+
+          <p className="text-md font-light leading-relaxed">
+            {project.description}
+          </p>
+        </motion.div>
+
+        {/* Project Details Grid */}
+        <div className="flex flex-col-reverse sm:grid sm:grid-cols-2 gap-12 mb-12">
+          {/* Screenshots Carousel */}
+          <motion.div variants={itemVariants}>
+            <div className='mt-4 lg:mt-16'>
+              {project.screenshots.length > 0 ? (
+                <div className="relative">
+                  {/* Thumbnail Preview */}
+                  <div className="hidden sm:flex justify-center mb-4 space-x-2">
+                    {project.screenshots.map((screenshot, index) => (
+                      <button
+                        key={index}
+                        onClick={() => goToImage(index)}
+                        className={`relative w-16 h-12 rounded overflow-hidden border-2 transition-all ${
+                          index === currentImageIndex ? 'border-slate-600 scale-110' : 'border-slate-300 hover:border-slate-400'
+                        }`}
+                      >
+                        <img
+                          src={screenshot.src}
+                          alt={`thumbnail ${index + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                        {index === currentImageIndex && (
+                          <div className="absolute inset-0 bg-slate-600/20"></div>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="relative overflow-hidden rounded-lg border border-slate-200">
+                    <AnimatePresence mode="wait">
+                      <motion.img
+                        key={currentImageIndex}
+                        src={project.screenshots[currentImageIndex].src}
+                        alt={`${project.title} screenshot ${currentImageIndex + 1}`}
+                        className="w-full object-cover"
+                        initial={{ opacity: 0, x: 100 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -100 }}
+                        transition={{ duration: 0.5, ease: "easeOut"}}
+                      />
+                    </AnimatePresence>
+                    
+                    {/* Navigation Arrows */}
+                    {project.screenshots.length > 1 && (
+                      <>
+                        <button
+                          onClick={prevImage}
+                          className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                        >
+                          <ChevronLeft size={20} />
+                        </button>
+                        <button
+                          onClick={nextImage}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                        >
+                          <ChevronRight size={20} />
+                        </button>
+                      </>
+                    )}
+                  </div>
+                  
+                  {/* Dots Indicator */}
+                  {project.screenshots.length > 1 && (
+                    <div className="flex justify-center mt-4 space-x-2">
+                      {project.screenshots.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => goToImage(index)}
+                          className={`w-3 h-3 rounded-full transition-colors ${
+                            index === currentImageIndex ? 'bg-slate-600' : 'bg-slate-300'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <p className="text-slate-500">スクリーンショットはありません</p>
+              )}
+            </div>
+          </motion.div>
+          
+          <div className='flex flex-col gap-12'>
+            {/* Project Info */}
+            <motion.div variants={itemVariants}>
+              <div className="lg:mt-16 rounded-xl text-gray-800">
+                <div className="space-y-4 mt-8 bg-slate-300 p-4 rounded-xl">
+                  <div className="flex items-center gap-4">
+                    <Calendar className="w-6 h-6" />
+                    <div>
+                      <p className="text-sm">期間</p>
+                      <p className="font-medium">{project.duration}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-4">
+                    <Tag className="w-6 h-6" />
+                    <div>
+                      <p className="text-sm">使用技術</p>
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        {project.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-2 py-1 bg-gray-800 text-white text-sm font-medium rounded-lg"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Current Image Comment */}
+            <motion.div variants={itemVariants}>
+              <div className="">
+                <div className="flex flex-col md:flex-row gap-2">
+                  <AnimatePresence mode="wait">
+                    {project.screenshots[currentImageIndex].icon && (
+                      <motion.img
+                        src={project.screenshots[currentImageIndex].icon}
+                        alt={`${project.title} screenshot ${currentImageIndex + 1}`}
+                        className="w-14 h-14 md:w-20 md:h-20"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
+                      />
+                    )}
+                    <motion.p
+                      key={currentImageIndex}
+                      className="text-slate-700 font-light text-sm leading-relaxed"
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.6, ease: "easeOut" }}
+                    >
+                      {project.screenshots[currentImageIndex].comment}
+                    </motion.p>
+                  </AnimatePresence>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </motion.div>
     </section>
   );

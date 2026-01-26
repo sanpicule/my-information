@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,7 +11,7 @@ const Header = () => {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
-    { name: 'Works', href: '#works' },
+    { name: 'Portfolio', href: '#portfolio' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -49,26 +50,27 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* デスクトップナビゲーション */}
-          <nav className="hidden md:flex space-x-8 ml-auto">
+          <nav className="hidden md:flex space-x-3 ml-auto">
             {navItems.map((item, index) => (
-              <a
+              <motion.a
                 key={item.name}
                 href={item.href}
-                className="text-slate-700 hover:text-slate-900 transition-all duration-300 relative hover:opacity-30"
+                className={`py-2 px-4 ${isAtTop ? 'text-white' : 'text-slate-800'} transition-all duration-300 relative hover:opacity-40`}
                 style={{ animationDelay: `${index * 100}ms` }}
+                transition={{ duration: 0.2 }}
               >
                 {item.name}
-              </a>
+              </motion.a>
             ))}
           </nav>
 
           {/* モバイルメニューボタン */}
-          <button
+          <motion.button
             onClick={toggleMenu}
-            className="md:hidden p-2 text-slate-700 hover:text-slate-900 transition-all duration-300 hover:scale-110 hover:rotate-180 ml-auto"
+            className={`md:hidden p-2 text-slate-700 hover:text-slate-900 transition-all duration-300 hover:scale-110 hover:rotate-180 ml-auto ${isAtTop &&!isMenuOpen ? 'text-white' : 'text-slate-700'}`}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          </motion.button>
         </div>
       </div>
 
