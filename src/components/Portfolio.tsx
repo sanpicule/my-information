@@ -57,7 +57,7 @@ const Portfolio = ({ projects, onProjectSelect }: PortfolioProps) => {
     }
   };
 
-  // フィルターは使用しないため、一覧はそのまま projects を表示
+
 
   const openModal = (project: Project) => {
     onProjectSelect(project);
@@ -123,12 +123,11 @@ const Portfolio = ({ projects, onProjectSelect }: PortfolioProps) => {
                   )}
                   <div className="p-4 sm:p-6">
                     <h3 
-                      className="text-lg sm:text-xl font-sans font-medium text-slate-900 mb-3 group-hover:text-slate-700 transition-colors duration-300 cursor-pointer"
-                      onClick={() => openModal(project)}
-                    >
-                      {project.title}
-                    </h3>
-                    <p className="text-sm sm:text-base text-slate-800 mb-4 line-clamp-2 font-light leading-relaxed">
+                                        className="text-lg sm:text-xl font-sans font-medium text-slate-900 mb-3 group-hover:text-slate-700 transition-colors duration-300 cursor-pointer"
+                                        onClick={() => onProjectSelect(project)}
+                                      >
+                                        {project.title}
+                                      </h3>                    <p className="text-sm sm:text-base text-slate-800 mb-4 line-clamp-2 font-light leading-relaxed">
                       {project.description}
                     </p>
                   </div>

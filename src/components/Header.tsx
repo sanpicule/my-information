@@ -16,20 +16,11 @@ const Header = () => {
   ];
 
   const toggleMenu = () => {
-    if (isMenuOpen) {
-      closeMenu();
-    } else {
-      setIsMenuOpen(true);
-    }
+    setIsMenuOpen(!isMenuOpen);
   };
 
   const closeMenu = () => {
-    setIsClosing(true);
-    // 文字が消えるのを待ってから背景をスライドアウト
-    setTimeout(() => {
-      setIsMenuOpen(false);
-      setIsClosing(false);
-    }, 300); // 文字のアニメーション完了後
+    setIsMenuOpen(false);
   };
 
   useEffect(() => {
@@ -80,8 +71,7 @@ const Header = () => {
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         style={{ 
-          height: 'calc(100vh - 4rem)',
-          transitionDelay: isClosing ? '0.3s' : '0s' // 閉じる時は文字が消えてから背景をスライド
+          height: 'calc(100vh - 4rem)'
         }}
       >
         <nav className="px-4 py-8 space-y-4">
@@ -91,14 +81,13 @@ const Header = () => {
               href={item.href}
               onClick={closeMenu}
               className="block text-slate-700 hover:text-slate-900 transition-all duration-300 font-medium text-lg py-1 px-4"
-              style={{ 
-                opacity: (isMenuOpen && !isClosing) ? 1 : 0,
-                transform: (isMenuOpen && !isClosing) ? 'translateY(0)' : 'translateY(-15px)',
-                transition: (isMenuOpen && !isClosing)
-                  ? `opacity 0.3s ease-out ${0.2 + index * 0.05}s, transform 0.3s ease-out ${0.2 + index * 0.05}s`
-                  : `opacity 0.15s ease-in ${(navItems.length - 1 - index) * 0.04}s, transform 0.15s ease-in ${(navItems.length - 1 - index) * 0.04}s`
-              }}
-            >
+                            style={{
+                              opacity: isMenuOpen ? 1 : 0,
+                              transform: isMenuOpen ? 'translateY(0)' : 'translateY(-15px)',
+                              transition: isMenuOpen
+                                ? `opacity 0.3s ease-out ${0.2 + index * 0.05}s, transform 0.3s ease-out ${0.2 + index * 0.05}s`
+                                : `opacity 0.15s ease-in ${(navItems.length - 1 - index) * 0.04}s, transform 0.15s ease-in ${(navItems.length - 1 - index) * 0.04}s`
+                            }}            >
               <span className="relative z-10 text-2xl">{item.name}</span>
             </a>
           ))}
