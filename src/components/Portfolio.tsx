@@ -3,12 +3,12 @@
 import { motion } from 'framer-motion';
 import { Project } from '../types';
 
-interface WorksProps {
+interface PortfolioProps {
   projects: Project[];
   onProjectSelect: (project: Project) => void;
 }
 
-const Works = ({ projects, onProjectSelect }: WorksProps) => {
+const Portfolio = ({ projects, onProjectSelect }: PortfolioProps) => {
   
 
   const containerVariants = {
@@ -142,4 +142,4 @@ const Works = ({ projects, onProjectSelect }: WorksProps) => {
   );
 };
 
-export default Works;
+export default Portfolio;

@@ -2,7 +2,6 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Skills from '@/components/Skills';
-import Works from '@/components/Works';
 import ProjectDetail from '@/components/ProjectDetail';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
@@ -11,6 +10,7 @@ import { BrowserRouter as Router, Routes, Route, useParams, useNavigate } from '
 import { useEffect, useState } from 'react';
 import { Project } from '@/types';
 import { motion } from 'framer-motion';
+import Portfolio from '@/components/Portfolio';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -35,10 +35,10 @@ function App() {
 
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/works/:id" element={<ProjectDetailPage />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/portfolio/:id" element={<ProjectDetailPage />} />
+        </Routes>
     </Router>
   );
 }
@@ -47,7 +47,7 @@ function MainPage() {
   const navigate = useNavigate();
 
   const handleProjectSelect = (project: Project) => {
-    navigate(`/works/${project.id}`);
+    navigate(`/portfolio/${project.id}`);
   };
 
   return (
@@ -60,7 +60,7 @@ function MainPage() {
       />
       <About about={profileData.about} skills={profileData.skills} />
       <Skills skills={profileData.skills} />
-      <Works projects={profileData.projects} onProjectSelect={handleProjectSelect} />
+      <Portfolio projects={profileData.projects} onProjectSelect={handleProjectSelect} />
       <Contact contact={profileData.contact} />
       <Footer contact={profileData.contact} />
     </main>
