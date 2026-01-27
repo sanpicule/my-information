@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
 
   const navItems = [

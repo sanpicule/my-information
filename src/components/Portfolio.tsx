@@ -57,12 +57,6 @@ const Portfolio = ({ projects, onProjectSelect }: PortfolioProps) => {
     }
   };
 
-
-
-  const openModal = (project: Project) => {
-    onProjectSelect(project);
-  };
-
   const personalProjects = projects.filter((p) => p.type === 'portfolio');
 
   return (
