@@ -35,10 +35,18 @@ const Header = () => {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-      isMenuOpen || !isAtTop ? 'bg-white shadow-lg' : 'bg-transparent'
+      isMenuOpen || !isAtTop ? 'bg-black/90 text-white shadow-sm' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
+          {/* MyProfile text */}
+          <div className={`
+            ${(!isAtTop || isMenuOpen) ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+            transition-all duration-300 text-xl font-bold
+          `}>
+            MyProfile
+          </div>
+
           {/* デスクトップナビゲーション */}
           <nav className="hidden md:flex space-x-3 ml-auto">
             {navItems.map((item, index) => (
@@ -57,7 +65,7 @@ const Header = () => {
           {/* モバイルメニューボタン */}
           <motion.button
             onClick={toggleMenu}
-            className={`md:hidden p-2 text-slate-700 hover:text-slate-900 transition-all duration-300 hover:scale-110 hover:rotate-180 ml-auto ${isAtTop &&!isMenuOpen ? 'text-white' : 'text-slate-700'}`}
+            className={`md:hidden p-2 ml-auto text-white`}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </motion.button>
@@ -66,7 +74,7 @@ const Header = () => {
 
       {/* モバイルナビゲーション */}
       <div 
-        className={`md:hidden fixed inset-0 top-16 bg-white transform transition-transform duration-400 ease-out ${
+        className={`md:hidden fixed inset-0 top-16 bg-white opacity-100 transform transition-transform duration-400 ease-out ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         style={{ 
@@ -80,13 +88,14 @@ const Header = () => {
               href={item.href}
               onClick={closeMenu}
               className="block text-slate-700 hover:text-slate-900 transition-all duration-300 font-medium text-lg py-1 px-4"
-                            style={{
-                              opacity: isMenuOpen ? 1 : 0,
-                              transform: isMenuOpen ? 'translateY(0)' : 'translateY(-15px)',
-                              transition: isMenuOpen
-                                ? `opacity 0.3s ease-out ${0.2 + index * 0.05}s, transform 0.3s ease-out ${0.2 + index * 0.05}s`
-                                : `opacity 0.15s ease-in ${(navItems.length - 1 - index) * 0.04}s, transform 0.15s ease-in ${(navItems.length - 1 - index) * 0.04}s`
-                            }}            >
+              style={{
+                opacity: isMenuOpen ? 1 : 0,
+                transform: isMenuOpen ? 'translateY(0)' : 'translateY(-15px)',
+                transition: isMenuOpen
+                  ? `opacity 0.3s ease-out ${0.2 + index * 0.05}s, transform 0.3s ease-out ${0.2 + index * 0.05}s`
+                  : `opacity 0.15s ease-in ${(navItems.length - 1 - index) * 0.04}s, transform 0.15s ease-in ${(navItems.length - 1 - index) * 0.04}s`
+              }}
+            >
               <span className="relative z-10 text-2xl">{item.name}</span>
             </a>
           ))}
