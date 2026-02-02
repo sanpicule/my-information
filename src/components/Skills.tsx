@@ -36,8 +36,10 @@ const Skills = ({ skills }: SkillsProps) => {
       <div className="container-max">
         {/* Title */}
         <div className="mb-12">
-          <h2 className="text-3xl sm:text-4xl font-black text-light tracking-tighter">Skills & Expertise</h2>
-          <p className="mt-2 text-base text-accent max-w-2xl">A look at the technologies I work with.</p>
+          <h2 className="text-3xl sm:text-4xl font-black text-dark tracking-tighter">Skills</h2>
+          <p className="mt-2 text-base text-gray-600 max-w-2xl">
+            私が持つ技術や経験をご覧ください。
+          </p>
         </div>
 
         {/* Category Buttons */}
@@ -48,8 +50,8 @@ const Skills = ({ skills }: SkillsProps) => {
               onClick={() => setSelectedCategory(cat.category)}
               className={`flex items-center gap-3 py-2 px-4 rounded-full text-sm font-semibold transition-colors duration-300
                 ${selectedCategory === cat.category 
-                  ? 'bg-primary text-dark' 
-                  : 'bg-dark/50 text-light hover:bg-dark'
+                  ? 'bg-dark text-light' 
+                  : 'bg-gray-200 text-gray-800 hover:bg-gray-200'
                 }`
               }
             >
@@ -59,9 +61,9 @@ const Skills = ({ skills }: SkillsProps) => {
           ))}
         </div>
 
-        {/* Skills Display */}
+        {/* --- Skills Display --- */}
         <div className="min-h-[200px]">
-          <h3 className="text-2xl font-bold text-light mb-4">
+          <h3 className="text-2xl font-bold text-dark mb-4">
             {skillCategories.find(c => c.category === selectedCategory)?.name}
           </h3>
           
@@ -70,15 +72,16 @@ const Skills = ({ skills }: SkillsProps) => {
               {filteredSkills.map(skill => (
                 <motion.div
                   key={skill.name}
+                  className="glass-card p-4"
                 >
                   <div className="flex items-center gap-3 mb-2">
                     <img src={skill.icon} className="w-8 h-8" alt={skill.name} />
-                    <h4 className="font-bold text-light text-md">{skill.name}</h4>
+                    <h4 className="font-bold text-dark text-md">{skill.name}</h4>
                   </div>
-                  <p className="text-xs text-accent mb-2 min-h-[32px] flex items-center">{skill.level}</p>
-                  <div className="w-full bg-accent/20 rounded-full h-1.5 overflow-hidden">
+                  <p className="text-xs text-gray-600 mb-2 min-h-[32px] flex items-center">{skill.level}</p>
+                  <div className="w-full bg-gray-200 rounded-full h-1.5 overflow-hidden">
                     <motion.div
-                      className="bg-primary h-1.5 rounded-full"
+                      className="bg-dark h-1.5 rounded-full"
                       initial={{ width: 0 }}
                       whileInView={{ width: getLevelWidth(skill.level) }}
                       transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
@@ -89,7 +92,7 @@ const Skills = ({ skills }: SkillsProps) => {
               ))}
             </div>
           ) : (
-            <p className="text-accent">No skills found in this category.</p>
+            <p className="text-gray-600">No skills found in this category.</p>
           )}
         </div>
       </div>

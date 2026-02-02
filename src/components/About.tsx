@@ -26,14 +26,14 @@ const About = ({ about }: AboutProps) => {
     { name: 'Skill Sheet', href: 'https://sanpicule.github.io/my-information/skill-sheet.pdf', icon: FileText }
   ];
 
-  const linkHover = isHoverable ? { y: -2, color: '#0ea5e9' } : {};
+  const linkHover = isHoverable ? { y: -2, color: '#111827' } : {};
 
   // タイムライン用のアイコンを決定するヘルパー
   const getTimelineIcon = (item: typeof about.workHistory[0]) => {
     if (item.position.includes('エンジニア') || item.position.includes('開発')) {
-      return <Briefcase className="w-5 h-5 text-light" />;
+      return <Briefcase className="w-5 h-5 text-gray-600" />;
     }
-    return <GraduationCap className="w-5 h-5 text-light" />;
+    return <GraduationCap className="w-5 h-5 text-gray-600" />;
   };
 
   return (
@@ -46,29 +46,29 @@ const About = ({ about }: AboutProps) => {
         viewport={{ once: true, amount: 0.1 }}
       >
         <motion.div variants={itemVariants} className="mb-16">
-          <h2 className="text-3xl sm:text-4xl font-black text-light tracking-tighter">About</h2>
-          <p className="mt-2 text-base text-accent max-w-2xl">私のこれまでの経歴や、エンジニアに至った経緯を記載しています。</p>
+          <h2 className="text-3xl sm:text-4xl font-black text-dark tracking-tighter">About</h2>
+          <p className="mt-2 text-base text-gray-600 max-w-2xl">私のこれまでの経歴や、エンジニアに至った経緯を記載しています。</p>
         </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-x-12 gap-y-16">
           {/* Left Column: Profile Card */}
           <motion.div className="lg:col-span-1" variants={itemVariants}>
             <div className="sticky top-28 grid gap-8">
-              <div className="flex items-center gap-4"> {/* glass-card削除、横並び */}
+              <div className="flex items-center gap-4">
                 <motion.img
                   src="/images/profile.jpg"
                   alt="Profile Picture"
-                  className="w-24 h-24 rounded-full border-2 border-primary/50 object-cover shadow-lg" // サイズ調整、mx-auto, mb-6削除
+                  className="w-24 h-24 rounded-full border-2 border-gray-300 object-cover shadow-lg"
                   initial={{ scale: 0.5, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1, transition: { delay: 0.2, duration: 0.5 } }}
                 />
-                <div> {/* 名前と役職のコンテナ */}
-                  <h3 className="text-2xl font-bold text-white">{profileData.name}</h3>
-                  <p className="text-sky-600 font-semibold mt-1">{profileData.title}</p>
+                <div>
+                  <h3 className="text-2xl font-bold text-dark">{profileData.name}</h3>
+                  <p className="text-gray-600 font-semibold mt-1">{profileData.title}</p>
                 </div>
               </div>
-              <div> {/* SNSリンクのカードはそのまま */}
-                <h4 className="font-semibold text-white mb-4">Find me on</h4>
+              <div>
+                <h4 className="font-semibold text-dark mb-4">Find me on</h4>
                 <div className="flex gap-8">
                   {socialLinks.map(link => (
                     <motion.a
@@ -76,7 +76,7 @@ const About = ({ about }: AboutProps) => {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-white flex flex-col items-center gap-2 text-xs"
+                      className="text-gray-600 flex flex-col items-center gap-2 text-xs"
                       whileHover={linkHover}
                     >
                       <link.icon className="w-6 h-6" />
@@ -91,15 +91,17 @@ const About = ({ about }: AboutProps) => {
           {/* Right Column: Main Content */}
           <motion.div className="lg:col-span-2" variants={containerVariants}>
             <motion.div variants={itemVariants} className="mb-12">
-              <h3 className="text-2xl font-bold text-light mb-4">Who I Am</h3>
-              <p className="text-accent leading-relaxed whitespace-pre-line">
+              <h3 className="text-2xl font-bold text-dark mb-4">
+                私について
+              </h3>
+              <p className="text-gray-600 leading-relaxed whitespace-pre-line">
                 {about.description}
               </p>
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <h3 className="text-2xl font-bold text-light mb-8">Career & Education</h3>
-              <div className="relative border-l-2 border-accent/20 pl-8 space-y-12">
+              <h3 className="text-2xl font-bold text-dark mb-8">これまでの経歴</h3>
+              <div className="relative border-l-2 border-gray-200 pl-8 space-y-12">
                 {about.workHistory.map((item, index) => (
                   <motion.div
                     key={index}
@@ -108,13 +110,13 @@ const About = ({ about }: AboutProps) => {
                     whileInView={{ opacity: 1, x: 0, transition: { duration: 0.5 } }}
                     viewport={{ once: true }}
                   >
-                    <div className="absolute -left-[43px] top-1 w-8 h-8 rounded-full bg-dark border-2 border-accent/20 flex items-center justify-center">
+                    <div className="absolute -left-[43px] top-1 w-8 h-8 rounded-full bg-gray-100 border-2 border-gray-200 flex items-center justify-center">
                       {getTimelineIcon(item)}
                     </div>
-                    <p className="text-sm text-primary font-semibold mb-1">{item.period}</p>
-                    <h4 className="font-bold text-light text-xl">{item.company}</h4>
-                    <p className="text-light/80 mb-2">{item.position}</p>
-                    <p className="text-accent text-sm leading-relaxed">{item.description}</p>
+                    <p className="text-sm text-gray-500 font-semibold mb-1">{item.period}</p>
+                    <h4 className="font-bold text-dark text-xl">{item.company}</h4>
+                    <p className="text-gray-700 mb-2">{item.position}</p>
+                    <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
                   </motion.div>
                 ))}
               </div>

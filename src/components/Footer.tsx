@@ -42,10 +42,7 @@ const Footer = ({ contact }: FooterProps) => {
   const scrollToTopHover = isHoverable ? { scale: 1.1, backgroundColor: 'rgb(56 189 248)' } : {};
 
   return (
-    <footer className="relative bg-dark pt-20 pb-10 overflow-hidden hidden md:block">
-      {/* Gradient border */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-500 to-accent" />
-      
+    <footer className="relative bg-gray-100 pt-20 pb-10 overflow-hidden border-t border-gray-200">
       <motion.div 
         className="container-max text-center"
         variants={containerVariants}
@@ -64,7 +61,7 @@ const Footer = ({ contact }: FooterProps) => {
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
-              className="text-accent md:hover:text-light md:hover:underline underline-offset-4 transition-colors duration-300"
+              className="text-gray-500 hover:text-dark hover:underline underline-offset-4 transition-colors duration-300"
             >
               {item}
             </a>
@@ -80,7 +77,7 @@ const Footer = ({ contact }: FooterProps) => {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 glass-card rounded-full flex items-center justify-center text-accent md:hover:text-primary transition-all duration-300"
+                className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-500 hover:text-dark transition-all duration-300 border"
                 whileHover={socialLinkHover}
                 whileTap={{ scale: 0.95 }}
                 title={name}
@@ -92,7 +89,7 @@ const Footer = ({ contact }: FooterProps) => {
         </motion.div>
 
         {/* Copyright */}
-        <motion.p className="text-accent text-sm" variants={itemVariants}>
+        <motion.p className="text-gray-500 text-sm" variants={itemVariants}>
           © {currentYear} MyPortfolio. All Rights Reserved.
         </motion.p>
       </motion.div>
@@ -100,7 +97,7 @@ const Footer = ({ contact }: FooterProps) => {
       {/* Scroll to Top Button */}
       <motion.button
         onClick={scrollToTop}
-        className="absolute bottom-8 right-8 w-12 h-12 bg-primary/80 rounded-full flex items-center justify-center text-light shadow-lg shadow-primary/30"
+        className="absolute bottom-8 right-8 w-12 h-12 bg-dark/80 rounded-full flex items-center justify-center text-light shadow-lg hover:bg-dark"
         whileHover={scrollToTopHover}
         whileTap={{ scale: 0.95 }}
         initial={{ opacity: 0, scale: 0 }}

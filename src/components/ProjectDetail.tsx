@@ -37,7 +37,7 @@ const ProjectDetail = ({ project, onBack }: ProjectDetailProps) => {
         <motion.div variants={itemVariants} className="mb-12">
           <div className="flex justify-between items-start mb-6">
             <motion.button onClick={onBack} className="btn-icon glass-card" whileHover={linkHover} whileTap={{ scale: 0.9 }}>
-              <ArrowLeft size={20} />
+              <ArrowLeft size={20} className="text-gray-700"/>
             </motion.button>
             <div className="flex gap-3">
               {project.demoUrl && (
@@ -52,7 +52,7 @@ const ProjectDetail = ({ project, onBack }: ProjectDetailProps) => {
               )}
             </div>
           </div>
-          <h1 className="text-2xl md:text-5xl font-black text-light tracking-tighter">{project.title}</h1>
+          <h1 className="text-2xl md:text-5xl font-black text-dark tracking-tighter">{project.title}</h1>
         </motion.div>
 
         {/* --- Main Content Grid --- */}
@@ -60,7 +60,7 @@ const ProjectDetail = ({ project, onBack }: ProjectDetailProps) => {
           {/* Left Column: Image Gallery */}
           <motion.div className="lg:col-span-3 space-y-4" variants={itemVariants}>
             {/* Main Image */}
-            <div className="relative overflow-hidden rounded-lg border border-white/10 shadow-xl">
+            <div className="relative overflow-hidden rounded-lg border border-gray-200 shadow-xl">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={currentImageIndex}
@@ -83,7 +83,7 @@ const ProjectDetail = ({ project, onBack }: ProjectDetailProps) => {
                       src={screenshot.src}
                       alt={`thumbnail ${index + 1}`}
                       className={`w-full h-full object-cover rounded-md border-2 transition-all duration-300 ${
-                        index === currentImageIndex ? 'border-primary' : 'border-transparent opacity-60 hover:opacity-100'
+                        index === currentImageIndex ? 'border-sky-500' : 'border-transparent opacity-60 hover:opacity-100'
                       }`}
                     />
                   </button>
@@ -95,17 +95,17 @@ const ProjectDetail = ({ project, onBack }: ProjectDetailProps) => {
           {/* Right Column: Details */}
           <motion.div className="lg:col-span-2 space-y-8" variants={itemVariants}>
             <div>
-              <h3 className="text-2xl font-bold text-light mb-4">About this project</h3>
-              <p className="text-accent leading-relaxed">{project.description}</p>
+              <h3 className="text-2xl font-bold text-dark mb-4">About this project</h3>
+              <p className="text-gray-600 leading-relaxed">{project.description}</p>
             </div>
             <div className="glass-card p-6">
               <div className="space-y-4">
-                <div className="flex items-center gap-4 text-light"><Calendar className="w-5 h-5 text-primary" /><p><span className="text-accent text-sm">期間:</span> {project.duration}</p></div>
-                <div className="text-light"><div className="flex items-center gap-4 mb-3"><Tag className="w-5 h-5 text-primary" /><span className="text-accent text-sm">使用技術</span></div><div className="flex flex-wrap gap-2">{project.technologies.map(tech => (<span key={tech} className="tag">{tech}</span>))}</div></div>
+                <div className="flex items-center gap-4 text-dark"><Calendar className="w-5 h-5 text-sky-600" /><p><span className="text-gray-600 text-sm">期間:</span> {project.duration}</p></div>
+                <div className="text-dark"><div className="flex items-center gap-4 mb-3"><Tag className="w-5 h-5 text-sky-600" /><span className="text-gray-600 text-sm">使用技術</span></div><div className="flex flex-wrap gap-2">{project.technologies.map(tech => (<span key={tech} className="tag">{tech}</span>))}</div></div>
               </div>
             </div>
             <div className="min-h-[80px]">
-              <h3 className="text-xl font-bold text-light mb-3">Feature</h3>
+              <h3 className="text-xl font-bold text-dark mb-3">Feature</h3>
               <AnimatePresence mode="wait">
                 <motion.p
                   key={currentImageIndex}
@@ -113,7 +113,7 @@ const ProjectDetail = ({ project, onBack }: ProjectDetailProps) => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
-                  className="text-accent text-sm leading-relaxed"
+                  className="text-gray-600 text-sm leading-relaxed"
                 >
                   {project.screenshots.length > 0 ? project.screenshots[currentImageIndex].comment : "No specific feature comment."}
                 </motion.p>

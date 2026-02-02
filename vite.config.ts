@@ -9,6 +9,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      includeAssets: ['icon.png'],
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg}'],
       },
@@ -16,8 +17,8 @@ export default defineConfig({
         name: 'Sanshiro Hikawa Portfolio',
         short_name: 'Portfolio',
         description: 'The portfolio of Sanshiro Hikawa, a web developer.',
-        theme_color: '#0D1117',
-        background_color: '#0D1117',
+        theme_color: '#F9FAFB',
+        background_color: '#F9FAFB',
         display: 'standalone',
         scope: '/',
         start_url: '/',
@@ -31,6 +32,12 @@ export default defineConfig({
             src: '/icon.png',
             sizes: '512x512',
             type: 'image/png',
+          },
+          {
+            src: '/icon.png',
+            sizes: '180x180',
+            type: 'image/png',
+            purpose: 'apple-touch-icon',
           },
           {
             src: '/icon.png',

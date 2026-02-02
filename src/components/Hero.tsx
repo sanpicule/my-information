@@ -34,7 +34,7 @@ const Hero = ({ name, introduction }: HeroProps) => {
   return (
     <section id="home" className="h-dvh flex items-center justify-center w-full relative overflow-hidden bg-[url('/images/first_view_pc.png')] bg-cover bg-center">
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/70 z-10" />
+      {/* <div className="absolute inset-0 bg-black/70 z-10" /> */}
 
       {/* Content */}
       <div className="relative z-20 w-full px-4 sm:px-6 lg:px-8">
@@ -43,7 +43,7 @@ const Hero = ({ name, introduction }: HeroProps) => {
           initial="hidden"
           animate="visible"
         >
-          <h1 className="flex flex-wrap items-center text-5xl font-black tracking-widest text-light sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1 className="flex flex-wrap items-center text-5xl font-black tracking-widest text-dark sm:text-6xl md:text-7xl lg:text-8xl">
             {Array.from("Sanshiro").map((letter, index) => (
               <motion.span
                 key={`first-${index}`}
@@ -77,7 +77,7 @@ const Hero = ({ name, introduction }: HeroProps) => {
             ))}
           </h1>
           <motion.p
-            className="mt-4 max-w-2xl text-left text-lg text-accent sm:text-xl"
+            className="mt-4 max-w-2xl text-left text-lg text-gray-700 sm:text-xl"
             variants={itemVariants}
           >
             {introduction}
@@ -93,7 +93,7 @@ const Hero = ({ name, introduction }: HeroProps) => {
         transition={{ delay: 2, duration: 1 }}
       >
         <motion.div
-          className="inline-flex flex-col items-center text-accent transition-colors duration-300 cursor-pointer md:hover:text-primary"
+          className="inline-flex flex-col items-center text-gray-700 transition-colors duration-300 cursor-pointer md:hover:text-primary"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}

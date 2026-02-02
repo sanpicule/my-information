@@ -14,30 +14,21 @@ const HamburguerIcon = ({ isOpen, toggle }: { isOpen: boolean, toggle: () => voi
   const isHoverable = useIsHoverable();
   const buttonHover = isHoverable ? { scale: 1.1 } : {};
 
-  const topVariants = {
-    closed: { rotate: 0, translateY: 0 },
-    open: { rotate: 45, translateY: 7 }
-  };
-  const centerVariants = {
-    closed: { opacity: 1 },
-    open: { opacity: 0 }
-  };
-  const bottomVariants = {
-    closed: { rotate: 0, translateY: 0 },
-    open: { rotate: -45, translateY: -7 }
+  const lineVariants = {
+    closed: (custom: number) => ({ rotate: 0, y: custom * 7 }),
+    open: (custom: number) => ({ rotate: custom * 45, y: 0 })
   };
 
   return (
     <motion.button
       onClick={toggle}
-      className="w-8 h-8 relative"
+      className="w-8 h-8 relative z-50"
       whileHover={buttonHover}
       whileTap={{ scale: 0.9 }}
       animate={isOpen ? "open" : "closed"}
     >
-      <motion.div className="absolute h-0.5 w-7 bg-light" variants={topVariants} style={{ top: 8 }} />
-      <motion.div className="absolute h-0.5 w-7 bg-light" variants={centerVariants} style={{ top: '50%', marginTop: '-1px' }}/>
-      <motion.div className="absolute h-0.5 w-7 bg-light" variants={bottomVariants} style={{ bottom: 8 }} />
+      <motion.div custom={1} variants={lineVariants} className="absolute h-1 w-7 rounded-md bg-gray-500 top-1/2 -translate-y-1/2" />
+      <motion.div custom={-1} variants={lineVariants} className="absolute h-1 w-7 rounded-md bg-gray-500 top-1/2 -translate-y-1/2" />
     </motion.button>
   );
 };
@@ -60,7 +51,7 @@ const MobileMenu = ({ isOpen, toggle }: { isOpen: boolean, toggle: () => void })
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-40 bg-dark/90 backdrop-blur-md"
+          className="fixed inset-0 z-40 bg-white/90 backdrop-blur-md md:hidden"
           variants={panelVariants}
           initial="hidden"
           animate="visible"
@@ -75,7 +66,7 @@ const MobileMenu = ({ isOpen, toggle }: { isOpen: boolean, toggle: () => void })
                 key={item.name}
                 href={item.href}
                 onClick={toggle}
-                className="text-4xl font-bold text-accent hover:text-primary transition-colors"
+                className="text-4xl font-bold text-gray-700 hover:text-dark transition-colors"
                 variants={itemVariants}
               >
                 {item.name}
@@ -93,7 +84,6 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('Home');
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -103,7 +93,6 @@ const Header = () => {
     return () => { document.body.style.overflow = 'auto'; };
   }, [isMenuOpen]);
 
-  // Scroll detection for header style
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -128,28 +117,26 @@ const Header = () => {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'pt-2' : 'pt-4'
-      }`}>
+      <header className="fixed top-0 left-0 right-0 z-50 py-4 md:py-0">
         <div className={`container-max transition-all duration-300
-          ${isScrolled ? 'rounded-2xl bg-white/5 backdrop-blur-lg shadow-lg shadow-black/20' : ''}
+          ${isScrolled ? 'md:mt-2 md:bg-white/80 md:backdrop-blur-lg md:shadow-lg md:rounded-2xl' : ''}
         `}>
           <div className="flex items-center justify-between h-16 px-4">
             <a href="#home" className="flex items-center gap-2">
               <motion.img 
                 src="/icon.png" 
                 alt="Logo" 
-                className="h-8 w-8 rounded-md"
+                className="h-8 w-8 rounded-md hidden md:block"
               />
             </a>
 
             <nav className="hidden md:flex space-x-2">
               {navItems.map((item) => (
-                <a key={item.name} href={item.href} className="relative px-3 py-2 text-sm font-medium text-accent md:hover:text-light transition-colors duration-300">
+                <a key={item.name} href={item.href} className={`relative px-3 py-2 text-sm font-medium transition-colors duration-300 ${isScrolled ? 'text-gray-600 hover:text-dark' : 'text-gray-800 hover:text-black'}`}>
                   {item.name}
                   {activeSection === item.name && (
                     <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-dark"
                       layoutId="underline"
                       transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                     />
@@ -157,7 +144,7 @@ const Header = () => {
                 </a>
               ))}
             </nav>
-
+            
             <div className="md:hidden">
               <HamburguerIcon isOpen={isMenuOpen} toggle={toggleMenu} />
             </div>

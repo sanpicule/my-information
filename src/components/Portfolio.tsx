@@ -15,47 +15,48 @@ const ProjectCard = ({ project, onProjectSelect }: { project: Project, onProject
   const isHoverable = useIsHoverable();
 
   const overlayVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } }
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.3, ease: 'easeInOut' } }
   };
 
   return (
     <motion.div
       layout
-      className="group relative glass-card rounded-2xl overflow-hidden cursor-pointer"
+      className="group relative glass-card rounded-2xl overflow-hidden cursor-pointer aspect-[4/3]"
       onClick={() => onProjectSelect(project)}
       variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-      whileHover={isHoverable ? { scale: 1.03, transition: { type: 'spring', stiffness: 300 } } : {}}
+      whileHover={isHoverable ? { scale: 1.03, y: -5, transition: { type: 'spring', stiffness: 300 } } : {}}
     >
-      {project.thumbnail && (
-        <img
-          src={project.thumbnail}
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-300 md:group-hover:scale-110"
-        />
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
-      
-      <div className="absolute bottom-0 left-0 right-0 p-6">
-        <h3 className="text-xl font-bold text-light mb-2">{project.title}</h3>
-        {/* Initially visible on larger cards or all cards if no hover */}
-        <div className={`hidden md:block ${isHoverable ? 'md:group-hover:hidden' : ''} transition-opacity duration-300`}>
-          <p className="text-accent text-sm line-clamp-2">{project.description}</p>
+      {/* --- Base Content --- */}
+      <div className="w-full h-full flex flex-col">
+        {project.thumbnail && (
+          <div className="w-full h-2/3 overflow-hidden">
+            <img
+              src={project.thumbnail}
+              alt={project.title}
+              className="w-full h-full object-cover transition-transform duration-300 md:group-hover:scale-110"
+            />
+          </div>
+        )}
+        <div className="flex-grow p-4 flex flex-col justify-center">
+          <h3 className="text-md font-bold text-dark mb-1 truncate">{project.title}</h3>
+          <p className="text-gray-500 text-sm line-clamp-2">{project.description}</p>
         </div>
       </div>
 
+      {/* --- Hover Overlay --- */}
       {isHoverable && (
         <motion.div 
-          className="absolute inset-0 p-6 bg-dark/80 backdrop-blur-sm flex flex-col justify-end"
+          className="absolute inset-0 p-6 bg-white/80 backdrop-blur-md flex flex-col justify-end"
           variants={overlayVariants}
           initial="hidden"
           whileHover="visible"
         >
-          <h3 className="text-xl font-bold text-primary mb-2">{project.title}</h3>
-          <p className="text-accent text-sm mb-4 line-clamp-3">{project.description}</p>
+          <h3 className="text-xl font-bold text-sky-600 mb-2">{project.title}</h3>
+          <p className="text-gray-700 text-sm mb-4 line-clamp-3">{project.description}</p>
           <div className="flex flex-wrap gap-2">
             {project.technologies.slice(0, 4).map(tech => (
-              <span key={tech} className="tag">
+              <span key={tech} className="px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-full">
                 {tech}
               </span>
             ))}
@@ -94,9 +95,9 @@ const Portfolio = ({ projects, onProjectSelect }: PortfolioProps) => {
           animate={isInView ? 'visible' : 'hidden'}
           variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
         >
-          <h2 className="text-3xl sm:text-4xl font-black text-light tracking-tighter">My Works</h2>
-          <p className="mt-2 text-base text-accent max-w-2xl">
-            A selection of projects I've worked on.
+          <h2 className="text-3xl sm:text-4xl font-black text-dark tracking-tighter">Portfolio</h2>
+          <p className="mt-2 text-base text-gray-600 max-w-2xl">
+            私が開発したプロジェクトをご覧ください。
           </p>
         </motion.div>
 

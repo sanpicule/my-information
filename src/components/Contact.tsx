@@ -44,8 +44,8 @@ const Contact = ({ contact }: ContactProps) => {
         viewport={{ once: true, amount: 0.1 }}
       >
         <motion.div variants={itemVariants} className="mb-12">
-          <h2 className="text-3xl sm:text-4xl font-black text-light tracking-tighter mb-4">
-            Get In Touch
+          <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tighter mb-4">
+            Contact
           </h2>
           <p className="text-base text-accent max-w-2xl">
             新しいプロジェクトのご相談や、お問い合わせがございましたら、
@@ -75,7 +75,7 @@ const Contact = ({ contact }: ContactProps) => {
                     whileHover={socialLinkHover}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Twitter size={20} className="text-primary" />
+                    <Twitter size={20} className="text-light" />
                   </motion.a>
                 )}
                 
@@ -87,7 +87,7 @@ const Contact = ({ contact }: ContactProps) => {
                   whileHover={socialLinkHover}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Instagram size={20} className="text-primary" />
+                  <Instagram size={20} className="text-light" />
                 </motion.a>
               </motion.div>
             </motion.div>
