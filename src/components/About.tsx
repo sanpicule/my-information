@@ -1,217 +1,126 @@
 import { motion } from 'framer-motion';
-
-interface AboutData {
-  description: string;
-  workHistory: {
-    company: string;
-    period: string;
-    position: string;
-    description: string;
-  }[];
-  education: {
-    school: string;
-    period: string;
-    degree: string;
-    description: string;
-  }[];
-  achievements: {
-    title: string;
-    year: string;
-    description: string;
-  }[];
-}
-
-interface Skill {
-  name: string;
-  level: string;
-  category: string;
-}
+import { useIsHoverable } from '../hooks/useIsHoverable';
+import { Briefcase, GraduationCap, Github, FileText, Rss } from 'lucide-react';
+import { profileData } from '@/lib/data';
 
 interface AboutProps {
-  about: AboutData;
-  skills: Skill[];
+  about: typeof profileData.about;
 }
 
 const About = ({ about }: AboutProps) => {
+  const isHoverable = useIsHoverable();
+
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1
-      }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
   };
 
   const itemVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 20
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut" as const
-      }
-    }
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } }
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.4,
-        ease: "easeOut" as const
-      }
+  const socialLinks = [
+    { name: 'GitHub', href: profileData.contact.github, icon: Github },
+    { name: 'Zenn', href: 'https://zenn.dev/sanpi34', icon: Rss },
+    { name: 'Skill Sheet', href: 'https://sanpicule.github.io/my-information/skill-sheet.pdf', icon: FileText }
+  ];
+
+  const linkHover = isHoverable ? { y: -2, color: '#111827' } : {};
+
+  // タイムライン用のアイコンを決定するヘルパー
+  const getTimelineIcon = (item: typeof about.workHistory[0]) => {
+    if (item.position.includes('エンジニア') || item.position.includes('開発')) {
+      return <Briefcase className="w-5 h-5 text-gray-600" />;
     }
+    return <GraduationCap className="w-5 h-5 text-gray-600" />;
   };
 
   return (
-    <section id="about" className="section-padding bg-slate-50">
+    <section id="about" className="section-padding overflow-hidden">
       <motion.div 
         className="container-max"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.1 }}
       >
-        {/* Section Header */}
-        <motion.div variants={itemVariants}>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sans font-medium text-slate-900 mb-12">About Me</h2>
+        <motion.div variants={itemVariants} className="mb-16">
+          <h2 className="text-3xl sm:text-4xl font-black text-dark tracking-tighter">About</h2>
+          <p className="mt-2 text-base text-gray-600 max-w-2xl">私のこれまでの経歴や、エンジニアに至った経緯を記載しています。</p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 md:gap-12 items-start">
-          {/* Personal Info */}
-          <motion.div variants={itemVariants}>
-            <motion.div
-              variants={cardVariants}
-            >
-              <div className="relative z-10">
-                <div className="flex flex-col gap-12">
-                  <div>
-                    <motion.div 
-                      className="text-slate-800"
-                      variants={itemVariants}
-                    >
-                      <h3 className="text-2xl font-sans font-light text-slate-900 mb-4">現在地</h3>
-                      <span className="font-light text-sm">
-                        エンジニア歴4年目
-                        <br></br>
-                        現在Webシステムの開発に貢献。現場での評価を得て、チームリーダーを任され、要件定義や設計、チームのリソース管理や開発スケジュールの調整なども経験。エンジニアとしてのスキルアップを目指すとともに、社会への貢献を目的として、副業案件を募集しています。
-                      </span>
-                    </motion.div>
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-sans font-light text-slate-900 mb-4">略歴</h3>
-                    <motion.p 
-                      className="text-md sm:text-base text-slate-900 font-light leading-relaxed"
-                      variants={itemVariants}
-                    >
-                      {about.description}
-                    </motion.p>
-                  </div>
-                  {/* Article and GitHub Link Buttons */}
-                  <motion.div variants={itemVariants} className="hidden mt-4 md:flex flex-col gap-4">
-                    <motion.a
-                      href="https://zenn.dev/sanpi34"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className='underline flex items-center gap-2 hover:opacity-40 w-fit transition-all duration-200'
-                    >
-                      <img src='/images/zenn-icon.svg' className='w-10 h-10'></img>
-                      <span>zennの記事を見る</span>
-                    </motion.a>
-                    <motion.a
-                      href="https://github.com/sanpicule"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className='underline flex items-center gap-2 hover:opacity-40 w-fit transition-all duration-200'
-                    >
-                      <img src='/images/github-icon.svg' className='w-10 h-10' />
-                      <span>GitHubを見る</span>
-                    </motion.a>
-                    <motion.a
-                      href="https://sanpicule.github.io/my-information/skill-sheet.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className='underline flex items-center gap-2 hover:opacity-40 w-fit transition-all duration-200'
-                    >
-                      <img src='/images/pdf-icon.svg' className='w-10 h-10' />
-                      <span>スキルシートをダウンロードする</span>
-                    </motion.a>
-                  </motion.div>
+        <div className="grid lg:grid-cols-3 gap-x-12 gap-y-16">
+          {/* Left Column: Profile Card */}
+          <motion.div className="lg:col-span-1" variants={itemVariants}>
+            <div className="sticky top-28 grid gap-8">
+              <div className="flex items-center gap-4">
+                <motion.img
+                  src="/images/profile.jpg"
+                  alt="Profile Picture"
+                  className="w-24 h-24 rounded-full border-2 border-gray-300 object-cover shadow-lg"
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1, transition: { delay: 0.2, duration: 0.5 } }}
+                />
+                <div>
+                  <h3 className="text-2xl font-bold text-dark">{profileData.name}</h3>
+                  <p className="text-gray-600 font-semibold mt-1">{profileData.title}</p>
                 </div>
               </div>
-            </motion.div>
+              <div>
+                <h4 className="font-semibold text-dark mb-4">Find me on</h4>
+                <div className="flex gap-8">
+                  {socialLinks.map(link => (
+                    <motion.a
+                      key={link.name}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-600 flex flex-col items-center gap-2 text-xs"
+                      whileHover={linkHover}
+                    >
+                      <link.icon className="w-6 h-6" />
+                      {link.name}
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
+            </div>
           </motion.div>
 
-          {/* Work Experience */}
-          <motion.div variants={itemVariants}>
-            <motion.div
-              variants={cardVariants}
-            >
-              <h3 className="text-2xl font-sans font-light text-slate-900 mb-4">
-                職歴・経験
+          {/* Right Column: Main Content */}
+          <motion.div className="lg:col-span-2" variants={containerVariants}>
+            <motion.div variants={itemVariants} className="mb-12">
+              <h3 className="text-2xl font-bold text-dark mb-4">
+                私について
               </h3>
-              
-              <div className="space-y-4">
-                {about.workHistory.map((work, index) => (
+              <p className="text-gray-600 leading-relaxed whitespace-pre-line">
+                {about.description}
+              </p>
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <h3 className="text-2xl font-bold text-dark mb-8">これまでの経歴</h3>
+              <div className="relative border-l-2 border-gray-200 pl-8 space-y-12">
+                {about.workHistory.map((item, index) => (
                   <motion.div
                     key={index}
-                    className="relative pl-5 border-l-2 border-slate-200"
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.4 }}
+                    className="relative"
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0, transition: { duration: 0.5 } }}
                     viewport={{ once: true }}
                   >
-                    <div className="absolute left-0 top-0 w-2 h-2 bg-slate-400 rounded-full -translate-x-1" />
-                    <h4 className="font-sans text-slate-900 text-base font-semibold mb-1">{work.company}</h4>
-                    <span className="text-sm text-slate-500 font-light flex items-center gap-2 mb-2">
-                      <span className="text-slate-400">●</span>
-                      {work.period}
-                    </span>
-                    <p className="text-slate-800 text-sm font-light mb-2">{work.position}</p>
-                    <p className="text-slate-500 text-sm font-light">{work.description}</p>
+                    <div className="absolute -left-[43px] top-1 w-8 h-8 rounded-full bg-gray-100 border-2 border-gray-200 flex items-center justify-center">
+                      {getTimelineIcon(item)}
+                    </div>
+                    <p className="text-sm text-gray-500 font-semibold mb-1">{item.period}</p>
+                    <h4 className="font-bold text-dark text-xl">{item.company}</h4>
+                    <p className="text-gray-700 mb-2">{item.position}</p>
+                    <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
                   </motion.div>
                 ))}
               </div>
             </motion.div>
-          </motion.div>
-
-          {/* Article and GitHub Link Buttons */}
-          <motion.div variants={itemVariants} className="md:hidden mt-4 flex flex-col gap-3">
-            <motion.a
-              href="https://zenn.dev/sanpi34"
-              target="_blank"
-              rel="noopener noreferrer"
-              className='underline flex items-center gap-2'
-            >
-              <img src='/images/zenn-icon.svg' className='w-8 h-8' />
-              <span>zennの記事を見る</span>
-            </motion.a>
-            <motion.a
-              href="https://github.com/sanpicule"
-              target="_blank"
-              rel="noopener noreferrer"
-              className='underline flex items-center gap-2'
-            >
-              <img src='/images/github-icon.svg' className='w-8 h-8' />
-              <span>GitHubを見る</span>
-            </motion.a>
-            <motion.a
-              href="https://sanpicule.github.io/my-information/skill-sheet.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className='underline flex items-center gap-2'
-            >
-              <img src='/images/pdf-icon.svg' className='w-8 h-8' />
-              <span>スキルシートをダウンロードする</span>
-            </motion.a>
           </motion.div>
         </div>
       </motion.div>

@@ -1,190 +1,101 @@
-import { motion } from 'framer-motion';
-import { Code, Database, Server, Settings } from 'lucide-react';
+import { useState } from 'react';
 import { Skill } from '../types';
+import { Code, Database, Server, Settings } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface SkillsProps {
   skills: Skill[];
 }
 
-const Skills = ({ skills }: SkillsProps) => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1
-      }
-    }
-  };
+// カテゴリ定義をコンポーネントの外に配置
+const skillCategories = [
+  { name: 'Frontend', category: 'frontend', icon: <Code className="w-5 h-5" /> },
+  { name: 'Backend & DB', category: 'backend', icon: <Server className="w-5 h-5" /> },
+  { name: 'Cloud', category: 'database', icon: <Database className="w-5 h-5" /> },
+  { name: 'Tools', category: 'tool', icon: <Settings className="w-5 h-5" /> },
+];
 
-  const getSkillsByCategory = (category: string) => {
-    return skills.filter(skill => skill.category === category);
+const Skills = ({ skills }: SkillsProps) => {
+  const [selectedCategory, setSelectedCategory] = useState(skillCategories[0].category);
+
+  // レンダリング内で直接フィルタリング
+  const filteredSkills = skills.filter(skill => 
+    skill.category.trim().toLowerCase() === selectedCategory.trim().toLowerCase()
+  );
+
+  const getLevelWidth = (level: string) => {
+    const years = parseInt(level.match(/\d+/)?.[0] || '1');
+    if (years >= 4) return '100%';
+    if (years === 3) return '80%';
+    if (years === 2) return '60%';
+    return '40%';
   };
 
   return (
-    <section id="skills" className="section-padding bg-white">
-      <motion.div 
-        className="container-max"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-      >
-        {/* Section Header */}
-        <motion.div className="mb-16">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sans font-medium text-slate-900 mb-6">
-            Skills
-          </h2>
-          
-          <motion.p 
-            className="text-sm sm:text-base text-slate-800 font-light leading-relaxed"
-          >
-            フロントエンド開発を中心に、幅広い技術スタックを習得しています。
-            各技術の習熟度を5段階で評価し、継続的な学習とスキル向上に取り組んでいます。
-          </motion.p>
-        </motion.div>
-
-        {/* Skills Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-          {/* Frontend Skills */}
-          <motion.div>
-            <motion.div className='mx-2'>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
-                  <Code className="w-5 h-5 text-slate-800" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-sans font-semibold text-slate-900">フロントエンド</h3>
-                  <span className="text-sm text-slate-500 font-light">Frontend Development</span>
-                </div>
-              </div>
-              
-              <div className="space-y-4">
-                {getSkillsByCategory('frontend').map((skill, index) => (
-                  <motion.div
-                    key={skill.name}
-                    className="space-y-2"
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05, duration: 0.4 }}
-                  >
-                    <div className="flex justify-between items-center">
-                      <div className='flex gap-10 items-center'>
-                        <img src={skill.icon} className='w-10 h-10'></img>
-                        <span className="font-medium text-slate-700">{skill.name}</span>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Backend Skills */}
-          <motion.div>
-            <motion.div className='mx-2'>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
-                  <Server className="w-5 h-5 text-slate-800" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-sans font-semibold text-slate-900">バックエンド / DB</h3>
-                  <span className="text-sm text-slate-500 font-light">Backend & Database</span>
-                </div>
-              </div>
-              
-              <div className="space-y-4">
-                {getSkillsByCategory('backend').map((skill, index) => (
-                  <motion.div
-                    key={skill.name}
-                    className="space-y-2"
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05, duration: 0.4 }}
-                    viewport={{ once: true }}
-                  >
-                    <div className="flex justify-between items-center">
-                      <div className='flex gap-10 items-center'>
-                        <img src={skill.icon} className='w-10 h-10'></img>
-                        <span className="font-medium text-slate-700">{skill.name}</span>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Database Skills */}
-          <motion.div>
-            <motion.div className='mx-2'>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
-                  <Database className="w-5 h-5 text-slate-800" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-sans font-semibold text-slate-900">クラウド</h3>
-                  <span className="text-sm text-slate-500 font-light">Cloud Services</span>
-                </div>
-              </div>
-              
-              <div className="space-y-4">
-                {getSkillsByCategory('database').map((skill, index) => (
-                  <motion.div
-                    key={skill.name}
-                    className="space-y-2"
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05, duration: 0.4 }}
-                  >
-                    <div className="flex justify-between items-center">
-                      <div className='flex gap-10 items-center'>
-                        <img src={skill.icon} className='w-10 h-10'></img>
-                        <span className="font-medium text-slate-700">{skill.name}</span>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Tools Skills */}
-          <motion.div>
-            <motion.div className='mx-2'>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
-                  <Settings className="w-5 h-5 text-slate-800" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-sans font-semibold text-slate-900">ツール</h3>
-                  <span className="text-sm text-slate-500 font-light">Development Tools</span>
-                </div>
-              </div>
-              
-              <div className="space-y-4">
-                {getSkillsByCategory('tool').map((skill, index) => (
-                  <motion.div
-                    key={skill.name}
-                    className="space-y-2"
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05, duration: 0.4 }}
-                  >
-                    <div className="flex justify-between items-center">
-                      <div className='flex gap-10 items-center'>
-                        <img src={skill.icon} className='w-10 h-10'></img>
-                        <span className="font-medium text-slate-700">{skill.name}</span>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
+    <section id="skills" className="section-padding">
+      <div className="container-max">
+        {/* Title */}
+        <div className="mb-12">
+          <h2 className="text-3xl sm:text-4xl font-black text-dark tracking-tighter">Skills</h2>
+          <p className="mt-2 text-base text-gray-600 max-w-2xl">
+            私が持つ技術や経験をご覧ください。
+          </p>
         </div>
-      </motion.div>
+
+        {/* Category Buttons */}
+        <div className="flex flex-wrap gap-3 mb-8">
+          {skillCategories.map((cat) => (
+            <button
+              key={cat.category}
+              onClick={() => setSelectedCategory(cat.category)}
+              className={`flex items-center gap-3 py-2 px-4 rounded-full text-sm font-semibold transition-colors duration-300
+                ${selectedCategory === cat.category 
+                  ? 'bg-dark text-light' 
+                  : 'bg-gray-200 text-gray-800 hover:bg-gray-200'
+                }`
+              }
+            >
+              {cat.icon}
+              <span>{cat.name}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* --- Skills Display --- */}
+        <div className="min-h-[200px]">
+          <h3 className="text-2xl font-bold text-dark mb-4">
+            {skillCategories.find(c => c.category === selectedCategory)?.name}
+          </h3>
+          
+          {filteredSkills.length > 0 ? (
+            <div className="grid md:grid-cols-2 gap-4">
+              {filteredSkills.map(skill => (
+                <motion.div
+                  key={skill.name}
+                  className="glass-card p-4"
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <img src={skill.icon} className="w-8 h-8" alt={skill.name} />
+                    <h4 className="font-bold text-dark text-md">{skill.name}</h4>
+                  </div>
+                  <p className="text-xs text-gray-600 mb-2 min-h-[32px] flex items-center">{skill.level}</p>
+                  <div className="w-full bg-gray-200 rounded-full h-1.5 overflow-hidden">
+                    <motion.div
+                      className="bg-dark h-1.5 rounded-full"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: getLevelWidth(skill.level) }}
+                      transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+                      viewport={{ once: true }}
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-600">No skills found in this category.</p>
+          )}
+        </div>
+      </div>
     </section>
   );
 };

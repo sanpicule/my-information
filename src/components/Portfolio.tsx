@@ -2,14 +2,74 @@
 
 import { motion } from 'framer-motion';
 import { Project } from '../types';
+import { useRef } from 'react';
+import { useInView } from 'framer-motion';
+import { useIsHoverable } from '../hooks/useIsHoverable';
 
 interface PortfolioProps {
   projects: Project[];
   onProjectSelect: (project: Project) => void;
 }
 
+const ProjectCard = ({ project, onProjectSelect }: { project: Project, onProjectSelect: (p: Project) => void }) => {
+  const isHoverable = useIsHoverable();
+
+  const overlayVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.3, ease: 'easeInOut' as const } }
+  };
+
+  return (
+    <motion.div
+      layout
+      className="group relative glass-card rounded-2xl overflow-hidden cursor-pointer aspect-[4/3]"
+      onClick={() => onProjectSelect(project)}
+      variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
+      whileHover={isHoverable ? { scale: 1.03, y: -5, transition: { type: 'spring' as const, stiffness: 300 } } : {}}
+    >
+      {/* --- Base Content --- */}
+      <div className="w-full h-full flex flex-col">
+        {project.thumbnail && (
+          <div className="w-full h-2/3 overflow-hidden">
+            <img
+              src={project.thumbnail}
+              alt={project.title}
+              className="w-full h-full object-cover transition-transform duration-300 md:group-hover:scale-110"
+            />
+          </div>
+        )}
+        <div className="flex-grow p-4 flex flex-col justify-center">
+          <h3 className="text-md font-bold text-dark mb-1 truncate">{project.title}</h3>
+          <p className="text-gray-500 text-sm line-clamp-2">{project.description}</p>
+        </div>
+      </div>
+
+      {/* --- Hover Overlay --- */}
+      {isHoverable && (
+        <motion.div 
+          className="absolute inset-0 p-6 bg-white/80 backdrop-blur-md flex flex-col justify-end"
+          variants={overlayVariants}
+          initial="hidden"
+          whileHover="visible"
+        >
+          <h3 className="text-xl font-bold text-sky-600 mb-2">{project.title}</h3>
+          <p className="text-gray-700 text-sm mb-4 line-clamp-3">{project.description}</p>
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.slice(0, 4).map(tech => (
+              <span key={tech} className="px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-full">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </motion.div>
+      )}
+    </motion.div>
+  );
+}
+
 const Portfolio = ({ projects, onProjectSelect }: PortfolioProps) => {
-  
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, amount: 0.1 });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -17,42 +77,6 @@ const Portfolio = ({ projects, onProjectSelect }: PortfolioProps) => {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 20
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut" as const
-      }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.4,
-        ease: "easeOut" as const
-      }
-    },
-    hover: {
-      y: -3,
-      opacity: 0.9,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut" as const
       }
     }
   };
@@ -60,77 +84,40 @@ const Portfolio = ({ projects, onProjectSelect }: PortfolioProps) => {
   const personalProjects = projects.filter((p) => p.type === 'portfolio');
 
   return (
-    <section id="portfolio" className="section-padding bg-slate-50">
-      <motion.div 
+    <section id="portfolio" className="section-padding">
+      <div 
         className="container-max"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
+        ref={containerRef}
       >
-        {/* Section Header */}
-        <motion.div variants={itemVariants} className="mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sans font-medium text-slate-900 mb-6">
-            Portfolio
-          </h2>
-          
-          <motion.p 
-              className="text-sm sm:text-base text-slate-800 font-light leading-relaxed"
-            variants={itemVariants}
-          >
-            これまでに手がけたプロジェクトや制作物をご紹介します。
-            各プロジェクトの詳細や技術的な特徴についても詳しくご覧いただけます。
-          </motion.p>
+        <motion.div 
+          className="mb-16"
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+        >
+          <h2 className="text-3xl sm:text-4xl font-black text-dark tracking-tighter">Portfolio</h2>
+          <p className="mt-2 text-base text-gray-600 max-w-2xl">
+            私が開発したプロジェクトをご覧ください。
+          </p>
         </motion.div>
 
-        {/* フィルター機能は削除 */}
-
-        {/* 個人開発 */}
         {personalProjects.length > 0 && (
-          <>
-            <motion.h3 
-              className="text-base sm:text-lg font-medium text-slate-900 mb-4"
-              variants={itemVariants}
-            >
-              個人開発
-            </motion.h3>
-            <motion.div 
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
-              variants={containerVariants}
-            >
-              {personalProjects.map((project) => (
-                <motion.div
-                  key={project.id}
-                  className="group bg-white shadow-md rounded-xl overflow-hidden cursor-pointer"
-                  variants={cardVariants}
-                  whileHover="hover"
-                >
-                  {/* Thumbnail for portfolio projects */}
-                  {project.thumbnail && (
-                    <div className="overflow-hidden">
-                      <img
-                        src={project.thumbnail}
-                        alt={project.title}
-                        className="w-full h-[200px] object-fit object-center"
-                      />
-                    </div>
-                  )}
-                  <div className="p-4 sm:p-6">
-                    <h3 
-                                        className="text-lg sm:text-xl font-sans font-medium text-slate-900 mb-3 group-hover:text-slate-700 transition-colors duration-300 cursor-pointer"
-                                        onClick={() => onProjectSelect(project)}
-                                      >
-                                        {project.title}
-                                      </h3>                    <p className="text-sm sm:text-base text-slate-800 mb-4 line-clamp-2 font-light leading-relaxed">
-                      {project.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </>
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+          >
+            {personalProjects.map((project) => (
+              <ProjectCard 
+                key={project.id}
+                project={project} 
+                onProjectSelect={onProjectSelect}
+              />
+            ))}
+          </motion.div>
         )}
-      </motion.div>
+      </div>
     </section>
   );
 };

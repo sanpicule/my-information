@@ -1,171 +1,51 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  :root {
-    /* 動的なビューポート高さはdvhで対応 */
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #F9FAFB; /* gray-50 */
+    color: #111827; /* gray-900 */
+    overflow-x: hidden;
+    position: relative;
   }
-  
+
   html {
     scroll-behavior: smooth;
-    /* スクロール時の表示領域可変を防ぐ */
-    height: 100%;
-    height: -webkit-fill-available;
-  }
-  
-  body {
-    font-family: 'Noto Sans JP', sans-serif;
-    background-color: #e0e5ec;
-    color: #2d3748;
-    /* スクロール時の表示領域可変を防ぐ */
-    min-height: 100dvh;
-    /* スクロール時のレイアウトシフトを防ぐ */
-    overflow-x: hidden;
-  }
-  
-  /* スムーズスクロールのフォールバック */
-  @media (prefers-reduced-motion: no-preference) {
-    html {
-      scroll-behavior: smooth;
-    }
-  }
-  
-  /* モバイルブラウザでの表示領域可変を防ぐ */
-  @media screen and (max-width: 768px) {
-    body {
-      /* dvhを使用 */
-      min-height: 100dvh;
-    }
   }
 }
 
 @layer components {
-  /* Neumorphism ボタン */
-  .btn-primary {
-    @apply bg-gray-100 text-gray-800 font-medium py-3 px-6 rounded-xl transition-all duration-200;
-    box-shadow: 4px 4px 12px #a3b1c6, -8px -8px 16px #ffffff;
-  }
-  
-  .btn-primary:hover {
-    box-shadow: 4px 4px 8px #a3b1c6, -4px -4px 8px #ffffff;
-    transform: translateY(2px);
-  }
-  
-  .btn-primary:active {
-    box-shadow: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px #ffffff;
-  }
-  
-  .btn-secondary {
-    @apply bg-gray-100 text-gray-800 font-medium py-3 px-6 rounded-xl transition-all duration-200;
-    box-shadow: 8px 8px 16px #a3b1c6, -8px -8px 16px #ffffff;
-  }
-  
-  .btn-secondary:hover {
-    box-shadow: 4px 4px 8px #a3b1c6, -4px -4px 8px #ffffff;
-    transform: translateY(2px);
-  }
-  
-  .btn-secondary:active {
-    box-shadow: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px #ffffff;
-  }
-  
-  /* Neumorphism カード */
-  .neumorphism-card {
-    @apply bg-gray-100 rounded-xl p-6;
-    box-shadow: 8px 8px 16px #a3b1c6, -8px -8px 16px #ffffff;
-  }
-  
-  .neumorphism-card-inset {
-    @apply bg-gray-100 rounded-xl p-6;
-    box-shadow: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px #ffffff;
-  }
-  
-  /* Neumorphism 入力フィールド */
-  .neumorphism-input {
-    @apply bg-gray-100 border-0 rounded-xl px-4 py-3 focus:outline-none transition-all duration-200;
-    box-shadow: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px #ffffff;
-  }
-  
-  .neumorphism-input:focus {
-    box-shadow: inset 6px 6px 12px #a3b1c6, inset -6px -6px 12px #ffffff;
-  }
-  
-  /* セクション */
   .section-padding {
-    @apply py-16 px-4 sm:px-6 lg:px-8;
+    @apply py-12 px-4 sm:py-20 sm:px-6 lg:px-8;
   }
-  
+
   .container-max {
     @apply max-w-7xl mx-auto;
   }
-  
-  /* スキルレベル */
-  .skill-level {
-    @apply bg-gray-200 rounded-full;
-    box-shadow: inset 2px 2px 4px #a3b1c6, inset -2px -2px 4px #ffffff;
+
+  .glass-card {
+    @apply bg-white border border-gray-200 rounded-2xl shadow-lg;
   }
   
-  .skill-level-fill {
-    @apply bg-gray-800 rounded-full transition-all duration-300;
-    box-shadow: 2px 2px 4px #a3b1c6, -2px -2px 4px #ffffff;
-  }
-  
-  /* プロジェクトカード */
-  .project-card {
-    @apply bg-gray-100 rounded-xl overflow-hidden transition-all duration-300 cursor-pointer;
-    box-shadow: 8px 8px 16px #a3b1c6, -8px -8px 16px #ffffff;
-  }
-  
-  .project-card:hover {
-    box-shadow: 12px 12px 24px #a3b1c6, -12px -12px 24px #ffffff;
-    transform: translateY(-4px);
-  }
-  
-  /* フィルターボタン */
-  .filter-btn {
-    @apply px-6 py-2 rounded-xl font-medium transition-all duration-200;
-    box-shadow: 4px 4px 8px #a3b1c6, -4px -4px 8px #ffffff;
-  }
-  
-  .filter-btn:hover {
-    box-shadow: 2px 2px 4px #a3b1c6, -2px -2px 4px #ffffff;
-    transform: translateY(1px);
-  }
-  
-  .filter-btn.active {
-    box-shadow: inset 2px 2px 4px #a3b1c6, inset -2px -2px 4px #ffffff;
-  }
-  
-  /* モーダル */
-  .neumorphism-modal {
-    @apply bg-gray-100 rounded-xl;
-    box-shadow: 16px 16px 32px #a3b1c6, -16px -16px 32px #ffffff;
-  }
-  
-  /* Bantyフォント */
-  .font-banty {
-    font-family: 'Noto Sans JP', sans-serif;
-  }
-  
-  /* 動的ビューポート高さのユーティリティ */
+  /* Dynamic Viewport Height */
   .h-screen-dynamic {
-    height: 100vh;
+    height: 100vh; /* Fallback */
     height: calc(var(--vh, 1vh) * 100);
-    height: -webkit-fill-available;
   }
   
   .min-h-screen-dynamic {
-    min-height: 100vh;
+    min-height: 100vh; /* Fallback */
     min-height: calc(var(--vh, 1vh) * 100);
-    min-height: -webkit-fill-available;
   }
-  
-  .max-h-screen-dynamic {
-    max-height: 100vh;
-    max-height: calc(var(--vh, 1vh) * 100);
-    max-height: -webkit-fill-available;
-  }
+
+  .btn { @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold rounded-full transition-all duration-300; }
+  .btn-primary { @apply bg-gray-500 text-white; }
+  .btn-secondary { @apply bg-gray-900 text-white border border-gray-300 md:hover:bg-gray-200; }
+  .btn-icon { @apply w-12 h-12 flex items-center justify-center rounded-full; }
+  .carousel-arrow { @apply absolute top-1/2 -translate-y-1/2 bg-dark/50 text-white p-2 rounded-full md:hover:bg-dark/80 transition-colors z-10; }
+  .tag { @apply px-2 py-1 bg-gray-200 text-gray-800 text-sm font-medium rounded-md; }
 }
