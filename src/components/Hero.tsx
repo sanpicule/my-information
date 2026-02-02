@@ -2,11 +2,10 @@ import { ArrowDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface HeroProps {
-  name: string;
   introduction: string;
 }
 
-const Hero = ({ name, introduction }: HeroProps) => {
+const Hero = ({ introduction }: HeroProps) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -24,7 +23,7 @@ const Hero = ({ name, introduction }: HeroProps) => {
       opacity: 1,
       y: 0,
       transition: {
-        type: 'spring',
+        type: 'spring' as const,
         stiffness: 50,
         damping: 10,
       },

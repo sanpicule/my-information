@@ -53,8 +53,8 @@ const pageVariants = {
 };
 
 const pageTransition = {
-  type: "tween",
-  ease: "anticipate",
+  type: "tween" as const,
+  ease: "anticipate" as const,
   duration: 0.5
 };
 
@@ -89,14 +89,13 @@ function MainPage() {
     >
       <Header />
       <Hero
-        name={profileData.name}
         introduction={profileData.introduction}
       />
       <About about={profileData.about} />
       <Skills skills={profileData.skills} />
       <Portfolio projects={profileData.projects} onProjectSelect={handleProjectSelect} />
       <Contact contact={profileData.contact} />
-      <Footer contact={profileData.contact} />
+      <Footer />
     </motion.main>
   );
 }
@@ -131,7 +130,7 @@ function ProjectDetailPage() {
     >
       <Header />
       <ProjectDetail project={project} onBack={handleBack} />
-      <Footer contact={profileData.contact} />
+      <Footer />
     </motion.main>
   );
 }
@@ -141,13 +140,11 @@ export default App;
 const LoadingScreen = () => {
   const progress = useMotionValue(0);
   const percentage = useTransform(progress, (v) => `${Math.floor(v)}%`);
-  const circumference = 2 * Math.PI * 45; // 2 * pi * radius
-  const strokeDashoffset = useTransform(progress, (v) => circumference * (1 - v / 100));
 
   useEffect(() => {
     const animation = animate(progress, 100, { 
       duration: 2.5, 
-      ease: 'easeInOut'
+      ease: 'easeInOut' as const
     });
     return animation.stop;
   }, []);

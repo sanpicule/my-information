@@ -16,7 +16,7 @@ const ProjectCard = ({ project, onProjectSelect }: { project: Project, onProject
 
   const overlayVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.3, ease: 'easeInOut' } }
+    visible: { opacity: 1, transition: { duration: 0.3, ease: 'easeInOut' as const } }
   };
 
   return (
@@ -25,7 +25,7 @@ const ProjectCard = ({ project, onProjectSelect }: { project: Project, onProject
       className="group relative glass-card rounded-2xl overflow-hidden cursor-pointer aspect-[4/3]"
       onClick={() => onProjectSelect(project)}
       variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-      whileHover={isHoverable ? { scale: 1.03, y: -5, transition: { type: 'spring', stiffness: 300 } } : {}}
+      whileHover={isHoverable ? { scale: 1.03, y: -5, transition: { type: 'spring' as const, stiffness: 300 } } : {}}
     >
       {/* --- Base Content --- */}
       <div className="w-full h-full flex flex-col">

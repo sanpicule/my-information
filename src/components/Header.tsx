@@ -35,8 +35,8 @@ const HamburguerIcon = ({ isOpen, toggle }: { isOpen: boolean, toggle: () => voi
 
 const MobileMenu = ({ isOpen, toggle }: { isOpen: boolean, toggle: () => void }) => {
   const panelVariants = {
-    hidden: { x: '100%', transition: { type: 'tween', ease: 'easeIn' } },
-    visible: { x: 0, transition: { type: 'tween', ease: 'easeOut' } }
+    hidden: { x: '100%', transition: { type: 'tween' as const, ease: 'easeIn' as const } },
+    visible: { x: 0, transition: { type: 'tween' as const, ease: 'easeOut' as const } }
   };
   const listVariants = {
     hidden: { opacity: 0 },
@@ -44,7 +44,7 @@ const MobileMenu = ({ isOpen, toggle }: { isOpen: boolean, toggle: () => void })
   };
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { type: 'spring' } }
+    visible: { opacity: 1, y: 0, transition: { type: 'spring' as const } }
   };
 
   return (

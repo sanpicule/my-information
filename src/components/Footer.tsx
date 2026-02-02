@@ -3,16 +3,7 @@ import { Mail, Twitter, Instagram, Github, ArrowUp } from 'lucide-react';
 import { profileData } from '@/lib/data';
 import { useIsHoverable } from '../hooks/useIsHoverable';
 
-interface FooterProps {
-  contact: {
-    github?: string;
-    twitter?: string;
-    email: string;
-    instagram?: string;
-  };
-}
-
-const Footer = ({ contact }: FooterProps) => {
+const Footer = () => {
   const isHoverable = useIsHoverable();
   const currentYear = new Date().getFullYear();
 

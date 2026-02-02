@@ -12,6 +12,7 @@ export default defineConfig({
       includeAssets: ['icon.png'],
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg}'],
+        maximumFileSizeToCacheInBytes: 7 * 1024 * 1024,
       },
       manifest: {
         name: 'Sanshiro Hikawa Portfolio',
