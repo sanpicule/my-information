@@ -6,13 +6,15 @@ import ProjectDetail from '@/components/ProjectDetail';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import { profileData } from '@/lib/data';
-import { BrowserRouter as Router, Routes, Route, useParams, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Project } from '@/types';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useTransform, animate } from 'framer-motion';
 import Portfolio from '@/components/Portfolio';
+import useCustomCursor from './hooks/useCustomCursor';
 
 function App() {
+  useCustomCursor();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,7 +23,7 @@ function App() {
     const timer = setTimeout(() => {
       setLoading(false);
       document.body.style.overflow = 'auto';
-    }, 2000);
+    }, 2800); // Increased loading time for better animation experience
 
     return () => {
       clearTimeout(timer);
@@ -29,17 +31,43 @@ function App() {
     };
   }, []);
 
-  if (loading) {
-    return <LoadingScreen />;
-  }
+  return (
+    <AnimatePresence mode="wait">
+      {loading ? (
+        <motion.div key="loader" exit={{ opacity: 0, transition: { duration: 0.5 } }}>
+          <LoadingScreen />
+        </motion.div>
+      ) : (
+        <Router>
+          <AnimatedRoutes />
+        </Router>
+      )}
+    </AnimatePresence>
+  );
+}
+
+const pageVariants = {
+  initial: { opacity: 0, x: -50 },
+  in: { opacity: 1, x: 0 },
+  out: { opacity: 0, x: 50 },
+};
+
+const pageTransition = {
+  type: "tween",
+  ease: "anticipate",
+  duration: 0.5
+};
+
+function AnimatedRoutes() {
+  const location = useLocation();
 
   return (
-    <Router>
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/portfolio/:id" element={<ProjectDetailPage />} />
-        </Routes>
-    </Router>
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/portfolio/:id" element={<ProjectDetailPage />} />
+      </Routes>
+    </AnimatePresence>
   );
 }
 
@@ -51,19 +79,25 @@ function MainPage() {
   };
 
   return (
-    <main className="min-h-screen-dynamic">
+    <motion.main 
+      className="min-h-screen-dynamic"
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
+    >
       <Header />
       <Hero
         name={profileData.name}
         introduction={profileData.introduction}
-        contact={profileData.contact}
       />
-      <About about={profileData.about} skills={profileData.skills} />
+      <About about={profileData.about} />
       <Skills skills={profileData.skills} />
       <Portfolio projects={profileData.projects} onProjectSelect={handleProjectSelect} />
       <Contact contact={profileData.contact} />
       <Footer contact={profileData.contact} />
-    </main>
+    </motion.main>
   );
 }
 
@@ -78,6 +112,7 @@ function ProjectDetailPage() {
   const project = profileData.projects.find(p => p.id === id);
 
   if (!project) {
+    // Or redirect to a 404 page
     return <div>Project not found</div>;
   }
 
@@ -86,56 +121,76 @@ function ProjectDetailPage() {
   };
 
   return (
-    <main className="min-h-screen-dynamic">
+    <motion.main 
+      className="min-h-screen-dynamic"
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
+    >
       <Header />
       <ProjectDetail project={project} onBack={handleBack} />
       <Footer contact={profileData.contact} />
-    </main>
+    </motion.main>
   );
 }
 
 export default App;
 
 const LoadingScreen = () => {
-  const [progress, setProgress] = useState(0);
+  const progress = useMotionValue(0);
+  const percentage = useTransform(progress, (v) => `${Math.floor(v)}%`);
+  const circumference = 2 * Math.PI * 45; // 2 * pi * radius
+  const strokeDashoffset = useTransform(progress, (v) => circumference * (1 - v / 100));
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress(prev => prev < 100 ? prev + 1 : 100);
-    }, 20);
-    return () => clearInterval(interval);
+    const animation = animate(progress, 100, { 
+      duration: 2.5, 
+      ease: 'easeInOut'
+    });
+    return animation.stop;
   }, []);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="text-center"
-      >
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-          className="text-2xl font-bold text-white mb-8"
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-dark">
+      <div className="relative w-48 h-48">
+        <motion.svg
+          className="absolute inset-0"
+          viewBox="0 0 100 100"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1, transition: { duration: 0.5 } }}
         >
-          Loading
-        </motion.h1>
-        
-        <div className="w-64 h-2 bg-gray-700 rounded mb-4">
-          <motion.div
-            className="h-full bg-white rounded"
-            initial={{ width: 0 }}
-            animate={{ width: "100%" }}
-            transition={{ duration: 2, ease: "easeInOut" }}
+          {/* Background circle */}
+          <circle
+            cx="50" cy="50" r="45"
+            strokeWidth="4"
+            className="stroke-accent/20"
+            fill="transparent"
           />
-        </div>
-        
-        <div className="text-white text-sm">
-          {progress}%
-        </div>
-      </motion.div>
+          {/* Progress circle */}
+          <motion.circle
+            cx="50" cy="50" r="45"
+            strokeWidth="4"
+            className="stroke-primary"
+            fill="transparent"
+            pathLength="1"
+            strokeDasharray="1"
+            strokeDashoffset={useTransform(progress, v => 1 - v / 100)}
+            transform="rotate(-90 50 50)"
+          />
+        </motion.svg>
+
+        <motion.div 
+          className="absolute inset-0 flex flex-col items-center justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { delay: 0.2 } }}
+        >
+          <motion.p className="text-xl font-bold tabular-nums text-light">
+            {percentage}
+          </motion.p>
+        </motion.div>
+      </div>
     </div>
   );
 };

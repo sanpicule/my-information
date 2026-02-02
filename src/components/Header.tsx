@@ -1,107 +1,171 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useIsHoverable } from '../hooks/useIsHoverable';
 
-const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isAtTop, setIsAtTop] = useState(true);
+const navItems = [
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Portfolio', href: '#portfolio' },
+  { name: 'Contact', href: '#contact' },
+];
 
-  const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'Contact', href: '#contact' },
-  ];
+const HamburguerIcon = ({ isOpen, toggle }: { isOpen: boolean, toggle: () => void }) => {
+  const isHoverable = useIsHoverable();
+  const buttonHover = isHoverable ? { scale: 1.1 } : {};
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const topVariants = {
+    closed: { rotate: 0, translateY: 0 },
+    open: { rotate: 45, translateY: 7 }
   };
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
+  const centerVariants = {
+    closed: { opacity: 1 },
+    open: { opacity: 0 }
   };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const atTop = window.scrollY < 10;
-      setIsAtTop(atTop);
-    };
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const bottomVariants = {
+    closed: { rotate: 0, translateY: 0 },
+    open: { rotate: -45, translateY: -7 }
+  };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-      isMenuOpen || !isAtTop ? 'bg-black/90 text-white shadow-sm' : 'bg-transparent'
-    }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* MyProfile text */}
-          <div className={`
-            ${(!isAtTop || isMenuOpen) ? 'opacity-100' : 'opacity-0 pointer-events-none'}
-            transition-all duration-300 text-xl font-bold
-          `}>
-            MyProfile
-          </div>
+    <motion.button
+      onClick={toggle}
+      className="w-8 h-8 relative"
+      whileHover={buttonHover}
+      whileTap={{ scale: 0.9 }}
+      animate={isOpen ? "open" : "closed"}
+    >
+      <motion.div className="absolute h-0.5 w-7 bg-light" variants={topVariants} style={{ top: 8 }} />
+      <motion.div className="absolute h-0.5 w-7 bg-light" variants={centerVariants} style={{ top: '50%', marginTop: '-1px' }}/>
+      <motion.div className="absolute h-0.5 w-7 bg-light" variants={bottomVariants} style={{ bottom: 8 }} />
+    </motion.button>
+  );
+};
 
-          {/* デスクトップナビゲーション */}
-          <nav className="hidden md:flex space-x-3 ml-auto">
-            {navItems.map((item, index) => (
+const MobileMenu = ({ isOpen, toggle }: { isOpen: boolean, toggle: () => void }) => {
+  const panelVariants = {
+    hidden: { x: '100%', transition: { type: 'tween', ease: 'easeIn' } },
+    visible: { x: 0, transition: { type: 'tween', ease: 'easeOut' } }
+  };
+  const listVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
+  };
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { type: 'spring' } }
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="fixed inset-0 z-40 bg-dark/90 backdrop-blur-md"
+          variants={panelVariants}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+        >
+          <motion.nav 
+            className="h-full flex flex-col items-center justify-center gap-8"
+            variants={listVariants}
+          >
+            {navItems.map((item) => (
               <motion.a
                 key={item.name}
                 href={item.href}
-                className={`py-2 px-4 ${isAtTop ? 'text-white' : 'text-slate-800'} transition-all duration-300 relative hover:opacity-40`}
-                style={{ animationDelay: `${index * 100}ms` }}
-                transition={{ duration: 0.2 }}
+                onClick={toggle}
+                className="text-4xl font-bold text-accent hover:text-primary transition-colors"
+                variants={itemVariants}
               >
                 {item.name}
               </motion.a>
             ))}
-          </nav>
+          </motion.nav>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
 
-          {/* モバイルメニューボタン */}
-          <motion.button
-            onClick={toggleMenu}
-            className={`md:hidden p-2 ml-auto text-white`}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </motion.button>
-        </div>
-      </div>
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('Home');
 
-      {/* モバイルナビゲーション */}
-      <div 
-        className={`md:hidden fixed inset-0 top-16 bg-white opacity-100 transform transition-transform duration-400 ease-out ${
-          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-        style={{ 
-          height: 'calc(100vh - 4rem)'
-        }}
-      >
-        <nav className="px-4 py-8 space-y-4">
-          {navItems.map((item, index) => (
-            <a
-              key={item.name}
-              href={item.href}
-              onClick={closeMenu}
-              className="block text-slate-700 hover:text-slate-900 transition-all duration-300 font-medium text-lg py-1 px-4"
-              style={{
-                opacity: isMenuOpen ? 1 : 0,
-                transform: isMenuOpen ? 'translateY(0)' : 'translateY(-15px)',
-                transition: isMenuOpen
-                  ? `opacity 0.3s ease-out ${0.2 + index * 0.05}s, transform 0.3s ease-out ${0.2 + index * 0.05}s`
-                  : `opacity 0.15s ease-in ${(navItems.length - 1 - index) * 0.04}s, transform 0.15s ease-in ${(navItems.length - 1 - index) * 0.04}s`
-              }}
-            >
-              <span className="relative z-10 text-2xl">{item.name}</span>
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => { document.body.style.overflow = 'auto'; };
+  }, [isMenuOpen]);
+
+  // Scroll detection for header style
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+      
+      const sections = navItems.map(item => document.getElementById(item.href.substring(1)));
+      let currentSection = 'Home';
+      for (const section of sections) {
+        if (section && section.getBoundingClientRect().top < window.innerHeight / 2) {
+          currentSection = section.id.charAt(0).toUpperCase() + section.id.slice(1);
+        }
+      }
+      setActiveSection(currentSection);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  return (
+    <>
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'pt-2' : 'pt-4'
+      }`}>
+        <div className={`container-max transition-all duration-300
+          ${isScrolled ? 'rounded-2xl bg-white/5 backdrop-blur-lg shadow-lg shadow-black/20' : ''}
+        `}>
+          <div className="flex items-center justify-between h-16 px-4">
+            <a href="#home" className="flex items-center gap-2">
+              <motion.img 
+                src="/icon.png" 
+                alt="Logo" 
+                className="h-8 w-8 rounded-md"
+              />
             </a>
-          ))}
-        </nav>
-      </div>
-    </header>
+
+            <nav className="hidden md:flex space-x-2">
+              {navItems.map((item) => (
+                <a key={item.name} href={item.href} className="relative px-3 py-2 text-sm font-medium text-accent md:hover:text-light transition-colors duration-300">
+                  {item.name}
+                  {activeSection === item.name && (
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                      layoutId="underline"
+                      transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                    />
+                  )}
+                </a>
+              ))}
+            </nav>
+
+            <div className="md:hidden">
+              <HamburguerIcon isOpen={isMenuOpen} toggle={toggleMenu} />
+            </div>
+          </div>
+        </div>
+      </header>
+      <MobileMenu isOpen={isMenuOpen} toggle={toggleMenu} />
+    </>
   );
 };
 

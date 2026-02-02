@@ -1,155 +1,107 @@
 import { ArrowDown } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface HeroProps {
   name: string;
   introduction: string;
-  contact: {
-    github?: string;
-    twitter?: string;
-    email: string;
-  };
 }
 
-const Hero = ({ introduction }: HeroProps) => {
-  const { scrollY } = useScroll();
-  const scale = useTransform(scrollY, [0, 300], [1, 1.1]);
-  const blur = useTransform(scrollY, [0, 300], [0, 2]);
-
+const Hero = ({ name, introduction }: HeroProps) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
+        staggerChildren: 0.2,
+        delayChildren: 0.5,
+      },
+    },
   };
 
-  const firstLine = "HIKAWA";
-  const secondLine = "SANSHIRO";
-  const totalChars = firstLine.length + secondLine.length;
-  const delays = Array.from({ length: totalChars }, () => Math.random() * 2);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 50,
+        damping: 10,
+      },
+    },
+  };
 
   return (
-    <section id="home" className="h-dvh flex items-center justify-center w-full relative overflow-hidden">
-      {/* Background Image */}
-      <motion.div className="absolute inset-0 z-0" style={{ scale, filter: `blur(${blur}px)` }}>
-        {/* Animated Grid Background */}
-        <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <defs>
-            <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="0.5"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-
-        {/* PC Background */}
-        <div className="hidden md:block w-full h-full">
-          <img
-            src="/images/first_view_pc.png"
-            alt="Background PC"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        {/* SP Background */}
-        <div className="block md:hidden w-full h-full">
-          <img
-            src="/images/first_view_sp.png"
-            alt="Background SP"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40" />
-      </motion.div>
+    <section id="home" className="h-dvh flex items-center justify-center w-full relative overflow-hidden bg-[url('/images/first_view_pc.png')] bg-cover bg-center">
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/70 z-10" />
 
       {/* Content */}
-      <motion.div 
-        className="w-full px-4 sm:px-6 lg:px-8 relative z-20"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <div className="max-w-4xl">
-          {/* Portfolio Title */}
-          <motion.div>
-            <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-sans tracking-wide font-black">
-              <motion.div className="flex flex-col md:flex-row md:items-center md:justify-center">
-                <motion.div className="flex">
-                  {firstLine.split("").map((char, index) => (
-                    <motion.span
-                      key={index}
-                      initial={{ opacity: 0 }}
-                      animate={{
-                        opacity: [0, 1, 0.5, 1],
-                        textShadow: ["0 0 0px #fff", "0 0 10px #fff", "0 0 0px #fff"]
-                      }}
-                      transition={{
-                        duration: 1,
-                        delay: delays[index],
-                        times: [0, 0.3, 0.6, 1]
-                      }}
-                      className="inline-block text-white"
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                </motion.div>
-                <motion.div className="flex">
-                  {secondLine.split("").map((char, index) => (
-                    <motion.span
-                      key={index + firstLine.length}
-                      initial={{ opacity: 0 }}
-                      animate={{
-                        opacity: [0, 1, 0.5, 1],
-                        textShadow: ["0 0 0px #fff", "0 0 10px #fff", "0 0 0px #fff"]
-                      }}
-                      transition={{
-                        duration: 1,
-                        delay: delays[index + firstLine.length],
-                        times: [0, 0.3, 0.6, 1]
-                      }}
-                      className="inline-block text-white"
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                </motion.div>
-              </motion.div>
-            </h1>
-            <motion.p 
-              className="text-sm sm:text-base md:text-lg text-white max-w-3xl mx-auto font-light leading-relaxed font-sans mt-6"
-              style={{ fontFamily: 'Noto Sans JP, sans-serif' }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2, duration: 0.5 }}
-            >
-              {introduction}
-            </motion.p>
-          </motion.div>
-        </div>
-      </motion.div>
+      <div className="relative z-20 w-full px-4 sm:px-6 lg:px-8">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <h1 className="flex flex-wrap items-center text-5xl font-black tracking-widest text-light sm:text-6xl md:text-7xl lg:text-8xl">
+            {Array.from("Sanshiro").map((letter, index) => (
+              <motion.span
+                key={`first-${index}`}
+                initial={{ opacity: 0, scale: 0.5, x: (Math.random() - 0.5) * 400, y: (Math.random() - 0.5) * 400, rotate: (Math.random() - 0.5) * 360 }}
+                animate={{ opacity: 1, scale: 1, x: 0, y: 0, rotate: 0 }}
+                transition={{
+                  delay: 0.2 + Math.random() * 0.8,
+                  duration: 1.2,
+                  ease: [0.16, 1, 0.3, 1]
+                }}
+                className="inline-block"
+              >
+                {letter}
+              </motion.span>
+            ))}
+            <div className="w-full h-0 md:hidden" />
+            {Array.from("Hikawa").map((letter, index) => (
+              <motion.span
+                key={`last-${index}`}
+                initial={{ opacity: 0, scale: 0.5, x: (Math.random() - 0.5) * 400, y: (Math.random() - 0.5) * 400, rotate: (Math.random() - 0.5) * 360 }}
+                animate={{ opacity: 1, scale: 1, x: 0, y: 0, rotate: 0 }}
+                transition={{
+                  delay: 0.2 + Math.random() * 0.8,
+                  duration: 1.2,
+                  ease: [0.16, 1, 0.3, 1]
+                }}
+                className="inline-block"
+              >
+                {letter}
+              </motion.span>
+            ))}
+          </h1>
+          <motion.p
+            className="mt-4 max-w-2xl text-left text-lg text-accent sm:text-xl"
+            variants={itemVariants}
+          >
+            {introduction}
+          </motion.p>
+        </motion.div>
+      </div>
 
       {/* Scroll Indicator at Bottom */}
       <motion.div
-        className="absolute bottom-8 sm:bottom-12 lg:bottom-16 left-1/2 transform -translate-x-1/2 z-20"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1 }}
       >
         <motion.div
-          className="inline-flex flex-col items-center text-white transition-colors duration-300 cursor-pointer"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="inline-flex flex-col items-center text-accent transition-colors duration-300 cursor-pointer md:hover:text-primary"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
         >
-          <span 
-            className="text-sm font-medium mb-2 tracking-wider font-sans"
-            style={{ fontFamily: 'Noto Sans JP, sans-serif' }}
-          >
+          <span className="text-sm font-medium tracking-widest">
             SCROLL
           </span>
-          <ArrowDown size={20} />
+          <ArrowDown size={20} className="mt-1" />
         </motion.div>
       </motion.div>
     </section>
