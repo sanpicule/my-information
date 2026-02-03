@@ -44,7 +44,7 @@ const Contact = ({ contact }: ContactProps) => {
         viewport={{ once: true, amount: 0.1 }}
       >
         <motion.div variants={itemVariants} className="mb-12">
-          <h2 className="text-3xl sm:text-4xl font-black text-black tracking-tighter mb-4">
+          <h2 className="text-4xl sm:text-5xl font-bold text-dark tracking-wide mb-2">
             Contact
           </h2>
           <p className="text-base text-accent max-w-2xl">

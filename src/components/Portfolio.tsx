@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { Project } from '../types';
 import { useRef } from 'react';
 import { useInView } from 'framer-motion';
@@ -13,34 +14,37 @@ interface PortfolioProps {
 
 const ProjectCard = ({ project, onProjectSelect }: { project: Project, onProjectSelect: (p: Project) => void }) => {
   const isHoverable = useIsHoverable();
+  const [isHovering, setIsHovering] = useState(false); // 新しいstate
 
   const overlayVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.3, ease: 'easeInOut' as const } }
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: 'easeInOut' as const } }
   };
 
   return (
     <motion.div
       layout
-      className="group relative glass-card rounded-2xl overflow-hidden cursor-pointer aspect-[4/3]"
+      className="group relative glass-card rounded-2xl overflow-hidden cursor-pointer aspect-[4/3] border border-transparent"
       onClick={() => onProjectSelect(project)}
       variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-      whileHover={isHoverable ? { scale: 1.03, y: -5, transition: { type: 'spring' as const, stiffness: 300 } } : {}}
+      onHoverStart={() => isHoverable && setIsHovering(true)}
+      onHoverEnd={() => isHoverable && setIsHovering(false)}
+      whileHover={isHoverable ? { borderColor: '#6B7280', transition: { type: 'spring' as const, stiffness: 300 } } : {}}
     >
       {/* --- Base Content --- */}
       <div className="w-full h-full flex flex-col">
         {project.thumbnail && (
-          <div className="w-full h-2/3 overflow-hidden">
-            <img
-              src={project.thumbnail}
-              alt={project.title}
-              className="w-full h-full object-cover transition-transform duration-300 md:group-hover:scale-110"
-            />
-          </div>
+          <img
+            src={project.thumbnail}
+            alt={project.title}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 md:group-hover:scale-110"
+          />
         )}
-        <div className="flex-grow p-4 flex flex-col justify-center">
-          <h3 className="text-md font-bold text-dark mb-1 truncate">{project.title}</h3>
-          <p className="text-gray-500 text-sm line-clamp-2">{project.description}</p>
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent" /> {/* グラデーションもモノクロライトに合わせて調整 */}
+        
+        <div className="absolute bottom-0 left-0 right-0 p-6">
+          <h3 className="text-md font-bold text-light mb-1 truncate">{project.title}</h3>
+          <p className="text-white/80 text-sm line-clamp-2">{project.description}</p>
         </div>
       </div>
 
@@ -50,13 +54,13 @@ const ProjectCard = ({ project, onProjectSelect }: { project: Project, onProject
           className="absolute inset-0 p-6 bg-white/80 backdrop-blur-md flex flex-col justify-end"
           variants={overlayVariants}
           initial="hidden"
-          whileHover="visible"
+          animate={isHovering ? "visible" : "hidden"} // ← whileHover を animate に変更
         >
-          <h3 className="text-xl font-bold text-sky-600 mb-2">{project.title}</h3>
-          <p className="text-gray-700 text-sm mb-4 line-clamp-3">{project.description}</p>
+          <h3 className="text-xl font-bold text-gray-700 mb-2">{project.title}</h3> {/* テキスト色をダーク系に */}
+          <p className="text-gray-600 text-sm mb-4 line-clamp-3">{project.description}</p> {/* テキスト色をダーク系に */}
           <div className="flex flex-wrap gap-2">
             {project.technologies.slice(0, 4).map(tech => (
-              <span key={tech} className="px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-full">
+              <span key={tech} className="px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-full"> {/* モノクロライトに合わせたタグ色 */}
                 {tech}
               </span>
             ))}
@@ -95,7 +99,7 @@ const Portfolio = ({ projects, onProjectSelect }: PortfolioProps) => {
           animate={isInView ? 'visible' : 'hidden'}
           variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
         >
-          <h2 className="text-3xl sm:text-4xl font-black text-dark tracking-tighter">Portfolio</h2>
+          <h2 className="text-4xl sm:text-5xl font-bold text-dark tracking-wide">Portfolio</h2>
           <p className="mt-2 text-base text-gray-600 max-w-2xl">
             私が開発したプロジェクトをご覧ください。
           </p>

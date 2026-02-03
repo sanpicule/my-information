@@ -2,13 +2,13 @@ import { Profile } from '../types';
 
 export const profileData: Profile = {
   name: 'SanshiroHikawa',
-  title: 'フロントエンド開発者',
+  title: 'Frontend: 4years / Backend: 2years',
   introduction: '',
   skills: [
     // フロントエンド
     {
       name: 'React',
-      level: '業務で3年以上使用',
+      level: '業務で4年以上使用',
       category: 'frontend',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg'
     },
@@ -72,13 +72,13 @@ export const profileData: Profile = {
     },
     {
       name: 'Vercel',
-      level: '業務で1年使用',
+      level: '個人開発で3年使用',
       category: 'database',
       icon: '/images/vercel-icon.svg'
     },
     {
       name: 'Supabase',
-      level: '業務で1年使用',
+      level: '個人開発で2年使用',
       category: 'database',
       icon: '/images/supabase-icon.svg'
     },
@@ -88,13 +88,13 @@ export const profileData: Profile = {
     // ツール
     {
       name: 'Git/GitHub/GitLab',
-      level: '業務で4年以上使用',
+      level: '業務/個人開発で4年以上使用',
       category: 'tool',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg'
     },
     {
       name: 'Prisma',
-      level: '業務で4年以上使用',
+      level: '業務で1年以上使用',
       category: 'tool',
       icon: '/images/prisma-icon.svg'
     },
@@ -106,7 +106,7 @@ export const profileData: Profile = {
     },
     {
       name: 'Docker',
-      level: '業務で1年使用',
+      level: '業務で3年使用',
       category: 'tool',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg'
     },
@@ -211,7 +211,7 @@ export const profileData: Profile = {
     instagram: 'https://instagram.com/sanp___ery'
   },
   about: {
-    description: '熊本での訪問営業での挫折を経験、独学で学んだプログラミングの知識を活かすために、上京し、エンジニアに転職。やりがいを感じているものの、営業での挫折を克服したい思いがあり、現在はエンジニアの知見を生かした営業寄りの仕事を探しながら日々様々な分野の知見をキャッチアップ。',
+    description: '大学卒業後、接客のアルバイト経験を活かすために、熊本の通信会社へ新卒で営業職として入社。営業を通じて、「良いサービスだから売れる」のではなく、お客様に必要性を理解してもらうことで初めて価値が生まれるということを実感。この経験から、"本当に良いサービスを自ら生み出したい" という思いが強まり、独学でプログラミングを学び始める。その後、スキルを深めるために上京し、エンジニアへキャリアチェンジ。現在はエンジニアとしての経験を活かし、プロダクトマネジメントにも関心を持ちながら、現場ではリーダーとしてチームを牽引。社内のPMセミナーへの参加など、プロダクトづくり全体への理解も広げている。',
     workHistory: [
       {
         company: '株式会社Gizumo',
@@ -232,20 +232,5 @@ export const profileData: Profile = {
         description: '数理工学科卒業。'
       }
     ],
-    education: [
-      {
-        school: '○○大学 工学部 情報工学科',
-        period: '2016年4月 - 2020年3月',
-        degree: '学士',
-        description: '情報工学を専攻し、Web開発の基礎を学びました。'
-      }
-    ],
-    achievements: [
-      {
-        title: 'AWS認定ソリューションアーキテクト',
-        year: '2023年',
-        description: 'クラウドアーキテクチャの設計と実装に関する知識を習得。'
-      }
-    ]
   }
 };

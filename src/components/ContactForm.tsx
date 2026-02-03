@@ -72,7 +72,7 @@ const ContactForm = () => {
           type="text"
           id="name"
           {...register('name')}
-          className={`w-full px-1 py-2 bg-transparent border-b text-light focus:outline-none transition-colors duration-300 ${
+          className={`w-full px-1 py-2 bg-transparent border-b text-black focus:outline-none transition-colors duration-300 ${
             errors.name ? 'border-red-400 focus:border-red-400' : 'border-accent/30 focus:border-primary'
           }`}
         />
@@ -89,7 +89,7 @@ const ContactForm = () => {
           type="email"
           id="email"
           {...register('email')}
-          className={`w-full px-1 py-2 bg-transparent border-b text-light focus:outline-none transition-colors duration-300 ${
+          className={`w-full px-1 py-2 bg-transparent border-b text-black focus:outline-none transition-colors duration-300 ${
             errors.email ? 'border-red-400 focus:border-red-400' : 'border-accent/30 focus:border-primary'
           }`}
         />
@@ -106,7 +106,7 @@ const ContactForm = () => {
           type="text"
           id="subject"
           {...register('subject')}
-          className={`w-full px-1 py-2 bg-transparent border-b text-light focus:outline-none transition-colors duration-300 ${
+          className={`w-full px-1 py-2 bg-transparent border-b text-black focus:outline-none transition-colors duration-300 ${
             errors.subject ? 'border-red-400 focus:border-red-400' : 'border-accent/30 focus:border-primary'
           }`}
         />
@@ -123,7 +123,7 @@ const ContactForm = () => {
           id="message"
           {...register('message')}
           rows={5}
-          className={`w-full px-1 py-2 bg-transparent border-b text-light focus:outline-none resize-none transition-colors duration-300 ${
+          className={`w-full px-1 py-2 bg-transparent border-b text-black focus:outline-none resize-none transition-colors duration-300 ${
             errors.message ? 'border-red-400 focus:border-red-400' : 'border-accent/30 focus:border-primary'
           }`}
         />
@@ -135,7 +135,7 @@ const ContactForm = () => {
       <motion.button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-primary py-3 text-dark font-bold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center rounded-full"
+        className="w-full bg-slate-800 py-3 text-white font-bold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center rounded-full"
         whileHover={buttonHover}
         whileTap={{ scale: 0.95 }}
         transition={{ duration: 0.2 }}

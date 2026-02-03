@@ -46,7 +46,7 @@ const About = ({ about }: AboutProps) => {
         viewport={{ once: true, amount: 0.1 }}
       >
         <motion.div variants={itemVariants} className="mb-16">
-          <h2 className="text-3xl sm:text-4xl font-black text-dark tracking-tighter">About</h2>
+          <h2 className="text-4xl sm:text-5xl font-bold text-dark tracking-wide">About</h2>
           <p className="mt-2 text-base text-gray-600 max-w-2xl">私のこれまでの経歴や、エンジニアに至った経緯を記載しています。</p>
         </motion.div>
 
@@ -64,7 +64,11 @@ const About = ({ about }: AboutProps) => {
                 />
                 <div>
                   <h3 className="text-2xl font-bold text-dark">{profileData.name}</h3>
-                  <p className="text-gray-600 font-semibold mt-1">{profileData.title}</p>
+                  <div className="ml-2">
+                    {profileData.title.split(" / ").map((line, i) => (
+                      <p className="text-gray-600 font-semibold" key={i}>- {line}</p>
+                    ))}
+                  </div>
                 </div>
               </div>
               <div>
@@ -92,7 +96,7 @@ const About = ({ about }: AboutProps) => {
           <motion.div className="lg:col-span-2" variants={containerVariants}>
             <motion.div variants={itemVariants} className="mb-12">
               <h3 className="text-2xl font-bold text-dark mb-4">
-                私について
+                ここまでの経緯
               </h3>
               <p className="text-gray-600 leading-relaxed whitespace-pre-line">
                 {about.description}
@@ -100,7 +104,7 @@ const About = ({ about }: AboutProps) => {
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <h3 className="text-2xl font-bold text-dark mb-8">これまでの経歴</h3>
+              <h3 className="text-2xl font-bold text-dark mb-8">学歴・職歴</h3>
               <div className="relative border-l-2 border-gray-200 pl-8 space-y-12">
                 {about.workHistory.map((item, index) => (
                   <motion.div
