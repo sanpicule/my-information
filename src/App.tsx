@@ -9,17 +9,17 @@ import { profileData } from '@/lib/data';
 import { BrowserRouter as Router, Routes, Route, useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Project } from '@/types';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import Portfolio from '@/components/Portfolio';
 import useCustomCursor from './hooks/useCustomCursor';
 
 // --- Loading Screen ---
-const textContainerVariants = {
+const textContainerVariants: Variants = {
   animate: { transition: { staggerChildren: 0.08, delayChildren: 0.2 } },
   exit: { opacity: 0, transition: { duration: 0.5 } }
 };
 
-const letterVariants = {
+const letterVariants: Variants = {
   initial: { y: 0, opacity: 1 },
   animate: {
     y: [0, -15, 0],

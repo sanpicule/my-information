@@ -232,5 +232,7 @@ export const profileData: Profile = {
         description: '数理工学科卒業。'
       }
     ],
+    education: [],
+    achievements: [],
   }
 };
