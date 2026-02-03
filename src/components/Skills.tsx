@@ -36,9 +36,13 @@ const Skills = ({ skills }: SkillsProps) => {
       <div className="container-max">
         {/* Title */}
         <div className="mb-12">
-          <h2 className="text-3xl sm:text-4xl font-black text-dark tracking-tighter">Skills</h2>
+          <h2 className="text-4xl sm:text-5xl font-bold text-dark tracking-wide">Skills</h2>
           <p className="mt-2 text-base text-gray-600 max-w-2xl">
-            私が持つ技術や経験をご覧ください。
+            私が持つ技術や経験をご覧ください。各技術のスキル感を5段階評価しています。
+            <br></br>
+            <span className="text-xs text-gray-500">
+              ※なおこちらは主要な技術のみ表示しています。詳しくは、スキルシートをご覧ください
+            </span>
           </p>
         </div>
 

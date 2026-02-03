@@ -132,11 +132,11 @@ const Header = () => {
 
             <nav className="hidden md:flex space-x-2">
               {navItems.map((item) => (
-                <a key={item.name} href={item.href} className={`relative px-3 py-2 text-sm font-medium transition-colors duration-300 ${isScrolled ? 'text-gray-600 hover:text-dark' : 'text-gray-800 hover:text-black'}`}>
+                <a key={item.name} href={item.href} className={`relative px-3 py-2 text-sm font-medium transition-colors duration-300 ${isScrolled ? 'text-gray-600 hover:text-dark' : 'text-white hover:opacity-80'}`}>
                   {item.name}
                   {activeSection === item.name && (
                     <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-dark"
+                      className={`absolute bottom-0 left-0 right-0 h-0.5 ${isScrolled ? "bg-dark": "bg-white"}`}
                       layoutId="underline"
                       transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                     />

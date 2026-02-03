@@ -31,9 +31,9 @@ const Hero = ({ introduction }: HeroProps) => {
   };
 
   return (
-    <section id="home" className="h-dvh flex items-center justify-center w-full relative overflow-hidden bg-[url('/images/first_view_pc.png')] bg-cover bg-center">
+    <section id="home" className="h-dvh flex items-center justify-center w-full relative overflow-hidden bg-[url('/images/first_view_sp.png')] md:bg-[url('/images/first_view_pc.png')] bg-cover bg-center">
       {/* Overlay */}
-      {/* <div className="absolute inset-0 bg-black/70 z-10" /> */}
+      <div className="absolute inset-0 bg-black/70 z-10" />
 
       {/* Content */}
       <div className="relative z-20 w-full px-4 sm:px-6 lg:px-8">
@@ -42,8 +42,8 @@ const Hero = ({ introduction }: HeroProps) => {
           initial="hidden"
           animate="visible"
         >
-          <h1 className="flex flex-wrap items-center text-5xl font-black tracking-widest text-dark sm:text-6xl md:text-7xl lg:text-8xl">
-            {Array.from("Sanshiro").map((letter, index) => (
+          <h1 className="flex flex-wrap items-center text-5xl font-black tracking-wide mt-4 text-white sm:text-6xl md:text-7xl lg:text-8xl">
+            {Array.from("SANSHIRO").map((letter, index) => (
               <motion.span
                 key={`first-${index}`}
                 initial={{ opacity: 0, scale: 0.5, x: (Math.random() - 0.5) * 400, y: (Math.random() - 0.5) * 400, rotate: (Math.random() - 0.5) * 360 }}
@@ -58,8 +58,8 @@ const Hero = ({ introduction }: HeroProps) => {
                 {letter}
               </motion.span>
             ))}
-            <div className="w-full h-0 md:hidden" />
-            {Array.from("Hikawa").map((letter, index) => (
+            <div className="w-full h-2 md:hidden" />
+            {Array.from("HIKAWA").map((letter, index) => (
               <motion.span
                 key={`last-${index}`}
                 initial={{ opacity: 0, scale: 0.5, x: (Math.random() - 0.5) * 400, y: (Math.random() - 0.5) * 400, rotate: (Math.random() - 0.5) * 360 }}
@@ -92,7 +92,7 @@ const Hero = ({ introduction }: HeroProps) => {
         transition={{ delay: 2, duration: 1 }}
       >
         <motion.div
-          className="inline-flex flex-col items-center text-gray-700 transition-colors duration-300 cursor-pointer md:hover:text-primary"
+          className="inline-flex flex-col items-center text-white transition-colors duration-300 cursor-pointer md:hover:text-primary"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}

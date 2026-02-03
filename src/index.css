@@ -44,7 +44,7 @@
 
   .btn { @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold rounded-full transition-all duration-300; }
   .btn-primary { @apply bg-gray-500 text-white; }
-  .btn-secondary { @apply bg-gray-900 text-white border border-gray-300 md:hover:bg-gray-200; }
+  .btn-secondary { @apply bg-gray-900 text-white border border-gray-300 md:hover:bg-gray-800; }
   .btn-icon { @apply w-12 h-12 flex items-center justify-center rounded-full; }
   .carousel-arrow { @apply absolute top-1/2 -translate-y-1/2 bg-dark/50 text-white p-2 rounded-full md:hover:bg-dark/80 transition-colors z-10; }
   .tag { @apply px-2 py-1 bg-gray-200 text-gray-800 text-sm font-medium rounded-md; }
